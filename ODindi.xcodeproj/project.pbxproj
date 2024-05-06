@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		D922105F2BE8BBFA00301B08 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D922105E2BE8BBFA00301B08 /* MainViewModel.swift */; };
+		D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210602BE8C6B500301B08 /* IndieCinema.swift */; };
+		D92210642BE8CD6800301B08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210632BE8CD6800301B08 /* Extensions.swift */; };
+		D92210662BE9019E00301B08 /* CinemaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210652BE9019E00301B08 /* CinemaService.swift */; };
+		D92210682BE9028300301B08 /* MovieSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210672BE9028300301B08 /* MovieSchedule.swift */; };
 		D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */; };
 		D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */; };
 		D9B37EBB2BE7A67300AC1C55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9B37EBA2BE7A67300AC1C55 /* Assets.xcassets */; };
@@ -30,6 +34,10 @@
 
 /* Begin PBXFileReference section */
 		D922105E2BE8BBFA00301B08 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		D92210602BE8C6B500301B08 /* IndieCinema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndieCinema.swift; sourceTree = "<group>"; };
+		D92210632BE8CD6800301B08 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D92210652BE9019E00301B08 /* CinemaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaService.swift; sourceTree = "<group>"; };
+		D92210672BE9028300301B08 /* MovieSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSchedule.swift; sourceTree = "<group>"; };
 		D9B37EAE2BE7A67200AC1C55 /* ODindi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODindi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D92210622BE8CD4900301B08 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D92210632BE8CD6800301B08 /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		D9B37EA52BE7A67200AC1C55 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +102,7 @@
 				D9B37EC72BE7AB8000AC1C55 /* Model */,
 				D9B37EC92BE7AB8D00AC1C55 /* View */,
 				D9B37ECA2BE7AB9400AC1C55 /* ViewModel */,
+				D92210622BE8CD4900301B08 /* Utils */,
 				D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */,
 				D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */,
 				D9B37EBA2BE7A67300AC1C55 /* Assets.xcassets */,
@@ -98,6 +115,8 @@
 		D9B37EC72BE7AB8000AC1C55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D92210602BE8C6B500301B08 /* IndieCinema.swift */,
+				D92210672BE9028300301B08 /* MovieSchedule.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -125,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */,
+				D92210652BE9019E00301B08 /* CinemaService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -217,9 +237,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9B37EDE2BE7B18000AC1C55 /* LocationService.swift in Sources */,
+				D92210682BE9028300301B08 /* MovieSchedule.swift in Sources */,
 				D9B37EC62BE7AA9600AC1C55 /* TabBarController.swift in Sources */,
 				D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */,
+				D92210662BE9019E00301B08 /* CinemaService.swift in Sources */,
+				D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */,
 				D9B37ECE2BE7AD6600AC1C55 /* SubViewController.swift in Sources */,
+				D92210642BE8CD6800301B08 /* Extensions.swift in Sources */,
 				D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */,
 				D9B37ED02BE7AE6100AC1C55 /* TabBarViewModel.swift in Sources */,
 				D9B37ECC2BE7AD2A00AC1C55 /* MainViewController.swift in Sources */,

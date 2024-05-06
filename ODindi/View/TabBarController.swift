@@ -34,23 +34,6 @@ class TabBarController: UITabBarController{
         setupBindings()
     }
     
-    
-    // MARK: - Helpers
-    func configureViewControllers(currentCoordinate: CLLocationCoordinate2D){
-        let mainVM = MainViewModel(currentCoordinate)
-        let mainVC = MainViewController(viewModel: mainVM)
-        
-        let nav1 = configureNavController(vc: mainVC, image: UIImage(systemName: "map")!)
-        let nav2 = configureNavController(vc: SubViewController(), image: UIImage(systemName: "magnifyingglass")!)
-        viewControllers = [nav1, nav2]
-    }
-    func configureNavController(vc: UIViewController, image: UIImage) -> UINavigationController {
-        let navigationController = UINavigationController(rootViewController: vc)
-        navigationController.tabBarItem.image = image
-        return navigationController
-    }
-    
-    
     // MARK: - UI Bindings
     
     func setupBindings() {
@@ -74,8 +57,21 @@ class TabBarController: UITabBarController{
                 self?.configureViewControllers(currentCoordinate: coordinate)
             }
             .disposed(by: disposeBag)
-            
+    }
+    
+    // MARK: - Helpers
+    func configureViewControllers(currentCoordinate: CLLocationCoordinate2D){
+        let mainVM = MainViewModel(currentCoordinate)
+        let mainVC = MainViewController(viewModel: mainVM)
         
+        let nav1 = configureNavController(vc: mainVC, image: UIImage(systemName: "map")!)
+        let nav2 = configureNavController(vc: SubViewController(), image: UIImage(systemName: "magnifyingglass")!)
+        viewControllers = [nav1, nav2]
+    }
+    func configureNavController(vc: UIViewController, image: UIImage) -> UINavigationController {
+        let navigationController = UINavigationController(rootViewController: vc)
+        navigationController.tabBarItem.image = image
+        return navigationController
     }
 
 }

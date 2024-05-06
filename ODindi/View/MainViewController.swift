@@ -32,16 +32,23 @@ class MainViewController: UIViewController {
         view.backgroundColor = .brown
         configureAutolayout()
         setupBindings()
+        CinemaService.shared.fetchCinemaSchedule(cinema: IndieCinema.list[17], date: "2024-05-11").subscribe { _ in
+            print("Subscribed")
+        }
     }
     
     // MARK: - UI Binding
     func setupBindings() {
-        viewModel.currentCoordinate
-            .map { return "현재 좌표는 위도 \($0.latitude), 경도 \($0.longitude) 입니다" }
+        Observable
+            .just(())
+            .bind(to: viewModel.fetchNearCinemas)
+            .disposed(by: disposeBag)
+        viewModel.nearCinemas
+            .map { $0[0].name }
             .bind(to: coordinateLabel.rx.text)
             .disposed(by: disposeBag)
+        
     }
-    
     
     // MARK: - UI Properties
     let coordinateLabel = UILabel().then {
