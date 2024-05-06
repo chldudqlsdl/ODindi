@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import Then
 import SnapKit
+import RxCocoa
+import CoreLocation
 
 class TabBarController: UITabBarController{
     
@@ -29,15 +31,16 @@ class TabBarController: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        configureViewControllers()
         setupBindings()
-        configureAutolayout()
     }
     
     
     // MARK: - Helpers
-    func configureViewControllers(){
-        let nav1 = configureNavController(vc: MainViewController(), image: UIImage(systemName: "map")!)
+    func configureViewControllers(currentCoordinate: CLLocationCoordinate2D){
+        let mainVM = MainViewModel(currentCoordinate)
+        let mainVC = MainViewController(viewModel: mainVM)
+        
+        let nav1 = configureNavController(vc: mainVC, image: UIImage(systemName: "map")!)
         let nav2 = configureNavController(vc: SubViewController(), image: UIImage(systemName: "magnifyingglass")!)
         viewControllers = [nav1, nav2]
     }
@@ -51,34 +54,29 @@ class TabBarController: UITabBarController{
     // MARK: - UI Bindings
     
     func setupBindings() {
-        viewModel.checkLocationAuth
-    }
-    
-    
-    // MARK: - Properties
-    lazy var button = UIButton(type: .custom).then {
-        $0.setTitle("Auth", for: .normal)
-        $0.addTarget(self, action: #selector(btnTapped), for: .touchUpInside)
-    }
-
-
-// MARK: - AutoLayouts
-    
-    func configureAutolayout() {
-        view.addSubview(button)
-        button.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(100)
-        }
-    }
-
-
-// MARK: - Selectors
-    @objc func btnTapped() {
-        LocationService.shared.requestLocation()
-            .bind { print($0) }
-            .disposed(by: self.disposeBag)
+        
+        //INPUT
+        
+        // 위치 권한 요청
+        Observable
+            .just(())
+            .bind(to: viewModel.checkLocationAuth)
+            .disposed(by: disposeBag)
+        // 좌표 값 요청
+        Observable
+            .just(())
+            .bind(to: viewModel.fetchCoordinate)
+            .disposed(by: disposeBag)
+        
+        // OUTPUT
+        viewModel.currentCoordinate
+            .subscribe { [weak self] coordinate in
+                self?.configureViewControllers(currentCoordinate: coordinate)
+            }
+            .disposed(by: disposeBag)
+            
+        
     }
 
 }
+

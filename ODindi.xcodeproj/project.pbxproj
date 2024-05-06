@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D922105F2BE8BBFA00301B08 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D922105E2BE8BBFA00301B08 /* MainViewModel.swift */; };
 		D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */; };
 		D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */; };
 		D9B37EBB2BE7A67300AC1C55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9B37EBA2BE7A67300AC1C55 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D922105E2BE8BBFA00301B08 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D9B37EAE2BE7A67200AC1C55 /* ODindi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODindi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				D9B37ECF2BE7AE6100AC1C55 /* TabBarViewModel.swift */,
+				D922105E2BE8BBFA00301B08 /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */,
 				D9B37ED02BE7AE6100AC1C55 /* TabBarViewModel.swift in Sources */,
 				D9B37ECC2BE7AD2A00AC1C55 /* MainViewController.swift in Sources */,
+				D922105F2BE8BBFA00301B08 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +370,7 @@
 				DEVELOPMENT_TEAM = 3X7HFG8283;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ODindi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "어디인디";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -394,6 +399,7 @@
 				DEVELOPMENT_TEAM = 3X7HFG8283;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ODindi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "어디인디";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
