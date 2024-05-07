@@ -57,6 +57,7 @@ class TabBarViewModel: TabBarViewModelType {
         // OUTPUT
         
         currentCoordinate = tempCoordinate
+
     }
     
 }

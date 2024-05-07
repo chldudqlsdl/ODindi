@@ -16,6 +16,7 @@ protocol MainViewModelType {
     var fetchCinemaSchedule: AnyObserver<Void> { get }
     
     var nearCinemas: Observable<[IndieCinema]> { get }
+    var cinemaSchedule: Observable<CinemaSchedule> { get }
 }
 
 class MainViewModel: MainViewModelType {
@@ -28,6 +29,7 @@ class MainViewModel: MainViewModelType {
     
     // OUTPUT
     var nearCinemas: Observable<[IndieCinema]>
+    var cinemaSchedule: Observable<CinemaSchedule>
     
     init(_ currentCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()){
         self.currentCoordinate = Observable.just(currentCoordinate)
@@ -36,6 +38,7 @@ class MainViewModel: MainViewModelType {
         let fetchingCinemaSchedule = PublishSubject<Void>()
         
         let tempNearCinemas = BehaviorSubject<[IndieCinema]>(value: [])
+        let tempCinemaSchedule = BehaviorSubject<CinemaSchedule>(value: [])
         
         // INPUT
         fetchNearCinemas = fetchingNearCinemas.asObserver()
@@ -54,8 +57,23 @@ class MainViewModel: MainViewModelType {
         
         fetchCinemaSchedule = fetchingCinemaSchedule.asObserver()
         
+        tempNearCinemas
+            .compactMap { $0 }
+            .flatMap { nearCinemas in
+                guard let nearestCinema = nearCinemas.first else {
+                    return Observable<CinemaSchedule>.empty()
+                }
+                let date = "2024-05-08"
+                return CinemaService.shared.fetchCinemaSchedule(cinema: nearestCinema, date: date)
+                    .take(1)
+            }
+            .subscribe(onNext: tempCinemaSchedule.onNext(_:))
+            .disposed(by: disposeBag)
+            
+        
         
         // OUTPUT
         nearCinemas = tempNearCinemas
+        cinemaSchedule = tempCinemaSchedule
     }
 }

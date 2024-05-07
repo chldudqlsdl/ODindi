@@ -29,12 +29,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .brown
+        view.backgroundColor = .orange
         configureAutolayout()
         setupBindings()
-        CinemaService.shared.fetchCinemaSchedule(cinema: IndieCinema.list[17], date: "2024-05-11").subscribe { _ in
-            print("Subscribed")
-        }
     }
     
     // MARK: - UI Binding
@@ -43,11 +40,11 @@ class MainViewController: UIViewController {
             .just(())
             .bind(to: viewModel.fetchNearCinemas)
             .disposed(by: disposeBag)
-        viewModel.nearCinemas
-            .map { $0[0].name }
+
+        viewModel.cinemaSchedule
+            .map { $0.first?.name}
             .bind(to: coordinateLabel.rx.text)
             .disposed(by: disposeBag)
-        
     }
     
     // MARK: - UI Properties

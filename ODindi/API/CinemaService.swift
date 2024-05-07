@@ -20,13 +20,11 @@ class CinemaService {
             
             URLSession.shared.dataTask(with: URL(string: urlString)!) { data, response, error in
                 if let error = error {
-                    print("에러")
                     emitter.onError(error)
                 }
                 guard let data = data else {
                     let response = response as! HTTPURLResponse
                     let error = NSError(domain: "No Data", code: response.statusCode)
-                    print("에러")
                     emitter.onError(error)
                     return
                 }
