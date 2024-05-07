@@ -17,6 +17,7 @@ protocol MainViewModelType {
     
     var nearCinemas: Observable<[IndieCinema]> { get }
     var cinemaSchedule: Observable<CinemaSchedule> { get }
+    var cinemaCalendar: Observable<CinemaCalendar> { get }
 }
 
 class MainViewModel: MainViewModelType {
@@ -30,6 +31,7 @@ class MainViewModel: MainViewModelType {
     // OUTPUT
     var nearCinemas: Observable<[IndieCinema]>
     var cinemaSchedule: Observable<CinemaSchedule>
+    var cinemaCalendar: Observable<CinemaCalendar>
     
     init(_ currentCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()){
         self.currentCoordinate = Observable.just(currentCoordinate)
@@ -39,6 +41,7 @@ class MainViewModel: MainViewModelType {
         
         let tempNearCinemas = BehaviorSubject<[IndieCinema]>(value: [])
         let tempCinemaSchedule = BehaviorSubject<CinemaSchedule>(value: [])
+        let tempCinemaCalendar = BehaviorSubject<CinemaCalendar>(value: CinemaCalendar())
         
         // INPUT
         fetchNearCinemas = fetchingNearCinemas.asObserver()
@@ -57,13 +60,36 @@ class MainViewModel: MainViewModelType {
         
         fetchCinemaSchedule = fetchingCinemaSchedule.asObserver()
         
+//        tempNearCinemas
+//            .flatMap {
+//                guard let nearestCinema = $0.first else {
+//                    return Observable<CinemaSchedule>.empty()
+//                }
+//                let date = "2024-05-11"
+//                return CinemaService.shared.fetchCinemaSchedule(cinema: nearestCinema, date: date)
+//                    .take(1)
+//            }
+//            .subscribe(onNext: tempCinemaSchedule.onNext(_:))
+//            .disposed(by: disposeBag)
+        
         tempNearCinemas
-            .compactMap { $0 }
-            .flatMap { nearCinemas in
-                guard let nearestCinema = nearCinemas.first else {
+            .flatMap {
+                guard let nearestCinema = $0.first else {
+                    return Observable<CinemaCalendar>.empty()
+                }
+                return CinemaService.shared.fetchCinemaCalendar(cinema: nearestCinema)
+            }
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(onNext: tempCinemaCalendar.onNext(_:))
+            .disposed(by: disposeBag)
+        
+        Observable
+            .combineLatest(tempNearCinemas, tempCinemaCalendar)
+            .flatMap {
+                guard let nearestCinema = $0.0.first else {
                     return Observable<CinemaSchedule>.empty()
                 }
-                let date = "2024-05-08"
+                let date = $0.1.businessDays.first ?? "2024-05-07"
                 return CinemaService.shared.fetchCinemaSchedule(cinema: nearestCinema, date: date)
                     .take(1)
             }
@@ -71,9 +97,9 @@ class MainViewModel: MainViewModelType {
             .disposed(by: disposeBag)
             
         
-        
         // OUTPUT
         nearCinemas = tempNearCinemas
         cinemaSchedule = tempCinemaSchedule
+        cinemaCalendar = tempCinemaCalendar
     }
 }

@@ -32,6 +32,9 @@ class TabBarController: UITabBarController{
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupBindings()
+        let appearance = UITabBarAppearance()
+        tabBar.standardAppearance = appearance
+        tabBar.tintColor = .white
     }
     
     // MARK: - UI Bindings

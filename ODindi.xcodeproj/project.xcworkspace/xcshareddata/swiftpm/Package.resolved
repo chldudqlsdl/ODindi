@@ -1,12 +1,30 @@
 {
   "pins" : [
     {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "1a0c2df04b31ed7aa318354f3583faea24f006fc",
+        "version" : "5.15.8"
+      }
+    },
+    {
       "identity" : "rxcorelocation",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RxSwiftCommunity/RxCoreLocation.git",
       "state" : {
         "revision" : "8b26b77851c09689c2fb6ba9cd875c203ff79797",
         "version" : "1.5.1"
+      }
+    },
+    {
+      "identity" : "rxkingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/RxKingfisher.git",
+      "state" : {
+        "revision" : "5f195d1c9a21e3ca930d1bfef24335c8b752ea64",
+        "version" : "2.1.0"
       }
     },
     {
@@ -25,6 +43,15 @@
       "state" : {
         "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
         "version" : "5.7.1"
+      }
+    },
+    {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup.git",
+      "state" : {
+        "revision" : "028487d4a8a291b2fe1b4392b5425b6172056148",
+        "version" : "2.7.2"
       }
     },
     {

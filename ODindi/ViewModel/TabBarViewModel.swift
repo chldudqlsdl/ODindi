@@ -46,7 +46,7 @@ class TabBarViewModel: TabBarViewModelType {
         fetchCoordinate = fetchingCoordinate.asObserver()
         
         fetchingCoordinate
-            .flatMap { _ in
+            .flatMap {
                 LocationService.shared.locationSubject
                     .compactMap { $0 }
                     .take(1)
@@ -61,3 +61,4 @@ class TabBarViewModel: TabBarViewModelType {
     }
     
 }
+

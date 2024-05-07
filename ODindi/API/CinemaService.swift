@@ -7,16 +7,16 @@
 
 import Foundation
 import RxSwift
+import SwiftSoup
 
 class CinemaService {
     static let shared = CinemaService()
     private init() {}
     
-    func fetchCinemaSchedule(cinema: IndieCinema, date: String) -> Observable<CinemaSchedule> {
-        print("Hi")
+    func fetchCinemaSchedule(cinema: IndieCinema = IndieCinema.list[0], date: String) -> Observable<CinemaSchedule> {
         return Observable<CinemaSchedule>.create { emitter in
             let urlString = "https://www.dtryx.com/cinema/showseq_list.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&ssid=&tokn=&BrandCd=\(cinema.code[0])&CinemaCd=\(cinema.code[1])&PlaySDT=\(date)"
-            print(urlString)
+            print(cinema.name)
             
             URLSession.shared.dataTask(with: URL(string: urlString)!) { data, response, error in
                 if let error = error {
@@ -37,8 +37,10 @@ class CinemaService {
                             cinemaSchedule.append(MovieSchedule(info: info))
                         }
                     }
-                    print(cinemaSchedule)
-                    emitter.onNext(cinemaSchedule)
+                    let sortedCinemaSchedule = cinemaSchedule.sorted {
+                        return $0.timeTable.first ?? "0" < $1.timeTable.first ?? "1"
+                    }
+                    emitter.onNext(sortedCinemaSchedule)
                 } else {
                     let error = NSError(domain: "Parsing Error", code: 0)
                     emitter.onError(error)
@@ -58,4 +60,33 @@ class CinemaService {
             return nil
         }
     }
+    
+    func fetchCinemaCalendar(cinema: IndieCinema = IndieCinema.list[0]) -> Observable<CinemaCalendar> {
+            
+            return Observable<CinemaCalendar>.create { emitter in
+                
+                let urlString = "https://www.dtryx.com/cinema/main.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&BrandCd=\(cinema.code[0])&CinemaCd=\(cinema.code[1])"
+                var cinemaCalendar = CinemaCalendar()
+                do {
+                    let html = try String(contentsOf: URL(string: urlString)!, encoding: .utf8)
+                    let doc: Document = try SwiftSoup.parse(html)
+                    let elements = try doc.select("div.main-schedule").select("div.swiper-slide").select("a")
+                    
+                    for element in elements.array() {
+                        if try element.attr("class") == "btnDay disabled" {
+                            cinemaCalendar.holidays.append(try element.attr("data-dt"))
+                        } else {
+                            cinemaCalendar.businessDays.append(try element.attr("data-dt"))
+                        }
+                        cinemaCalendar.alldays.append(try element.attr("data-dt"))
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+                emitter.onNext(cinemaCalendar)
+                return Disposables.create()
+            }
+    }
 }
+
