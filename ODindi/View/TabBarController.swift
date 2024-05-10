@@ -37,31 +37,6 @@ class TabBarController: UITabBarController{
         tabBar.tintColor = .white
     }
     
-    // MARK: - UI Bindings
-    
-    func setupBindings() {
-        
-        //INPUT
-        
-        // 위치 권한 요청
-        Observable
-            .just(())
-            .bind(to: viewModel.checkLocationAuth)
-            .disposed(by: disposeBag)
-        // 좌표 값 요청
-        Observable
-            .just(())
-            .bind(to: viewModel.fetchCoordinate)
-            .disposed(by: disposeBag)
-        
-        // OUTPUT
-        viewModel.currentCoordinate
-            .subscribe { [weak self] coordinate in
-                self?.configureViewControllers(currentCoordinate: coordinate)
-            }
-            .disposed(by: disposeBag)
-    }
-    
     // MARK: - Helpers
     func configureViewControllers(currentCoordinate: CLLocationCoordinate2D){
         let mainVM = MainViewModel(currentCoordinate)
@@ -76,6 +51,28 @@ class TabBarController: UITabBarController{
         navigationController.tabBarItem.image = image
         return navigationController
     }
-
+    
+    // MARK: - UI Bindings
+    
+    func setupBindings() {
+        
+        //INPUT
+        
+        // 위치 권한 요청
+        viewModel.checkLocationAuth
+            .onNext(())
+        
+        // 좌표 값 요청
+        viewModel.fetchCoordinate
+            .onNext(())
+        
+        
+        // OUTPUT
+        viewModel.currentCoordinate
+            .subscribe { [weak self] coordinate in
+                self?.configureViewControllers(currentCoordinate: coordinate)
+            }
+            .disposed(by: disposeBag)
+    }
 }
 

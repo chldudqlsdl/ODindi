@@ -20,6 +20,7 @@
 		D926E3622BEA6B6100CFA01B /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3612BEA6B6100CFA01B /* RxCocoa-Dynamic */; };
 		D926E3642BEA6B6100CFA01B /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3632BEA6B6100CFA01B /* RxRelay */; };
 		D926E36B2BEA6E2100CFA01B /* RxKingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D926E36A2BEA6E2100CFA01B /* RxKingfisher */; };
+		D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92870BE2BEE419D00484866 /* CinemaCell.swift */; };
 		D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */; };
 		D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */; };
 		D9B37EBB2BE7A67300AC1C55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9B37EBA2BE7A67300AC1C55 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		D92210652BE9019E00301B08 /* CinemaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaService.swift; sourceTree = "<group>"; };
 		D92210672BE9028300301B08 /* MovieSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSchedule.swift; sourceTree = "<group>"; };
 		D926E3482BEA416000CFA01B /* CinemaCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaCalendar.swift; sourceTree = "<group>"; };
+		D92870BE2BEE419D00484866 /* CinemaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaCell.swift; sourceTree = "<group>"; };
 		D9B37EAE2BE7A67200AC1C55 /* ODindi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODindi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D92870C02BEE41A400484866 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D92870BE2BEE419D00484866 /* CinemaCell.swift */,
+			);
+			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
 		D9B37EA52BE7A67200AC1C55 = {
@@ -142,6 +152,7 @@
 				D9B37EC52BE7AA9600AC1C55 /* TabBarController.swift */,
 				D9B37ECB2BE7AD2A00AC1C55 /* MainViewController.swift */,
 				D9B37ECD2BE7AD6600AC1C55 /* SubViewController.swift */,
+				D92870C02BEE41A400484866 /* CollectionViewCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +272,7 @@
 				D9B37EC62BE7AA9600AC1C55 /* TabBarController.swift in Sources */,
 				D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */,
 				D92210662BE9019E00301B08 /* CinemaService.swift in Sources */,
+				D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */,
 				D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */,
 				D9B37ECE2BE7AD6600AC1C55 /* SubViewController.swift in Sources */,
 				D92210642BE8CD6800301B08 /* Extensions.swift in Sources */,

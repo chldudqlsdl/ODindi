@@ -8,13 +8,13 @@
 import Foundation
 import CoreLocation
 
-struct IndieCinema {
-        
+struct IndieCinema: Hashable {
+    
     let id: Int
     let name: String
     let location: CLLocationCoordinate2D
     let code: [String]
-
+    
 }
 
 extension IndieCinema {
@@ -26,6 +26,14 @@ extension IndieCinema {
             cinemas.append(IndieCinema(id: index, name: name, location: CLLocationCoordinate2D(latitude: IndieCinemaData.latitudeList[index], longitude: IndieCinemaData.longitudeList[index]), code: IndieCinemaData.cinemaCodeList[name] ?? ["indieart","000057"]))
         }
         return cinemas
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: IndieCinema, rhs: IndieCinema) -> Bool {
+        return lhs.id == rhs.id 
     }
 }
 

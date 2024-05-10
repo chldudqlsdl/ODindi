@@ -15,10 +15,21 @@ import RxKingfisher
 
 class MainViewController: UIViewController {
     
+    // MARK: - Nested Type
+    private enum Section {
+        case cinema
+    }
+    typealias CinemaItem = IndieCinema
+    
+    // MARK: - Properties
+    
     var viewModel: MainViewModelType
     var disposeBag = DisposeBag()
+    private var cinemaCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    private var cinemaDataSource: UICollectionViewDiffableDataSource<Section, CinemaItem>!
+    private var snapshot: NSDiffableDataSourceSnapshot<Section, CinemaItem>!
     
-    // MARK: - LifeCycle
+    // MARK: - LifeCycle Methods
     init(viewModel: MainViewModelType = MainViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -31,90 +42,80 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .orange
-        configureAutolayout()
-        setupBindings()
+        configureUI()
+        bind()
     }
     
-    // MARK: - UI Binding
-    func setupBindings() {
-        Observable
-            .just(())
-            .bind(to: viewModel.fetchNearCinemas)
-            .disposed(by: disposeBag)
+    // MARK: - Methods
+    private func configureUI() {
+        configureAutoLayout()
+        configureCollectionView()
+    }
+    
+    private func configureAutoLayout() {
+        view.addSubview(cinemaCollectionView)
+        cinemaCollectionView.snp.makeConstraints {
+            $0.width.height.equalToSuperview()
+        }
+    }
+    
+    private func configureCollectionView() {
+        cinemaCollectionView.collectionViewLayout = configureCollectionViewLayout()
+        configureCellRegisterationAndDataSource()
+    }
+    
+    private func configureCellRegisterationAndDataSource() {
+        cinemaCollectionView.register(CinemaCell.self, forCellWithReuseIdentifier: "CinemaCell")
         
-        viewModel.cinemaSchedule
-            .observe(on: MainScheduler.instance)
-            .compactMap { $0.first?.imageUrl }
-            .flatMap { [weak self] urlString in
-                self!.movieImageView.kf.rx.setImage(with: URL(string: urlString)!)
-            }
-            .subscribe { _ in
-                print("Image Binding Completed")
-            }
-            .disposed(by: disposeBag)
-            
+        cinemaDataSource = UICollectionViewDiffableDataSource(collectionView: cinemaCollectionView, cellProvider: { collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as? CinemaCell else { return nil}
+            cell.name = item.name
+            return cell
+        })
+    }
+    
+    private func configureCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.1))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    // MARK: - Rx Binding Methods
+    func bind() {
+        viewModel.fetchNearCinemas
+            .onNext(())
         
-        viewModel.cinemaCalendar
-            .map { $0.businessDays.first ?? "" }
-            .observe(on: MainScheduler.instance)
-            .bind(to: dateLabel.rx.text)
-            .disposed(by: disposeBag)
         viewModel.nearCinemas
-            .map { $0.first?.name ?? "" }
             .observe(on: MainScheduler.instance)
-            .bind(to: cinemaLabel.rx.text)
-            .disposed(by: disposeBag)
-        viewModel.cinemaSchedule
-            .map { $0.first?.name ?? "" }
-            .observe(on: MainScheduler.instance)
-            .bind(to: movieLabel.rx.text)
-            .disposed(by: disposeBag)
-        viewModel.cinemaSchedule
-            .map { $0.first?.timeTable.joined(separator: " ∙ ") ?? "" }
-            .observe(on: MainScheduler.instance)
-            .bind(to: timeTableLabel.rx.text)
+            .subscribe { [weak self] items in
+                print(items[0].name)
+                self?.setSnapShot(items)
+            }
             .disposed(by: disposeBag)
     }
     
-    // MARK: - UI Properties
-    let movieImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
-    }
-    
-    let dateLabel = UILabel().then {
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 25)
-        $0.textColor = .white
-    }
-    let cinemaLabel = UILabel().then {
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 25)
-        $0.textColor = .white
-    }
-    let movieLabel = UILabel().then {
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 25)
-        $0.textColor = .white
-    }
-    let timeTableLabel = UILabel().then {
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 25)
-        $0.textColor = .white
-    }
-    lazy var stackView = UIStackView(arrangedSubviews: [dateLabel, cinemaLabel, movieLabel, timeTableLabel]).then {
-        $0.axis = .vertical
-        $0.spacing = 20
-    }
-    
-    // MARK: - ConfigureAutolayout
-    func configureAutolayout() {
-        
-        view.addSubview(movieImageView)
-        movieImageView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.height.equalToSuperview()
+    func setSnapShot( _ items: [IndieCinema]) {
+        if snapshot == nil {
+            configureInitialSnapshot(items)
+        } else {
+            configureSnapshot(items)
         }
-        
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints {
-            $0.centerX.centerY.equalToSuperview()
-        }
+    }
+    
+    func configureInitialSnapshot(_ items: [CinemaItem]) {
+        snapshot = NSDiffableDataSourceSnapshot<Section, CinemaItem>()
+        snapshot.appendSections([.cinema])
+        snapshot.appendItems(items, toSection: .cinema)
+        cinemaDataSource.apply(snapshot)
+    }
+    
+    func configureSnapshot(_ items: [CinemaItem]) {
+        snapshot.appendItems(items, toSection: .cinema)
+        cinemaDataSource.apply(snapshot)
     }
 }
 
