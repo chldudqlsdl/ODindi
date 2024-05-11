@@ -140,8 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				D92210602BE8C6B500301B08 /* IndieCinema.swift */,
-				D92210672BE9028300301B08 /* MovieSchedule.swift */,
 				D926E3482BEA416000CFA01B /* CinemaCalendar.swift */,
+				D92210672BE9028300301B08 /* MovieSchedule.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
