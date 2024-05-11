@@ -45,6 +45,8 @@ class MainViewModel: MainViewModelType {
                     let distance2 = currentCoordinate.distance(to: cinema2.location)
                     return distance1 < distance2
                 }
+                print(currentCoordinate)
+                print(sortedCinemaListByDistance)
                 tempNearCinemas.onNext(Array(sortedCinemaListByDistance.prefix(3)))
             })
             .disposed(by: disposeBag)

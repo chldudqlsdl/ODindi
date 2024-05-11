@@ -50,6 +50,7 @@ class MainViewController: UIViewController {
     private func configureUI() {
         configureAutoLayout()
         configureCollectionView()
+        cinemaCollectionView.backgroundColor = .secondarySystemBackground
     }
     
     private func configureAutoLayout() {
@@ -75,11 +76,13 @@ class MainViewController: UIViewController {
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.1))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4), heightDimension: .fractionalHeight(0.1))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
@@ -92,28 +95,14 @@ class MainViewController: UIViewController {
         viewModel.nearCinemas
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] items in
-                print(items[0].name)
                 self?.setSnapShot(items)
             }
             .disposed(by: disposeBag)
     }
     
-    func setSnapShot( _ items: [IndieCinema]) {
-        if snapshot == nil {
-            configureInitialSnapshot(items)
-        } else {
-            configureSnapshot(items)
-        }
-    }
-    
-    func configureInitialSnapshot(_ items: [CinemaItem]) {
+    func setSnapShot( _ items: [CinemaItem]) {
         snapshot = NSDiffableDataSourceSnapshot<Section, CinemaItem>()
         snapshot.appendSections([.cinema])
-        snapshot.appendItems(items, toSection: .cinema)
-        cinemaDataSource.apply(snapshot)
-    }
-    
-    func configureSnapshot(_ items: [CinemaItem]) {
         snapshot.appendItems(items, toSection: .cinema)
         cinemaDataSource.apply(snapshot)
     }

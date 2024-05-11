@@ -12,17 +12,26 @@ import SnapKit
 class CinemaCell: UICollectionViewCell {
     
     // MARK: - Properties
-    var name: String?
+    var name: String? {
+        didSet { configure() }
+    }
     
     lazy var nameLabel = UILabel().then {
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
-        $0.text = self.name
+        $0.font = UIFont.boldSystemFont(ofSize: 15)
+        $0.numberOfLines = 0
     }
     // MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .brown
-        configureUI()
+        
+        addSubview(nameLabel)
+        nameLabel.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
+        
+        self.layer.cornerRadius = 5
+        self.layer.masksToBounds = true
     }
     
     required init?(coder: NSCoder) {
@@ -30,10 +39,7 @@ class CinemaCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    func configureUI() {
-        addSubview(nameLabel)
-        nameLabel.snp.makeConstraints {
-            $0.centerX.centerY.equalToSuperview()
-        }
+    func configure() {
+        nameLabel.text = name
     }
 }
