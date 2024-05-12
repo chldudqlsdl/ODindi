@@ -9,7 +9,7 @@ import Foundation
 
 typealias CinemaSchedule = [MovieSchedule]
 
-struct MovieSchedule {
+struct MovieSchedule: Hashable {
     let name: String
     let imageUrl: String
     var timeTable: [String]
