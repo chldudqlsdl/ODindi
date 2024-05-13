@@ -217,5 +217,3 @@ class MainViewController: UIViewController {
         }
     }
 }
-
-

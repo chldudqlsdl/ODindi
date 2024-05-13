@@ -80,6 +80,7 @@ class MainViewModel: MainViewModelType {
             .flatMap { cinema in
                 guard let cinema = cinema else { return Observable<CinemaCalendar>.empty() }
                 tempSelectedCinema.onNext(cinema)
+                fetchingSelectedDateMovieSchedule.onNext(0)
                 return CinemaService.shared.fetchCinemaCalendar(cinema: cinema)
             }
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -119,5 +120,6 @@ class MainViewModel: MainViewModelType {
         isLoading = loading.distinctUntilChanged()
     }
 }
+
 
 

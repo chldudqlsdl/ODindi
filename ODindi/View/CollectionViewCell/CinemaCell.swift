@@ -61,3 +61,4 @@ class CinemaCell: UICollectionViewCell {
         nameLabel.text = name
     }
 }
+
