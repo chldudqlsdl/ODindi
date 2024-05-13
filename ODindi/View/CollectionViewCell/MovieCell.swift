@@ -20,19 +20,22 @@ class MovieCell: UICollectionViewCell {
     }
     
     var imageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleToFill
     }
     
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .black
         
         addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
+        
+        self.layer.cornerRadius = 10
+        self.layer.masksToBounds = true
         
     }
     required init?(coder: NSCoder) {
