@@ -16,7 +16,6 @@ class CinemaService {
     func fetchCinemaSchedule(cinema: IndieCinema = IndieCinema.list[0], date: String) -> Observable<CinemaSchedule> {
         return Observable<CinemaSchedule>.create { emitter in
             let urlString = "https://www.dtryx.com/cinema/showseq_list.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&ssid=&tokn=&BrandCd=\(cinema.code[0])&CinemaCd=\(cinema.code[1])&PlaySDT=\(date)"
-            print(urlString)
             
             URLSession.shared.dataTask(with: URL(string: urlString)!) { data, response, error in
                 if let error = error {

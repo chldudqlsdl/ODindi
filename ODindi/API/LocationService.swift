@@ -30,16 +30,27 @@ class LocationService {
         self.locationManager.startUpdatingLocation()
     }
     
-    func requestLocation() -> Observable<CLAuthorizationStatus> {
-        return Observable<CLAuthorizationStatus>
+    func requestLocation() -> Observable<Void> {
+        return Observable<Void>
             .deferred { [weak self] in
-                guard let ss = self else { return .empty() }
-                ss.locationManager.requestWhenInUseAuthorization()
-                return ss.locationManager.rx.didChangeAuthorization
-                    .map { $1 }
-                    .filter { $0 != .notDetermined }
-                    .do(onNext: { _ in ss.locationManager.startUpdatingLocation() })
-                    .take(1)
-            }
+                guard let ls = self else { return .empty() }
+                ls.locationManager.requestWhenInUseAuthorization()
+                return Observable.just(())
+        }
     }
+    
+//    func requestLocation() -> Observable<CLAuthorizationStatus> {
+//        return Observable<CLAuthorizationStatus>
+//            .deferred { [weak self] in
+//                guard let ss = self else { return .empty() }
+//                ss.locationManager.requestWhenInUseAuthorization()
+//                return ss.locationManager.rx.didChangeAuthorization
+//                    .map { $1 }
+//                    .filter { $0 != .notDetermined }
+//                    .do(onNext: { _ in ss.locationManager.startUpdatingLocation() })
+//                    .take(1)
+//            }
+//    }
+    
 }
+

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D922105F2BE8BBFA00301B08 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D922105E2BE8BBFA00301B08 /* MainViewModel.swift */; };
+		D922105F2BE8BBFA00301B08 /* CinemaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D922105E2BE8BBFA00301B08 /* CinemaViewModel.swift */; };
 		D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210602BE8C6B500301B08 /* IndieCinema.swift */; };
 		D92210642BE8CD6800301B08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210632BE8CD6800301B08 /* Extensions.swift */; };
 		D92210662BE9019E00301B08 /* CinemaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210652BE9019E00301B08 /* CinemaService.swift */; };
@@ -20,14 +20,15 @@
 		D926E3622BEA6B6100CFA01B /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3612BEA6B6100CFA01B /* RxCocoa-Dynamic */; };
 		D926E3642BEA6B6100CFA01B /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3632BEA6B6100CFA01B /* RxRelay */; };
 		D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92870BE2BEE419D00484866 /* CinemaCell.swift */; };
+		D9AF46672BF490AB00DDC787 /* RxAppState in Frameworks */ = {isa = PBXBuildFile; productRef = D9AF46662BF490AB00DDC787 /* RxAppState */; };
 		D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */; };
 		D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */; };
 		D9B37EBB2BE7A67300AC1C55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9B37EBA2BE7A67300AC1C55 /* Assets.xcassets */; };
 		D9B37EBE2BE7A67300AC1C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9B37EBC2BE7A67300AC1C55 /* LaunchScreen.storyboard */; };
-		D9B37EC62BE7AA9600AC1C55 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EC52BE7AA9600AC1C55 /* TabBarController.swift */; };
-		D9B37ECC2BE7AD2A00AC1C55 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECB2BE7AD2A00AC1C55 /* MainViewController.swift */; };
+		D9B37EC62BE7AA9600AC1C55 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EC52BE7AA9600AC1C55 /* MainTabBarController.swift */; };
+		D9B37ECC2BE7AD2A00AC1C55 /* CinemaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECB2BE7AD2A00AC1C55 /* CinemaViewController.swift */; };
 		D9B37ECE2BE7AD6600AC1C55 /* SubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECD2BE7AD6600AC1C55 /* SubViewController.swift */; };
-		D9B37ED02BE7AE6100AC1C55 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECF2BE7AE6100AC1C55 /* TabBarViewModel.swift */; };
+		D9B37ED02BE7AE6100AC1C55 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */; };
 		D9B37EDE2BE7B18000AC1C55 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */; };
 		D9B37EE12BE7B34800AC1C55 /* RxCoreLocation in Frameworks */ = {isa = PBXBuildFile; productRef = D9B37EE02BE7B34800AC1C55 /* RxCoreLocation */; };
 		D9B37EE42BE7D21000AC1C55 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D9B37EE32BE7D21000AC1C55 /* Then */; };
@@ -38,7 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D922105E2BE8BBFA00301B08 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		D922105E2BE8BBFA00301B08 /* CinemaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaViewModel.swift; sourceTree = "<group>"; };
 		D92210602BE8C6B500301B08 /* IndieCinema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndieCinema.swift; sourceTree = "<group>"; };
 		D92210632BE8CD6800301B08 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D92210652BE9019E00301B08 /* CinemaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaService.swift; sourceTree = "<group>"; };
@@ -51,10 +52,10 @@
 		D9B37EBA2BE7A67300AC1C55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9B37EBD2BE7A67300AC1C55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9B37EBF2BE7A67300AC1C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D9B37EC52BE7AA9600AC1C55 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		D9B37ECB2BE7AD2A00AC1C55 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D9B37EC52BE7AA9600AC1C55 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		D9B37ECB2BE7AD2A00AC1C55 /* CinemaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaViewController.swift; sourceTree = "<group>"; };
 		D9B37ECD2BE7AD6600AC1C55 /* SubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubViewController.swift; sourceTree = "<group>"; };
-		D9B37ECF2BE7AE6100AC1C55 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
+		D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		D9F070A22BF0F84400F21641 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +67,7 @@
 			files = (
 				D926E3602BEA6B6100CFA01B /* RxCocoa in Frameworks */,
 				D9B37EE72BE7D21700AC1C55 /* SnapKit in Frameworks */,
+				D9AF46672BF490AB00DDC787 /* RxAppState in Frameworks */,
 				D9B37EE12BE7B34800AC1C55 /* RxCoreLocation in Frameworks */,
 				D9B37EE42BE7D21000AC1C55 /* Then in Frameworks */,
 				D9B37EE92BE7D21700AC1C55 /* SnapKit-Dynamic in Frameworks */,
@@ -152,8 +154,8 @@
 		D9B37EC92BE7AB8D00AC1C55 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D9B37EC52BE7AA9600AC1C55 /* TabBarController.swift */,
-				D9B37ECB2BE7AD2A00AC1C55 /* MainViewController.swift */,
+				D9B37EC52BE7AA9600AC1C55 /* MainTabBarController.swift */,
+				D9B37ECB2BE7AD2A00AC1C55 /* CinemaViewController.swift */,
 				D9B37ECD2BE7AD6600AC1C55 /* SubViewController.swift */,
 				D92870C02BEE41A400484866 /* CollectionViewCell */,
 			);
@@ -163,8 +165,8 @@
 		D9B37ECA2BE7AB9400AC1C55 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				D9B37ECF2BE7AE6100AC1C55 /* TabBarViewModel.swift */,
-				D922105E2BE8BBFA00301B08 /* MainViewModel.swift */,
+				D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */,
+				D922105E2BE8BBFA00301B08 /* CinemaViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -206,6 +208,7 @@
 				D926E3612BEA6B6100CFA01B /* RxCocoa-Dynamic */,
 				D926E3632BEA6B6100CFA01B /* RxRelay */,
 				D9F070A52BF106BE00F21641 /* Kingfisher */,
+				D9AF46662BF490AB00DDC787 /* RxAppState */,
 			);
 			productName = ODindi;
 			productReference = D9B37EAE2BE7A67200AC1C55 /* ODindi.app */;
@@ -242,6 +245,7 @@
 				D926E3452BEA3B1700CFA01B /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				D926E35A2BEA6B6100CFA01B /* XCRemoteSwiftPackageReference "RxSwift" */,
 				D9F070A42BF106BD00F21641 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D9AF46652BF490AB00DDC787 /* XCRemoteSwiftPackageReference "RxAppState" */,
 			);
 			productRefGroup = D9B37EAF2BE7A67200AC1C55 /* Products */;
 			projectDirPath = "";
@@ -272,7 +276,7 @@
 				D9B37EDE2BE7B18000AC1C55 /* LocationService.swift in Sources */,
 				D926E3492BEA416000CFA01B /* CinemaCalendar.swift in Sources */,
 				D92210682BE9028300301B08 /* MovieSchedule.swift in Sources */,
-				D9B37EC62BE7AA9600AC1C55 /* TabBarController.swift in Sources */,
+				D9B37EC62BE7AA9600AC1C55 /* MainTabBarController.swift in Sources */,
 				D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */,
 				D92210662BE9019E00301B08 /* CinemaService.swift in Sources */,
 				D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */,
@@ -281,9 +285,9 @@
 				D9B37ECE2BE7AD6600AC1C55 /* SubViewController.swift in Sources */,
 				D92210642BE8CD6800301B08 /* Extensions.swift in Sources */,
 				D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */,
-				D9B37ED02BE7AE6100AC1C55 /* TabBarViewModel.swift in Sources */,
-				D9B37ECC2BE7AD2A00AC1C55 /* MainViewController.swift in Sources */,
-				D922105F2BE8BBFA00301B08 /* MainViewModel.swift in Sources */,
+				D9B37ED02BE7AE6100AC1C55 /* MainTabBarViewModel.swift in Sources */,
+				D9B37ECC2BE7AD2A00AC1C55 /* CinemaViewController.swift in Sources */,
+				D922105F2BE8BBFA00301B08 /* CinemaViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +522,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		D9AF46652BF490AB00DDC787 /* XCRemoteSwiftPackageReference "RxAppState" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pixeldock/RxAppState.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.1;
+			};
+		};
 		D9B37EDF2BE7B34800AC1C55 /* XCRemoteSwiftPackageReference "RxCoreLocation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxCoreLocation.git";
@@ -582,6 +594,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D926E35A2BEA6B6100CFA01B /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
+		};
+		D9AF46662BF490AB00DDC787 /* RxAppState */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D9AF46652BF490AB00DDC787 /* XCRemoteSwiftPackageReference "RxAppState" */;
+			productName = RxAppState;
 		};
 		D9B37EE02BE7B34800AC1C55 /* RxCoreLocation */ = {
 			isa = XCSwiftPackageProductDependency;

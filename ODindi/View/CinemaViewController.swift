@@ -12,7 +12,7 @@ import RxCocoa
 import Then
 import SnapKit
 
-class MainViewController: UIViewController {
+class CinemaViewController: UIViewController {
     
     // MARK: - Nested Type
     private enum Section {
@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    var viewModel: MainViewModelType
+    var viewModel: CinemaViewModelType
     var disposeBag = DisposeBag()
     private var cinemaCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dateCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -39,8 +39,9 @@ class MainViewController: UIViewController {
     private var movieSnapshot: NSDiffableDataSourceSnapshot<Section, MovieItem>!
     private var activityIndicator = UIActivityIndicatorView()
     
-    // MARK: - LifeCycle Methods
-    init(viewModel: MainViewModelType = MainViewModel()) {
+    // MARK: - LifeCycle 
+    
+    init(viewModel: CinemaViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,21 +52,53 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        configureUI()
+        attribute()
+        collectionViewAttribute()
+        layout()
+        collectionViewLayout()
         bind()
     }
     
-    // MARK: - Methods
-    private func configureUI() {
-        configureAutoLayout()
-        configureCollectionView()
-        cinemaCollectionView.backgroundColor = .systemBackground
-        dateCollectionView.backgroundColor = .systemBackground
-        movieCollectionView.backgroundColor = .systemBackground
+    // MARK: - Attribute
+    
+    private func attribute() {
+        view.backgroundColor = .systemBackground
     }
     
-    private func configureAutoLayout() {
+    private func collectionViewAttribute() {
+        let cvs = [cinemaCollectionView, dateCollectionView, movieCollectionView]
+        cvs.forEach { cv in
+            cv.backgroundColor = .systemBackground
+            cv.isScrollEnabled = false
+        }
+        configureCellRegisterationAndDataSource()
+    }
+    
+    private func configureCellRegisterationAndDataSource() {
+        cinemaCollectionView.register(CinemaCell.self, forCellWithReuseIdentifier: "CinemaCell")
+        dateCollectionView.register(CinemaCell.self, forCellWithReuseIdentifier: "CinemaCell")
+        movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
+        
+        cinemaDataSource = UICollectionViewDiffableDataSource(collectionView: cinemaCollectionView, cellProvider: { collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as? CinemaCell else { return nil}
+            cell.name = item.name
+            return cell
+        })
+        dateDataSource = UICollectionViewDiffableDataSource(collectionView: dateCollectionView, cellProvider: { collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as? CinemaCell else { return nil}
+            cell.name = item
+            return cell
+        })
+        movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollectionView, cellProvider: { collectionView, indexPath, item in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
+            cell.imageUrlString = item.imageUrl
+            return cell
+        })
+    }
+    
+    // MARK: - Layout
+    
+    private func layout() {
         view.addSubview(cinemaCollectionView)
         cinemaCollectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -92,38 +125,10 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func configureCollectionView() {
-        configureCellRegisterationAndDataSource()
+    private func collectionViewLayout() {
         cinemaCollectionView.collectionViewLayout = configureCollectionViewLayout(.cinema)
-        
         dateCollectionView.collectionViewLayout = configureCollectionViewLayout(.date)
         movieCollectionView.collectionViewLayout = configureCollectionViewLayout(.movie)
-        cinemaCollectionView.isScrollEnabled = false
-        dateCollectionView.isScrollEnabled = false
-        movieCollectionView.isScrollEnabled = false
-    }
-    
-    private func configureCellRegisterationAndDataSource() {
-        cinemaCollectionView.register(CinemaCell.self, forCellWithReuseIdentifier: "CinemaCell")
-        dateCollectionView.register(CinemaCell.self, forCellWithReuseIdentifier: "CinemaCell")
-        movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
-        
-        cinemaDataSource = UICollectionViewDiffableDataSource(collectionView: cinemaCollectionView, cellProvider: { collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as? CinemaCell else { return nil}
-            cell.name = item.name
-            return cell
-        })
-        dateDataSource = UICollectionViewDiffableDataSource(collectionView: dateCollectionView, cellProvider: { collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as? CinemaCell else { return nil}
-            cell.name = item
-            return cell
-        })
-        movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollectionView, cellProvider: { collectionView, indexPath, item in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
-            print(item.imageUrl)
-            cell.imageUrlString = item.imageUrl
-            return cell
-        })
     }
     
     private func configureCollectionViewLayout(_ option: Section) -> UICollectionViewLayout {
@@ -138,25 +143,27 @@ class MainViewController: UIViewController {
         return layout
     }
     
-    // MARK: - Rx Binding Methods
+    // MARK: - Binding
     func bind() {
-        viewModel.fetchNearCinemas
-            .onNext(())
+        self.rx.viewWillAppear
+            .map { _ in }
+            .bind(to: viewModel.fetchNearCinemas)
+            .disposed(by: disposeBag)
         
         viewModel.nearCinemas
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] items in
+            .bind { [weak self] items in
                 self?.setCinemaSnapShot(items)
             }
             .disposed(by: disposeBag)
         
-        cinemaCollectionView.rx.itemSelected.asObservable()
+        cinemaCollectionView.rx.itemSelected
             .map { $0.row }
-            .bind(to: viewModel.didCinemaSelected)
+            .bind(to: viewModel.didSelectCinema)
             .disposed(by: disposeBag)
         
         viewModel.selectedCinemaCalendar
-            .map { $0.businessDays }
+            .map { $0.businessDays}
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] items in
                 self?.setDateSnapshot(items)
@@ -176,9 +183,9 @@ class MainViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        dateCollectionView.rx.itemSelected.asObservable()
+        dateCollectionView.rx.itemSelected
             .map { $0.row }
-            .bind(to: viewModel.didDateSelected)
+            .bind(to: viewModel.didSelectDate)
             .disposed(by: disposeBag)
         
         viewModel.selectedDateMovieSchedule
@@ -187,9 +194,6 @@ class MainViewController: UIViewController {
                 self?.setMovieSnapshot(items)
             }
             .disposed(by: disposeBag)
-        
-        
-        
     }
     
     func setCinemaSnapShot(_ items: [CinemaItem]) {
