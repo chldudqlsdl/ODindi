@@ -64,15 +64,17 @@ class CinemaViewModel: CinemaViewModelType {
             .combineLatest(nearCinemas, didSelectCinema) { cinemas, index -> IndieCinema in
                 return cinemas[index]
             }
+            .debug()
             .bind(to: selectedCinema)
             .disposed(by: disposeBag)
         
         selectedCinema
+            .debug()
             .do(onNext: { [weak self] _ in self?.didSelectDate.onNext(0) })
             .flatMap { cinema in
                 return CinemaService.shared.fetchCinemaCalendar(cinema: cinema)
+                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             }
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .do(onNext: { [weak self] _ in self?.isLoading.onNext(false)})
             .bind(to: selectedCinemaCalendar)
             .disposed(by: disposeBag)
@@ -90,5 +92,4 @@ class CinemaViewModel: CinemaViewModelType {
             .disposed(by: disposeBag)
     }
 }
-
 
