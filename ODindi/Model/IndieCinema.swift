@@ -12,7 +12,7 @@ struct IndieCinema: Hashable {
     
     let id: Int
     let name: String
-    let location: CLLocationCoordinate2D
+    let coordinate: CLLocationCoordinate2D
     let code: [String]
     
 }
@@ -23,7 +23,7 @@ extension IndieCinema {
     static var list: [IndieCinema] {
         var cinemas: [IndieCinema] = []
         for (index, name) in IndieCinemaData.nameList.enumerated() {
-            cinemas.append(IndieCinema(id: index, name: name, location: CLLocationCoordinate2D(latitude: IndieCinemaData.latitudeList[index], longitude: IndieCinemaData.longitudeList[index]), code: IndieCinemaData.cinemaCodeList[name] ?? ["indieart","000057"]))
+            cinemas.append(IndieCinema(id: index, name: name, coordinate: CLLocationCoordinate2D(latitude: IndieCinemaData.latitudeList[index], longitude: IndieCinemaData.longitudeList[index]), code: IndieCinemaData.cinemaCodeList[name] ?? ["indieart","000057"]))
         }
         return cinemas
     }

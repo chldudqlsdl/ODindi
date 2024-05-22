@@ -51,8 +51,8 @@ class CinemaViewModel: CinemaViewModelType {
             .withLatestFrom(self.currentCoordinate)
             .map { currentCoordinate in
                 let sortedCinemaListByDistance = IndieCinema.list.sorted { cinema1, cinema2 in
-                    let distance1 = currentCoordinate.distance(to: cinema1.location)
-                    let distance2 = currentCoordinate.distance(to: cinema2.location)
+                    let distance1 = currentCoordinate.distance(to: cinema1.coordinate)
+                    let distance2 = currentCoordinate.distance(to: cinema2.coordinate)
                     return distance1 < distance2
                 }
                 return Array(sortedCinemaListByDistance.prefix(3))

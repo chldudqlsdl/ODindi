@@ -75,8 +75,11 @@ class MainTabBarController: UITabBarController{
         let cinemaVM = CinemaViewModel(coordinate)
         let cinemaVC = CinemaViewController(viewModel: cinemaVM)
         
-        let nav1 = configureNavController(vc: cinemaVC, image: UIImage(systemName: "map")!)
-        let nav2 = configureNavController(vc: SubViewController(), image: UIImage(systemName: "magnifyingglass")!)
+        let mapVM = MapViewModel(coordinate)
+        let mapVC = MapViewController(viewModel: mapVM)
+        
+        let nav1 = configureNavController(vc: cinemaVC, image: UIImage(systemName: "popcorn")!)
+        let nav2 = configureNavController(vc: mapVC, image: UIImage(systemName: "map")!)
         viewControllers = [nav1, nav2]
     }
     func configureNavController(vc: UIViewController, image: UIImage) -> UINavigationController {

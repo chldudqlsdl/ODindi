@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D92191522BFC68740049AC13 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92191512BFC68740049AC13 /* MapViewModel.swift */; };
 		D922105F2BE8BBFA00301B08 /* CinemaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D922105E2BE8BBFA00301B08 /* CinemaViewModel.swift */; };
 		D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210602BE8C6B500301B08 /* IndieCinema.swift */; };
 		D92210642BE8CD6800301B08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210632BE8CD6800301B08 /* Extensions.swift */; };
@@ -27,7 +28,7 @@
 		D9B37EBE2BE7A67300AC1C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9B37EBC2BE7A67300AC1C55 /* LaunchScreen.storyboard */; };
 		D9B37EC62BE7AA9600AC1C55 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EC52BE7AA9600AC1C55 /* MainTabBarController.swift */; };
 		D9B37ECC2BE7AD2A00AC1C55 /* CinemaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECB2BE7AD2A00AC1C55 /* CinemaViewController.swift */; };
-		D9B37ECE2BE7AD6600AC1C55 /* SubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECD2BE7AD6600AC1C55 /* SubViewController.swift */; };
+		D9B37ECE2BE7AD6600AC1C55 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECD2BE7AD6600AC1C55 /* MapViewController.swift */; };
 		D9B37ED02BE7AE6100AC1C55 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */; };
 		D9B37EDE2BE7B18000AC1C55 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */; };
 		D9B37EE12BE7B34800AC1C55 /* RxCoreLocation in Frameworks */ = {isa = PBXBuildFile; productRef = D9B37EE02BE7B34800AC1C55 /* RxCoreLocation */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D92191512BFC68740049AC13 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		D922105E2BE8BBFA00301B08 /* CinemaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaViewModel.swift; sourceTree = "<group>"; };
 		D92210602BE8C6B500301B08 /* IndieCinema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndieCinema.swift; sourceTree = "<group>"; };
 		D92210632BE8CD6800301B08 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -54,7 +56,7 @@
 		D9B37EBF2BE7A67300AC1C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9B37EC52BE7AA9600AC1C55 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		D9B37ECB2BE7AD2A00AC1C55 /* CinemaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaViewController.swift; sourceTree = "<group>"; };
-		D9B37ECD2BE7AD6600AC1C55 /* SubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubViewController.swift; sourceTree = "<group>"; };
+		D9B37ECD2BE7AD6600AC1C55 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		D9F070A22BF0F84400F21641 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
@@ -156,7 +158,7 @@
 			children = (
 				D9B37EC52BE7AA9600AC1C55 /* MainTabBarController.swift */,
 				D9B37ECB2BE7AD2A00AC1C55 /* CinemaViewController.swift */,
-				D9B37ECD2BE7AD6600AC1C55 /* SubViewController.swift */,
+				D9B37ECD2BE7AD6600AC1C55 /* MapViewController.swift */,
 				D92870C02BEE41A400484866 /* CollectionViewCell */,
 			);
 			path = View;
@@ -167,6 +169,7 @@
 			children = (
 				D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */,
 				D922105E2BE8BBFA00301B08 /* CinemaViewModel.swift */,
+				D92191512BFC68740049AC13 /* MapViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -280,9 +283,10 @@
 				D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */,
 				D92210662BE9019E00301B08 /* CinemaService.swift in Sources */,
 				D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */,
+				D92191522BFC68740049AC13 /* MapViewModel.swift in Sources */,
 				D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */,
 				D9F070A32BF0F84400F21641 /* MovieCell.swift in Sources */,
-				D9B37ECE2BE7AD6600AC1C55 /* SubViewController.swift in Sources */,
+				D9B37ECE2BE7AD6600AC1C55 /* MapViewController.swift in Sources */,
 				D92210642BE8CD6800301B08 /* Extensions.swift in Sources */,
 				D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */,
 				D9B37ED02BE7AE6100AC1C55 /* MainTabBarViewModel.swift in Sources */,
