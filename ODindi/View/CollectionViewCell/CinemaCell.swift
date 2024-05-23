@@ -13,41 +13,48 @@ class CinemaCell: UICollectionViewCell {
     
     // MARK: - Properties
     var name: String? {
-        didSet { configure() }
+        didSet { configureTitle() }
+    }
+    var isBusinessDay: Bool? {
+        didSet { configureTitleColor() }
     }
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.selectedCircle.backgroundColor = .orange
+                self.insetView.backgroundColor = .yellow
             } else {
-                self.selectedCircle.backgroundColor = .systemBackground
+                self.insetView.backgroundColor = .systemBackground
             }
         }
     }
     
-    var selectedCircle = UIView()
+    lazy var insetView = UIView()
     
     lazy var nameLabel = UILabel().then {
         $0.font = UIFont.boldSystemFont(ofSize: 15)
-        $0.numberOfLines = 0
+//        $0.numberOfLines = 0
+        $0.textAlignment = .center
     }
+    
     // MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(selectedCircle)
-        selectedCircle.snp.makeConstraints {
+        insetView.layer.cornerRadius = self.frame.height / 2
+        insetView.layer.masksToBounds = true
+        
+        addSubview(insetView)
+        insetView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
-            $0.width.height.equalTo(30)
+            $0.height.equalToSuperview()
+            $0.width.equalToSuperview().inset(10)
         }
-        
-        selectedCircle.layer.cornerRadius = 15
-        selectedCircle.layer.masksToBounds = true
-        
+       
         addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
     }
@@ -57,8 +64,16 @@ class CinemaCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    func configure() {
+    func configureTitle() {
         nameLabel.text = name
     }
+    func configureTitleColor() {
+        if isBusinessDay! {
+            nameLabel.textColor = .black
+        } else {
+            nameLabel.textColor = .lightGray
+        }
+    }
 }
+
 

@@ -39,6 +39,8 @@ class CinemaViewController: UIViewController {
     private var movieSnapshot: NSDiffableDataSourceSnapshot<Section, MovieItem>!
     private var activityIndicator = UIActivityIndicatorView()
     
+    private var selectedCinemaCalendar: CinemaCalendar?
+    
     // MARK: - LifeCycle 
     
     init(viewModel: CinemaViewModelType) {
@@ -63,6 +65,8 @@ class CinemaViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .systemBackground
+        self.title = "내 근처 독립영화관"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func collectionViewAttribute() {
@@ -84,11 +88,18 @@ class CinemaViewController: UIViewController {
             cell.name = item.name
             return cell
         })
-        dateDataSource = UICollectionViewDiffableDataSource(collectionView: dateCollectionView, cellProvider: { collectionView, indexPath, item in
+        dateDataSource = UICollectionViewDiffableDataSource(collectionView: dateCollectionView, cellProvider: { [weak self] collectionView, indexPath, item in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as? CinemaCell else { return nil}
+            guard let selectedCinemaCalendar = self?.selectedCinemaCalendar else { return nil }
+            if selectedCinemaCalendar.businessDays.contains(item) {
+                cell.isBusinessDay = true
+            } else {
+                cell.isBusinessDay = false
+            }
             cell.name = item
             return cell
         })
+        
         movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
             cell.imageUrlString = item.imageUrl
@@ -103,19 +114,19 @@ class CinemaViewController: UIViewController {
         cinemaCollectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.width.equalToSuperview()
-            $0.height.equalTo(50)
+            $0.height.equalTo(30)
         }
         view.addSubview(dateCollectionView)
         dateCollectionView.snp.makeConstraints {
-            $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(5)
+            $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(10)
             $0.width.equalToSuperview()
-            $0.height.equalTo(50)
+            $0.height.equalTo(30)
         }
         view.addSubview(activityIndicator)
         activityIndicator.snp.makeConstraints {
-            $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(5)
+            $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(10)
             $0.width.equalToSuperview()
-            $0.height.equalTo(50)
+            $0.height.equalTo(30)
         }
         view.addSubview(movieCollectionView)
         movieCollectionView.snp.makeConstraints {
@@ -132,10 +143,10 @@ class CinemaViewController: UIViewController {
     }
     
     private func configureCollectionViewLayout(_ option: Section) -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: option == .movie ? .fractionalWidth(1) : .estimated(50) , heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
-        let groupSize = NSCollectionLayoutSize(widthDimension: option == .movie ? .absolute(215):  .fractionalWidth(0.4), heightDimension: .fractionalHeight(1))
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        let groupSize = NSCollectionLayoutSize(widthDimension: option == .movie ? .absolute(215) :  .estimated(50), heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
@@ -163,11 +174,11 @@ class CinemaViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.selectedCinemaCalendar
-            .map { $0.businessDays}
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] items in
-                self?.setDateSnapshot(items)
-            }
+            .bind(onNext: { [weak self] cinemaCalendar in
+                self?.selectedCinemaCalendar = cinemaCalendar
+                self?.setDateSnapshot(cinemaCalendar.alldays)
+            })
             .disposed(by: disposeBag)
         
         viewModel.isLoading
@@ -200,24 +211,33 @@ class CinemaViewController: UIViewController {
         cinemaSnapshot = NSDiffableDataSourceSnapshot<Section, CinemaItem>()
         cinemaSnapshot.appendSections([.cinema])
         cinemaSnapshot.appendItems(items, toSection: .cinema)
-        cinemaDataSource.apply(cinemaSnapshot, animatingDifferences: true) { [weak self] in
-            self?.cinemaCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
+        cinemaDataSource.apply(cinemaSnapshot, animatingDifferences: true)
+        { [weak self] in
+            self?.cinemaCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
         }
+        
     }
     func setDateSnapshot(_ items: [String]) {
         dateSnapshot = NSDiffableDataSourceSnapshot<Section, DateItem>()
         dateSnapshot.appendSections([.date])
         dateSnapshot.appendItems(items, toSection: .date)
-        dateDataSource.apply(dateSnapshot, animatingDifferences: true) { [weak self] in
-            self?.dateCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
+        dateDataSource.apply(dateSnapshot, animatingDifferences: true) 
+        { [weak self] in
+            self?.viewModel.cinemaCalendarFirstIndex
+                .observe(on: MainScheduler.instance)
+                .bind(onNext: { index in
+                    self?.dateCollectionView.selectItem(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: index == 0 ? .left : .centeredHorizontally)
+                })
+                .disposed(by: self?.disposeBag ?? DisposeBag())
         }
     }
     func setMovieSnapshot(_ items: [MovieSchedule]) {
         movieSnapshot = NSDiffableDataSourceSnapshot<Section, MovieItem>()
         movieSnapshot.appendSections([.movie])
         movieSnapshot.appendItems(items, toSection: .movie)
-        movieDataSource.apply(movieSnapshot, animatingDifferences: true) { [weak self] in
-            self?.movieCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
+        movieDataSource.apply(movieSnapshot, animatingDifferences: true) 
+        { [weak self] in
+            self?.movieCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
         }
     }
 }

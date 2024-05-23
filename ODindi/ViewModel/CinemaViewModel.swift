@@ -19,6 +19,7 @@ protocol CinemaViewModelType {
     var nearCinemas: PublishSubject<[IndieCinema]> { get }
     var selectedCinema: PublishSubject<IndieCinema> { get }
     var selectedCinemaCalendar: PublishSubject<CinemaCalendar> { get }
+    var cinemaCalendarFirstIndex: BehaviorSubject<Int> { get }
     var selectedDateMovieSchedule: PublishSubject<CinemaSchedule> { get }
     
     var isLoading : PublishSubject<Bool> { get }
@@ -37,6 +38,7 @@ class CinemaViewModel: CinemaViewModelType {
     var nearCinemas = PublishSubject<[IndieCinema]>()
     var selectedCinema = PublishSubject<IndieCinema>()
     var selectedCinemaCalendar = PublishSubject<CinemaCalendar>()
+    var cinemaCalendarFirstIndex = BehaviorSubject<Int>(value: 0)
     var selectedDateMovieSchedule = PublishSubject<CinemaSchedule>()
     
     var isLoading = PublishSubject<Bool>()
@@ -64,7 +66,6 @@ class CinemaViewModel: CinemaViewModelType {
             .combineLatest(nearCinemas, didSelectCinema) { cinemas, index -> IndieCinema in
                 return cinemas[index]
             }
-            .debug()
             .bind(to: selectedCinema)
             .disposed(by: disposeBag)
         
@@ -78,11 +79,25 @@ class CinemaViewModel: CinemaViewModelType {
             .do(onNext: { [weak self] _ in self?.isLoading.onNext(false)})
             .bind(to: selectedCinemaCalendar)
             .disposed(by: disposeBag)
+        
+        selectedCinemaCalendar
+            .map({ cinemaCalendar in
+                let alldays = cinemaCalendar.alldays
+                let businessDays = cinemaCalendar.businessDays
+                guard let firstBusinessDay = businessDays.first else { return 0 }
+                guard let firstCellIndex = alldays.firstIndex(of: firstBusinessDay) else { return 0 }
+                return firstCellIndex
+            })
+            .bind(onNext: { [weak self] (index : Int) in
+                self?.cinemaCalendarFirstIndex.onNext(index)
+                self?.didSelectDate.onNext(index)
+            })
+            .disposed(by: disposeBag)
                 
         Observable
             .combineLatest(selectedCinema, selectedCinemaCalendar, didSelectDate) { cinema, calendar, dateIndex -> (IndieCinema, String)? in
-                guard !calendar.businessDays.isEmpty else { return nil }
-                return (cinema, calendar.businessDays[dateIndex])
+                guard !calendar.alldays.isEmpty else { return nil }
+                return (cinema, calendar.alldays[dateIndex])
             }
             .compactMap { $0 }
             .flatMap { cinemaAndDate in
