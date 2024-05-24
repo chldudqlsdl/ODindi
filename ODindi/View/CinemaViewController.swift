@@ -80,7 +80,7 @@ class CinemaViewController: UIViewController {
     
     private func configureCellRegisterationAndDataSource() {
         cinemaCollectionView.register(CinemaCell.self, forCellWithReuseIdentifier: "CinemaCell")
-        dateCollectionView.register(CinemaCell.self, forCellWithReuseIdentifier: "CinemaCell")
+        dateCollectionView.register(DateCell.self, forCellWithReuseIdentifier: "DateCell")
         movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
         
         cinemaDataSource = UICollectionViewDiffableDataSource(collectionView: cinemaCollectionView, cellProvider: { collectionView, indexPath, item in
@@ -89,14 +89,14 @@ class CinemaViewController: UIViewController {
             return cell
         })
         dateDataSource = UICollectionViewDiffableDataSource(collectionView: dateCollectionView, cellProvider: { [weak self] collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as? CinemaCell else { return nil}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DateCell", for: indexPath) as? DateCell else { return nil}
             guard let selectedCinemaCalendar = self?.selectedCinemaCalendar else { return nil }
             if selectedCinemaCalendar.businessDays.contains(item) {
                 cell.isBusinessDay = true
             } else {
                 cell.isBusinessDay = false
             }
-            cell.name = item
+            cell.viewModel = DateCellViewModel(item)
             return cell
         })
         
@@ -120,7 +120,7 @@ class CinemaViewController: UIViewController {
         dateCollectionView.snp.makeConstraints {
             $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(10)
             $0.width.equalToSuperview()
-            $0.height.equalTo(30)
+            $0.height.equalTo(60)
         }
         view.addSubview(activityIndicator)
         activityIndicator.snp.makeConstraints {
@@ -143,10 +143,21 @@ class CinemaViewController: UIViewController {
     }
     
     private func configureCollectionViewLayout(_ option: Section) -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: option == .movie ? .fractionalWidth(1) : .estimated(50) , heightDimension: .fractionalHeight(1))
+        
+        let widthDimension: (itemWidth: NSCollectionLayoutDimension, groupWidth: NSCollectionLayoutDimension)
+        switch option {
+        case .cinema:
+            widthDimension = (NSCollectionLayoutDimension.estimated(50), NSCollectionLayoutDimension.estimated(50))
+        case .date:
+            widthDimension = (NSCollectionLayoutDimension.fractionalWidth(1), NSCollectionLayoutDimension.fractionalWidth(0.2))
+        case .movie:
+            widthDimension = (NSCollectionLayoutDimension.fractionalWidth(1), NSCollectionLayoutDimension.absolute(215))
+        }
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension.itemWidth, heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-        let groupSize = NSCollectionLayoutSize(widthDimension: option == .movie ? .absolute(215) :  .estimated(50), heightDimension: .fractionalHeight(1))
+        let groupSize = NSCollectionLayoutSize(widthDimension: widthDimension.groupWidth, heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
@@ -198,6 +209,7 @@ class CinemaViewController: UIViewController {
             .map { $0.row }
             .bind(to: viewModel.didSelectDate)
             .disposed(by: disposeBag)
+        
         
         viewModel.selectedDateMovieSchedule
             .observe(on: MainScheduler.instance)

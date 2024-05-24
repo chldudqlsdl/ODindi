@@ -15,9 +15,6 @@ class CinemaCell: UICollectionViewCell {
     var name: String? {
         didSet { configureTitle() }
     }
-    var isBusinessDay: Bool? {
-        didSet { configureTitleColor() }
-    }
     
     override var isSelected: Bool {
         didSet {
@@ -33,7 +30,6 @@ class CinemaCell: UICollectionViewCell {
     
     lazy var nameLabel = UILabel().then {
         $0.font = UIFont.boldSystemFont(ofSize: 15)
-//        $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     
@@ -66,13 +62,6 @@ class CinemaCell: UICollectionViewCell {
     // MARK: - Methods
     func configureTitle() {
         nameLabel.text = name
-    }
-    func configureTitleColor() {
-        if isBusinessDay! {
-            nameLabel.textColor = .black
-        } else {
-            nameLabel.textColor = .lightGray
-        }
     }
 }
 

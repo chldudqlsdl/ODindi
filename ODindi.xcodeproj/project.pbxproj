@@ -21,6 +21,8 @@
 		D926E3622BEA6B6100CFA01B /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3612BEA6B6100CFA01B /* RxCocoa-Dynamic */; };
 		D926E3642BEA6B6100CFA01B /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3632BEA6B6100CFA01B /* RxRelay */; };
 		D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92870BE2BEE419D00484866 /* CinemaCell.swift */; };
+		D94991622BFF2F0200B95F5F /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94991612BFF2F0200B95F5F /* DateCell.swift */; };
+		D94991642BFF6EEF00B95F5F /* DateCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */; };
 		D9AF46672BF490AB00DDC787 /* RxAppState in Frameworks */ = {isa = PBXBuildFile; productRef = D9AF46662BF490AB00DDC787 /* RxAppState */; };
 		D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */; };
 		D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */; };
@@ -48,6 +50,8 @@
 		D92210672BE9028300301B08 /* MovieSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSchedule.swift; sourceTree = "<group>"; };
 		D926E3482BEA416000CFA01B /* CinemaCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaCalendar.swift; sourceTree = "<group>"; };
 		D92870BE2BEE419D00484866 /* CinemaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaCell.swift; sourceTree = "<group>"; };
+		D94991612BFF2F0200B95F5F /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCellViewModel.swift; sourceTree = "<group>"; };
 		D9B37EAE2BE7A67200AC1C55 /* ODindi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODindi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,9 +108,18 @@
 			isa = PBXGroup;
 			children = (
 				D92870BE2BEE419D00484866 /* CinemaCell.swift */,
+				D94991612BFF2F0200B95F5F /* DateCell.swift */,
 				D9F070A22BF0F84400F21641 /* MovieCell.swift */,
 			);
 			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		D94991652BFF6EFC00B95F5F /* CellViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */,
+			);
+			path = CellViewModel;
 			sourceTree = "<group>";
 		};
 		D9B37EA52BE7A67200AC1C55 = {
@@ -170,6 +183,7 @@
 				D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */,
 				D922105E2BE8BBFA00301B08 /* CinemaViewModel.swift */,
 				D92191512BFC68740049AC13 /* MapViewModel.swift */,
+				D94991652BFF6EFC00B95F5F /* CellViewModel */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -283,6 +297,7 @@
 				D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */,
 				D92210662BE9019E00301B08 /* CinemaService.swift in Sources */,
 				D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */,
+				D94991622BFF2F0200B95F5F /* DateCell.swift in Sources */,
 				D92191522BFC68740049AC13 /* MapViewModel.swift in Sources */,
 				D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */,
 				D9F070A32BF0F84400F21641 /* MovieCell.swift in Sources */,
@@ -291,6 +306,7 @@
 				D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */,
 				D9B37ED02BE7AE6100AC1C55 /* MainTabBarViewModel.swift in Sources */,
 				D9B37ECC2BE7AD2A00AC1C55 /* CinemaViewController.swift in Sources */,
+				D94991642BFF6EEF00B95F5F /* DateCellViewModel.swift in Sources */,
 				D922105F2BE8BBFA00301B08 /* CinemaViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
