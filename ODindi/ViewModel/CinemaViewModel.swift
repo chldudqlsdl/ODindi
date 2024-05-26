@@ -70,7 +70,6 @@ class CinemaViewModel: CinemaViewModelType {
             .disposed(by: disposeBag)
         
         selectedCinema
-            .debug()
             .do(onNext: { [weak self] _ in self?.didSelectDate.onNext(0) })
             .flatMap { cinema in
                 return CinemaService.shared.fetchCinemaCalendar(cinema: cinema)

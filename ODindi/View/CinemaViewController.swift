@@ -21,13 +21,17 @@ class CinemaViewController: UIViewController {
         case movie
     }
     typealias CinemaItem = IndieCinema
-    typealias DateItem = String
+    typealias DateItem = BusinessDayStatus
     typealias MovieItem = MovieSchedule
+    
     
     // MARK: - Properties
     
     var viewModel: CinemaViewModelType
     var disposeBag = DisposeBag()
+    
+    let titleImage = UIImageView()
+    
     private var cinemaCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dateCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var movieCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -65,8 +69,12 @@ class CinemaViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .systemBackground
-        self.title = "내 근처 독립영화관"
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        self.title = "내 근처 독립영화관"
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        titleImage.do {
+            $0.contentMode = .scaleAspectFit
+        }
     }
     
     private func collectionViewAttribute() {
@@ -84,19 +92,14 @@ class CinemaViewController: UIViewController {
         movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
         
         cinemaDataSource = UICollectionViewDiffableDataSource(collectionView: cinemaCollectionView, cellProvider: { collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as? CinemaCell else { return nil}
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as! CinemaCell
             cell.name = item.name
             return cell
         })
-        dateDataSource = UICollectionViewDiffableDataSource(collectionView: dateCollectionView, cellProvider: { [weak self] collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DateCell", for: indexPath) as? DateCell else { return nil}
-            guard let selectedCinemaCalendar = self?.selectedCinemaCalendar else { return nil }
-            if selectedCinemaCalendar.businessDays.contains(item) {
-                cell.isBusinessDay = true
-            } else {
-                cell.isBusinessDay = false
-            }
-            cell.viewModel = DateCellViewModel(item)
+        dateDataSource = UICollectionViewDiffableDataSource(collectionView: dateCollectionView, cellProvider: { collectionView, indexPath, item in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DateCell", for: indexPath) as! DateCell
+            cell.isBusinessDay = item.isBusinessDay
+            cell.viewModel = DateCellViewModel(item.dateString)
             return cell
         })
         
@@ -110,9 +113,16 @@ class CinemaViewController: UIViewController {
     // MARK: - Layout
     
     private func layout() {
+        view.addSubview(titleImage)
+        titleImage.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(50)
+        }
+        
         view.addSubview(cinemaCollectionView)
         cinemaCollectionView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(titleImage.snp.bottom).offset(10)
             $0.width.equalToSuperview()
             $0.height.equalTo(30)
         }
@@ -176,19 +186,26 @@ class CinemaViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .bind { [weak self] items in
                 self?.setCinemaSnapShot(items)
+                guard let cinema = items.first else { return }
+                self?.titleImage.image = UIImage(named: "\(cinema.name)")
             }
             .disposed(by: disposeBag)
         
         cinemaCollectionView.rx.itemSelected
             .map { $0.row }
+            .withLatestFrom(viewModel.nearCinemas) { [weak self] index, nearCinemas in
+                UIView.transition(with: self?.titleImage ?? UIImageView(), duration: 1.0, options: .transitionCrossDissolve) {
+                    self?.titleImage.image = UIImage(named: "\(nearCinemas[index].name)")
+                }
+                return index
+            }
             .bind(to: viewModel.didSelectCinema)
             .disposed(by: disposeBag)
         
         viewModel.selectedCinemaCalendar
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self] cinemaCalendar in
-                self?.selectedCinemaCalendar = cinemaCalendar
-                self?.setDateSnapshot(cinemaCalendar.alldays)
+                self?.setDateSnapshot(cinemaCalendar.businessDayStatusArray)
             })
             .disposed(by: disposeBag)
         
@@ -229,7 +246,7 @@ class CinemaViewController: UIViewController {
         }
         
     }
-    func setDateSnapshot(_ items: [String]) {
+    func setDateSnapshot(_ items: [DateItem]) {
         dateSnapshot = NSDiffableDataSourceSnapshot<Section, DateItem>()
         dateSnapshot.appendSections([.date])
         dateSnapshot.appendItems(items, toSection: .date)
@@ -238,7 +255,7 @@ class CinemaViewController: UIViewController {
             self?.viewModel.cinemaCalendarFirstIndex
                 .observe(on: MainScheduler.instance)
                 .bind(onNext: { index in
-                    self?.dateCollectionView.selectItem(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: index == 0 ? .left : .centeredHorizontally)
+                    self?.dateCollectionView.selectItem(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: [.centeredHorizontally])
                 })
                 .disposed(by: self?.disposeBag ?? DisposeBag())
         }

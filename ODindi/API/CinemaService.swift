@@ -79,6 +79,13 @@ class CinemaService {
                         }
                         cinemaCalendar.alldays.append(try element.attr("data-dt"))
                     }
+                    cinemaCalendar.alldays.forEach { dateString in
+                        if cinemaCalendar.businessDays.contains(dateString) {
+                            cinemaCalendar.businessDayStatusArray.append(BusinessDayStatus(dateString: dateString, isBusinessDay: true))
+                        } else {
+                            cinemaCalendar.businessDayStatusArray.append(BusinessDayStatus(dateString: dateString, isBusinessDay: false))
+                        }
+                    }
                 } catch {
                     print(error.localizedDescription)
                 }

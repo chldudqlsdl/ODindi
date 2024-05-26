@@ -19,9 +19,13 @@ class CinemaCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.insetView.backgroundColor = .yellow
+                UIView.transition(with: self.insetView, duration: 0.2, options: .transitionCrossDissolve) {
+                    self.insetView.backgroundColor = .yellow
+                }
             } else {
-                self.insetView.backgroundColor = .systemBackground
+                UIView.transition(with: self.insetView, duration: 0.2, options: .transitionCrossDissolve) {
+                    self.insetView.backgroundColor = .clear
+                }
             }
         }
     }
