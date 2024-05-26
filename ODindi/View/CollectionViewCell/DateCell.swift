@@ -26,15 +26,17 @@ class DateCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                selectedCircle.backgroundColor = .yellow
+                selectedCircle.layer.borderColor = UIColor.black.cgColor
             } else {
-                selectedCircle.backgroundColor = .clear
+                selectedCircle.layer.borderColor = UIColor.clear.cgColor
             }
         }
     }
     lazy var selectedCircle = UIView().then {
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.clear.cgColor
     }
     
     lazy var dayLabel = UILabel().then {
@@ -52,7 +54,7 @@ class DateCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+                
         addSubview(selectedCircle)
         selectedCircle.snp.makeConstraints {
             $0.centerX.equalToSuperview()

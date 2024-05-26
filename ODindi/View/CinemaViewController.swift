@@ -105,7 +105,7 @@ class CinemaViewController: UIViewController {
         
         movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
-            cell.imageUrlString = item.imageUrl
+            cell.movieSchedule = item
             return cell
         })
     }
@@ -122,27 +122,27 @@ class CinemaViewController: UIViewController {
         
         view.addSubview(cinemaCollectionView)
         cinemaCollectionView.snp.makeConstraints {
-            $0.top.equalTo(titleImage.snp.bottom).offset(10)
+            $0.top.equalTo(titleImage.snp.bottom).offset(18)
             $0.width.equalToSuperview()
             $0.height.equalTo(30)
         }
         view.addSubview(dateCollectionView)
         dateCollectionView.snp.makeConstraints {
-            $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(10)
+            $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(18)
             $0.width.equalToSuperview()
             $0.height.equalTo(60)
         }
         view.addSubview(activityIndicator)
         activityIndicator.snp.makeConstraints {
-            $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(10)
+            $0.top.equalTo(cinemaCollectionView.snp.bottom).offset(18)
             $0.width.equalToSuperview()
             $0.height.equalTo(30)
         }
         view.addSubview(movieCollectionView)
         movieCollectionView.snp.makeConstraints {
-            $0.top.equalTo(dateCollectionView.snp.bottom).offset(5)
+            $0.top.equalTo(dateCollectionView.snp.bottom).offset(18)
             $0.width.equalToSuperview()
-            $0.height.equalTo(300)
+            $0.height.equalToSuperview().multipliedBy(0.45)
         }
     }
     
@@ -161,7 +161,7 @@ class CinemaViewController: UIViewController {
         case .date:
             widthDimension = (NSCollectionLayoutDimension.fractionalWidth(1), NSCollectionLayoutDimension.fractionalWidth(0.2))
         case .movie:
-            widthDimension = (NSCollectionLayoutDimension.fractionalWidth(1), NSCollectionLayoutDimension.absolute(215))
+            widthDimension = (NSCollectionLayoutDimension.fractionalWidth(1), NSCollectionLayoutDimension.fractionalWidth(0.6))
         }
         
         let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension.itemWidth, heightDimension: .fractionalHeight(1))
@@ -266,7 +266,7 @@ class CinemaViewController: UIViewController {
         movieSnapshot.appendItems(items, toSection: .movie)
         movieDataSource.apply(movieSnapshot, animatingDifferences: true) 
         { [weak self] in
-            self?.movieCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
+            self?.movieCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [.centeredHorizontally])
         }
     }
 }
