@@ -177,11 +177,7 @@ class CinemaViewController: UIViewController {
     
     // MARK: - Binding
     func bind() {
-        self.rx.viewWillAppear
-            .map { _ in }
-            .bind(to: viewModel.fetchNearCinemas)
-            .disposed(by: disposeBag)
-        
+            
         viewModel.nearCinemas
             .observe(on: MainScheduler.instance)
             .bind { [weak self] items in
@@ -234,6 +230,21 @@ class CinemaViewController: UIViewController {
                 self?.setMovieSnapshot(items)
             }
             .disposed(by: disposeBag)
+        
+        movieCollectionView.rx.itemSelected
+            .map { $0.row }
+            .withLatestFrom(viewModel.selectedDateMovieSchedule) { indexPath, cinemaSchedule in
+                return cinemaSchedule[indexPath].code
+            }
+            .bind { movieCode in
+                self.present(MovieViewController(viewModel: MovieViewModel(movieCode)), animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        Observable
+            .just(())
+            .bind(to: viewModel.fetchNearCinemas)
+            .disposed(by: disposeBag)
     }
     
     func setCinemaSnapShot(_ items: [CinemaItem]) {
@@ -270,3 +281,4 @@ class CinemaViewController: UIViewController {
         }
     }
 }
+

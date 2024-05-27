@@ -99,7 +99,8 @@ class CinemaViewModel: CinemaViewModelType {
                 return (cinema, calendar.alldays[dateIndex])
             }
             .compactMap { $0 }
-            .flatMap { cinemaAndDate in
+            .flatMapLatest { cinemaAndDate in
+                print(cinemaAndDate)
                 return CinemaService.shared.fetchCinemaSchedule(cinema: cinemaAndDate.0, date: cinemaAndDate.1)
             }
             .bind(to: selectedDateMovieSchedule)

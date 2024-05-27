@@ -13,7 +13,7 @@ class CinemaService {
     static let shared = CinemaService()
     private init() {}
     
-    func fetchCinemaSchedule(cinema: IndieCinema = IndieCinema.list[0], date: String) -> Observable<CinemaSchedule> {
+    func fetchCinemaSchedule(cinema: IndieCinema, date: String) -> Observable<CinemaSchedule> {
         return Observable<CinemaSchedule>.create { emitter in
             let urlString = "https://www.dtryx.com/cinema/showseq_list.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&ssid=&tokn=&BrandCd=\(cinema.code[0])&CinemaCd=\(cinema.code[1])&PlaySDT=\(date)"
             
