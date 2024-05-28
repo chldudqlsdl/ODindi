@@ -100,11 +100,9 @@ class CinemaViewModel: CinemaViewModelType {
             }
             .compactMap { $0 }
             .flatMapLatest { cinemaAndDate in
-                print(cinemaAndDate)
                 return CinemaService.shared.fetchCinemaSchedule(cinema: cinemaAndDate.0, date: cinemaAndDate.1)
             }
             .bind(to: selectedDateMovieSchedule)
             .disposed(by: disposeBag)
     }
 }
-

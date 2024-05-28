@@ -73,7 +73,6 @@ class MovieCell: UICollectionViewCell {
         addSubview(timeTableStackView)
         timeTableStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
-            $0.width.equalToSuperview()
             $0.left.equalTo(imageView.snp.left).inset(3)
         }
         

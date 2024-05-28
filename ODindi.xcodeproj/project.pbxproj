@@ -23,6 +23,7 @@
 		D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92870BE2BEE419D00484866 /* CinemaCell.swift */; };
 		D94991622BFF2F0200B95F5F /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94991612BFF2F0200B95F5F /* DateCell.swift */; };
 		D94991642BFF6EEF00B95F5F /* DateCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */; };
+		D94CDCE92C04CA300096951E /* Loaf in Frameworks */ = {isa = PBXBuildFile; productRef = D94CDCE82C04CA300096951E /* Loaf */; };
 		D9AF46672BF490AB00DDC787 /* RxAppState in Frameworks */ = {isa = PBXBuildFile; productRef = D9AF46662BF490AB00DDC787 /* RxAppState */; };
 		D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */; };
 		D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */; };
@@ -85,6 +86,7 @@
 				D9B37EE12BE7B34800AC1C55 /* RxCoreLocation in Frameworks */,
 				D9B37EE42BE7D21000AC1C55 /* Then in Frameworks */,
 				D9B37EE92BE7D21700AC1C55 /* SnapKit-Dynamic in Frameworks */,
+				D94CDCE92C04CA300096951E /* Loaf in Frameworks */,
 				D926E3622BEA6B6100CFA01B /* RxCocoa-Dynamic in Frameworks */,
 				D926E3472BEA3B1700CFA01B /* SwiftSoup in Frameworks */,
 				D926E35C2BEA6B6100CFA01B /* RxBlocking in Frameworks */,
@@ -238,6 +240,7 @@
 				D926E3632BEA6B6100CFA01B /* RxRelay */,
 				D9F070A52BF106BE00F21641 /* Kingfisher */,
 				D9AF46662BF490AB00DDC787 /* RxAppState */,
+				D94CDCE82C04CA300096951E /* Loaf */,
 			);
 			productName = ODindi;
 			productReference = D9B37EAE2BE7A67200AC1C55 /* ODindi.app */;
@@ -275,6 +278,7 @@
 				D926E35A2BEA6B6100CFA01B /* XCRemoteSwiftPackageReference "RxSwift" */,
 				D9F070A42BF106BD00F21641 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D9AF46652BF490AB00DDC787 /* XCRemoteSwiftPackageReference "RxAppState" */,
+				D94CDCE72C04CA300096951E /* XCRemoteSwiftPackageReference "Loaf" */,
 			);
 			productRefGroup = D9B37EAF2BE7A67200AC1C55 /* Products */;
 			projectDirPath = "";
@@ -558,6 +562,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		D94CDCE72C04CA300096951E /* XCRemoteSwiftPackageReference "Loaf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/schmidyy/Loaf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.0;
+			};
+		};
 		D9AF46652BF490AB00DDC787 /* XCRemoteSwiftPackageReference "RxAppState" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pixeldock/RxAppState.git";
@@ -630,6 +642,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D926E35A2BEA6B6100CFA01B /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
+		};
+		D94CDCE82C04CA300096951E /* Loaf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D94CDCE72C04CA300096951E /* XCRemoteSwiftPackageReference "Loaf" */;
+			productName = Loaf;
 		};
 		D9AF46662BF490AB00DDC787 /* RxAppState */ = {
 			isa = XCSwiftPackageProductDependency;
