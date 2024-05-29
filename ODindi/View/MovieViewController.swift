@@ -23,6 +23,7 @@ class MovieViewController: UIViewController {
     private var shadowView = UIView()
     private var ratingImageView = UIImageView()
     private var titleLabel = UILabel()
+    private var directorLabel = UILabel()
     private var infoStackView = UIStackView()
     private var releasedDateLabel = UILabel()
     private var genreLabel = UILabel()
@@ -68,6 +69,11 @@ class MovieViewController: UIViewController {
             $0.numberOfLines = 0
         }
         
+        directorLabel.do {
+            $0.font = UIFont.customFont(ofSize: 15, style: .pretendardSemiBold)
+            $0.textColor = .secondaryLabel
+        }
+        
         let subViews = [releasedDateLabel, genreLabel, runningTimeLabel]
         subViews.forEach { label in
             label.do {
@@ -84,10 +90,9 @@ class MovieViewController: UIViewController {
         }
         
         overViewLabel.do {
-            $0.numberOfLines = 0
             $0.textColor = .darkText
-            $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-            $0.lineBreakMode = .byClipping
+            $0.font = UIFont.customFont(ofSize: 14, style: .pretendardRegular)
+            $0.numberOfLines = 0
         }
     }
     
@@ -120,7 +125,13 @@ class MovieViewController: UIViewController {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom).offset(20)
             $0.left.equalTo(posterImageView.snp.left)
-            $0.centerX.equalToSuperview()
+            $0.centerX.lessThanOrEqualToSuperview()
+        }
+        
+        view.addSubview(directorLabel)
+        directorLabel.snp.makeConstraints {
+            $0.bottom.equalTo(titleLabel.snp.bottom).inset(2)
+            $0.left.equalTo(titleLabel.snp.right).offset(15)
         }
         
         view.addSubview(infoStackView)
@@ -134,14 +145,11 @@ class MovieViewController: UIViewController {
             $0.top.equalTo(infoStackView.snp.bottom).offset(10)
             $0.left.equalTo(posterImageView.snp.left)
             $0.centerX.equalToSuperview()
+            $0.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(30)
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
+        
         genreLabel.snp.makeConstraints {
-            if genreLabel.frame.width > 150 {
-                $0.width.equalTo(150)
-            }
+            $0.width.lessThanOrEqualTo(150)
         }
     }
     
@@ -150,12 +158,12 @@ class MovieViewController: UIViewController {
         
         viewModel.movieData
             .bind { [weak self] data in
-                print(data)
                 self?.posterImageView.kf.setImage(with: URL(string: data.poster), completionHandler: { _ in
                     self?.shadowView.backgroundColor = .systemBackground
                 })
                 self?.ratingImageView.image = data.rating.image
                 self?.titleLabel.text = data.title
+                self?.directorLabel.text = data.director
                 self?.releasedDateLabel.text = data.releasedDate
                 self?.genreLabel.text = data.genre
                 self?.runningTimeLabel.text = data.runningTime

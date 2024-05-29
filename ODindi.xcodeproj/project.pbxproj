@@ -21,6 +21,19 @@
 		D926E3622BEA6B6100CFA01B /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3612BEA6B6100CFA01B /* RxCocoa-Dynamic */; };
 		D926E3642BEA6B6100CFA01B /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3632BEA6B6100CFA01B /* RxRelay */; };
 		D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92870BE2BEE419D00484866 /* CinemaCell.swift */; };
+		D937BD472C05C19E001E7F2A /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937BD462C05C19E001E7F2A /* LikeViewController.swift */; };
+		D937BD512C05C426001E7F2A /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD492C05C426001E7F2A /* Pretendard-Thin.otf */; };
+		D937BD522C05C426001E7F2A /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD4A2C05C426001E7F2A /* Pretendard-ExtraBold.otf */; };
+		D937BD542C05C426001E7F2A /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD4C2C05C426001E7F2A /* Pretendard-Light.otf */; };
+		D937BD552C05C426001E7F2A /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD4D2C05C426001E7F2A /* Pretendard-ExtraLight.otf */; };
+		D937BD562C05C426001E7F2A /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD4E2C05C426001E7F2A /* Pretendard-Black.otf */; };
+		D937BD572C05C426001E7F2A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD4F2C05C426001E7F2A /* Pretendard-SemiBold.otf */; };
+		D937BD582C05C426001E7F2A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD502C05C426001E7F2A /* Pretendard-Bold.otf */; };
+		D937BD5A2C05C42D001E7F2A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD592C05C42D001E7F2A /* Pretendard-Regular.otf */; };
+		D937BD5C2C05C770001E7F2A /* FontLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937BD5B2C05C770001E7F2A /* FontLiterals.swift */; };
+		D937BD5E2C05C9CC001E7F2A /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD5D2C05C9CC001E7F2A /* Pretendard-Medium.otf */; };
+		D937BD652C0609AA001E7F2A /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937BD642C0609AA001E7F2A /* DataBaseManager.swift */; };
+		D937BD682C061A23001E7F2A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D937BD672C061A23001E7F2A /* RealmSwift */; };
 		D94991622BFF2F0200B95F5F /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94991612BFF2F0200B95F5F /* DateCell.swift */; };
 		D94991642BFF6EEF00B95F5F /* DateCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */; };
 		D94CDCE92C04CA300096951E /* Loaf in Frameworks */ = {isa = PBXBuildFile; productRef = D94CDCE82C04CA300096951E /* Loaf */; };
@@ -55,6 +68,18 @@
 		D92210672BE9028300301B08 /* MovieSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSchedule.swift; sourceTree = "<group>"; };
 		D926E3482BEA416000CFA01B /* CinemaCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaCalendar.swift; sourceTree = "<group>"; };
 		D92870BE2BEE419D00484866 /* CinemaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaCell.swift; sourceTree = "<group>"; };
+		D937BD462C05C19E001E7F2A /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		D937BD492C05C426001E7F2A /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		D937BD4A2C05C426001E7F2A /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		D937BD4C2C05C426001E7F2A /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		D937BD4D2C05C426001E7F2A /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		D937BD4E2C05C426001E7F2A /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		D937BD4F2C05C426001E7F2A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		D937BD502C05C426001E7F2A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		D937BD592C05C42D001E7F2A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		D937BD5B2C05C770001E7F2A /* FontLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontLiterals.swift; sourceTree = "<group>"; };
+		D937BD5D2C05C9CC001E7F2A /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		D937BD642C0609AA001E7F2A /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		D94991612BFF2F0200B95F5F /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCellViewModel.swift; sourceTree = "<group>"; };
 		D9B37EAE2BE7A67200AC1C55 /* ODindi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODindi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +107,7 @@
 			files = (
 				D926E3602BEA6B6100CFA01B /* RxCocoa in Frameworks */,
 				D9B37EE72BE7D21700AC1C55 /* SnapKit in Frameworks */,
+				D937BD682C061A23001E7F2A /* RealmSwift in Frameworks */,
 				D9AF46672BF490AB00DDC787 /* RxAppState in Frameworks */,
 				D9B37EE12BE7B34800AC1C55 /* RxCoreLocation in Frameworks */,
 				D9B37EE42BE7D21000AC1C55 /* Then in Frameworks */,
@@ -124,6 +150,23 @@
 			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
+		D937BD482C05C3CE001E7F2A /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				D937BD592C05C42D001E7F2A /* Pretendard-Regular.otf */,
+				D937BD4E2C05C426001E7F2A /* Pretendard-Black.otf */,
+				D937BD502C05C426001E7F2A /* Pretendard-Bold.otf */,
+				D937BD5D2C05C9CC001E7F2A /* Pretendard-Medium.otf */,
+				D937BD4A2C05C426001E7F2A /* Pretendard-ExtraBold.otf */,
+				D937BD4D2C05C426001E7F2A /* Pretendard-ExtraLight.otf */,
+				D937BD4C2C05C426001E7F2A /* Pretendard-Light.otf */,
+				D937BD4F2C05C426001E7F2A /* Pretendard-SemiBold.otf */,
+				D937BD492C05C426001E7F2A /* Pretendard-Thin.otf */,
+				D937BD5B2C05C770001E7F2A /* FontLiterals.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		D94991652BFF6EFC00B95F5F /* CellViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +200,7 @@
 				D9B37EC92BE7AB8D00AC1C55 /* View */,
 				D9B37ECA2BE7AB9400AC1C55 /* ViewModel */,
 				D92210622BE8CD4900301B08 /* Utils */,
+				D937BD482C05C3CE001E7F2A /* Font */,
 				D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */,
 				D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */,
 				D9B37EBA2BE7A67300AC1C55 /* Assets.xcassets */,
@@ -184,6 +228,7 @@
 				D9B37ECB2BE7AD2A00AC1C55 /* CinemaViewController.swift */,
 				D9F8D4DD2C03726F00B811BD /* MovieViewController.swift */,
 				D9B37ECD2BE7AD6600AC1C55 /* MapViewController.swift */,
+				D937BD462C05C19E001E7F2A /* LikeViewController.swift */,
 				D92870C02BEE41A400484866 /* CollectionViewCell */,
 			);
 			path = View;
@@ -207,6 +252,7 @@
 				D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */,
 				D92210652BE9019E00301B08 /* CinemaService.swift */,
 				D9F8D4E12C03793900B811BD /* MovieService.swift */,
+				D937BD642C0609AA001E7F2A /* DataBaseManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -241,6 +287,7 @@
 				D9F070A52BF106BE00F21641 /* Kingfisher */,
 				D9AF46662BF490AB00DDC787 /* RxAppState */,
 				D94CDCE82C04CA300096951E /* Loaf */,
+				D937BD672C061A23001E7F2A /* RealmSwift */,
 			);
 			productName = ODindi;
 			productReference = D9B37EAE2BE7A67200AC1C55 /* ODindi.app */;
@@ -279,6 +326,7 @@
 				D9F070A42BF106BD00F21641 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D9AF46652BF490AB00DDC787 /* XCRemoteSwiftPackageReference "RxAppState" */,
 				D94CDCE72C04CA300096951E /* XCRemoteSwiftPackageReference "Loaf" */,
+				D937BD662C061A23001E7F2A /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = D9B37EAF2BE7A67200AC1C55 /* Products */;
 			projectDirPath = "";
@@ -294,8 +342,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D937BD552C05C426001E7F2A /* Pretendard-ExtraLight.otf in Resources */,
+				D937BD582C05C426001E7F2A /* Pretendard-Bold.otf in Resources */,
+				D937BD512C05C426001E7F2A /* Pretendard-Thin.otf in Resources */,
 				D9B37EBE2BE7A67300AC1C55 /* LaunchScreen.storyboard in Resources */,
+				D937BD522C05C426001E7F2A /* Pretendard-ExtraBold.otf in Resources */,
 				D9B37EBB2BE7A67300AC1C55 /* Assets.xcassets in Resources */,
+				D937BD572C05C426001E7F2A /* Pretendard-SemiBold.otf in Resources */,
+				D937BD5A2C05C42D001E7F2A /* Pretendard-Regular.otf in Resources */,
+				D937BD562C05C426001E7F2A /* Pretendard-Black.otf in Resources */,
+				D937BD542C05C426001E7F2A /* Pretendard-Light.otf in Resources */,
+				D937BD5E2C05C9CC001E7F2A /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +371,7 @@
 				D92210662BE9019E00301B08 /* CinemaService.swift in Sources */,
 				D9F8D4E22C03793900B811BD /* MovieService.swift in Sources */,
 				D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */,
+				D937BD472C05C19E001E7F2A /* LikeViewController.swift in Sources */,
 				D94991622BFF2F0200B95F5F /* DateCell.swift in Sources */,
 				D92191522BFC68740049AC13 /* MapViewModel.swift in Sources */,
 				D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */,
@@ -324,7 +382,9 @@
 				D92210642BE8CD6800301B08 /* Extensions.swift in Sources */,
 				D9F8D4DE2C03726F00B811BD /* MovieViewController.swift in Sources */,
 				D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */,
+				D937BD652C0609AA001E7F2A /* DataBaseManager.swift in Sources */,
 				D9B37ED02BE7AE6100AC1C55 /* MainTabBarViewModel.swift in Sources */,
+				D937BD5C2C05C770001E7F2A /* FontLiterals.swift in Sources */,
 				D9B37ECC2BE7AD2A00AC1C55 /* CinemaViewController.swift in Sources */,
 				D94991642BFF6EEF00B95F5F /* DateCellViewModel.swift in Sources */,
 				D922105F2BE8BBFA00301B08 /* CinemaViewModel.swift in Sources */,
@@ -475,6 +535,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ODindi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "어디인디";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처에 위치한 독립영화관을 찾기 위해 위치 권한 허용이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -504,6 +565,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ODindi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "어디인디";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처에 위치한 독립영화관을 찾기 위해 위치 권한 허용이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -560,6 +622,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.7.1;
+			};
+		};
+		D937BD662C061A23001E7F2A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		D94CDCE72C04CA300096951E /* XCRemoteSwiftPackageReference "Loaf" */ = {
@@ -642,6 +712,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D926E35A2BEA6B6100CFA01B /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
+		};
+		D937BD672C061A23001E7F2A /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D937BD662C061A23001E7F2A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		D94CDCE82C04CA300096951E /* Loaf */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -106,6 +106,19 @@ class CinemaViewController: UIViewController {
         movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
             cell.movieSchedule = item
+            
+            cell.watchLaterButtonTapped
+                .bind { movieCode in
+                    self.viewModel.watchLaterButtonTapped.onNext(movieCode)
+                }
+                .disposed(by: cell.disposeBag)
+            
+            cell.posterTapped
+                .bind { movieCode in
+                    self.present(MovieViewController(viewModel: MovieViewModel(movieCode)), animated: true)
+                }
+                .disposed(by: cell.disposeBag)
+            
             return cell
         })
     }
@@ -142,7 +155,7 @@ class CinemaViewController: UIViewController {
         movieCollectionView.snp.makeConstraints {
             $0.top.equalTo(dateCollectionView.snp.bottom).offset(18)
             $0.width.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.45)
+            $0.height.equalToSuperview().multipliedBy(0.5)
         }
     }
     
@@ -201,7 +214,9 @@ class CinemaViewController: UIViewController {
         viewModel.selectedCinemaCalendar
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self] cinemaCalendar in
-                self?.setDateSnapshot(cinemaCalendar.businessDayStatusArray)
+                UIView.transition(with: UIImageView(), duration: 0.7, options: .transitionCrossDissolve) {
+                    self?.setDateSnapshot(cinemaCalendar.businessDayStatusArray)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -227,19 +242,21 @@ class CinemaViewController: UIViewController {
         viewModel.selectedDateMovieSchedule
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] items in
-                self?.setMovieSnapshot(items)
+                UIView.transition(with: UIImageView(), duration: 0.8, options: .transitionCrossDissolve) {
+                    self?.setMovieSnapshot(items)
+                }
             }
             .disposed(by: disposeBag)
         
-        movieCollectionView.rx.itemSelected
-            .map { $0.row }
-            .withLatestFrom(viewModel.selectedDateMovieSchedule) { indexPath, cinemaSchedule in
-                return cinemaSchedule[indexPath].code
-            }
-            .bind { movieCode in
-                self.present(MovieViewController(viewModel: MovieViewModel(movieCode)), animated: true)
-            }
-            .disposed(by: disposeBag)
+//        movieCollectionView.rx.itemSelected
+//            .map { $0.row }
+//            .withLatestFrom(viewModel.selectedDateMovieSchedule) { indexPath, cinemaSchedule in
+//                return cinemaSchedule[indexPath].code
+//            }
+//            .bind { movieCode in
+//                self.present(MovieViewController(viewModel: MovieViewModel(movieCode)), animated: true)
+//            }
+//            .disposed(by: disposeBag)
         
         Observable
             .just(())

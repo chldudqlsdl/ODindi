@@ -15,6 +15,7 @@ protocol CinemaViewModelType {
     var fetchNearCinemas: BehaviorSubject<Void> { get }
     var didSelectCinema: BehaviorSubject<Int> { get }
     var didSelectDate: BehaviorSubject<Int> { get }
+    var watchLaterButtonTapped: PublishSubject<String> { get }
     
     var nearCinemas: PublishSubject<[IndieCinema]> { get }
     var selectedCinema: PublishSubject<IndieCinema> { get }
@@ -33,6 +34,7 @@ class CinemaViewModel: CinemaViewModelType {
     var fetchNearCinemas = BehaviorSubject<Void>(value: ())
     var didSelectCinema = BehaviorSubject<Int>(value: 0)
     var didSelectDate = BehaviorSubject<Int>(value: 0)
+    var watchLaterButtonTapped = PublishSubject<String>()
     
     // OUTPUT
     var nearCinemas = PublishSubject<[IndieCinema]>()
@@ -103,6 +105,12 @@ class CinemaViewModel: CinemaViewModelType {
                 return CinemaService.shared.fetchCinemaSchedule(cinema: cinemaAndDate.0, date: cinemaAndDate.1)
             }
             .bind(to: selectedDateMovieSchedule)
+            .disposed(by: disposeBag)
+        
+        watchLaterButtonTapped
+            .bind { movieCode in
+                print(movieCode)
+            }
             .disposed(by: disposeBag)
     }
 }
