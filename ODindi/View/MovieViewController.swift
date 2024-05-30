@@ -127,7 +127,7 @@ class MovieViewController: UIViewController {
             $0.left.equalTo(posterImageView.snp.left)
             $0.centerX.lessThanOrEqualToSuperview()
         }
-        
+                
         view.addSubview(directorLabel)
         directorLabel.snp.makeConstraints {
             $0.bottom.equalTo(titleLabel.snp.bottom).inset(2)
@@ -138,6 +138,7 @@ class MovieViewController: UIViewController {
         infoStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.left.equalTo(posterImageView.snp.left)
+            $0.right.lessThanOrEqualTo(posterImageView.snp.right)
         }
         
         view.addSubview(overViewLabel)
@@ -148,8 +149,14 @@ class MovieViewController: UIViewController {
             $0.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(30)
         }
         
-        genreLabel.snp.makeConstraints {
-            $0.width.lessThanOrEqualTo(150)
+        genreLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if titleLabel.frame.height > 50 {
+            directorLabel.snp.makeConstraints {
+                $0.left.equalTo(titleLabel.snp.right).inset(10)
+            }
         }
     }
     
