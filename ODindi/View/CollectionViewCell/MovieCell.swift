@@ -64,10 +64,13 @@ class MovieCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
-        bind()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        self.disposeBag = DisposeBag()
     }
 
     // MARK: - Attribute
@@ -87,6 +90,8 @@ class MovieCell: UICollectionViewCell {
             timeLabel.text = time
             timeTableStackView.addArrangedSubview(timeLabel)
         }
+        
+        bind()
     }
     
     // MARK: - Layout
