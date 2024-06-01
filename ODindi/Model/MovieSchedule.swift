@@ -14,6 +14,7 @@ struct MovieSchedule: Hashable {
     let imageUrl: String
     var timeTable: [String]
     let code: String
+    var watchLater: Bool = false
     
     init(info: MovieScheduleInfo) {
         self.name = info.MovieNm

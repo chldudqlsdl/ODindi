@@ -51,6 +51,7 @@
 		D9B37EE42BE7D21000AC1C55 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D9B37EE32BE7D21000AC1C55 /* Then */; };
 		D9B37EE72BE7D21700AC1C55 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D9B37EE62BE7D21700AC1C55 /* SnapKit */; };
 		D9B37EE92BE7D21700AC1C55 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D9B37EE82BE7D21700AC1C55 /* SnapKit-Dynamic */; };
+		D9CAAE3E2C09F436004ED4E0 /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */; };
 		D9F070A32BF0F84400F21641 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F070A22BF0F84400F21641 /* MovieCell.swift */; };
 		D9F070A62BF106BE00F21641 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D9F070A52BF106BE00F21641 /* Kingfisher */; };
 		D9F8D4DE2C03726F00B811BD /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F8D4DD2C03726F00B811BD /* MovieViewController.swift */; };
@@ -93,6 +94,7 @@
 		D9B37ECD2BE7AD6600AC1C55 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		D9F070A22BF0F84400F21641 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		D9F8D4DD2C03726F00B811BD /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		D9F8D4DF2C0375EE00B811BD /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */,
+				D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */,
 			);
 			path = CellViewModel;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				D92210682BE9028300301B08 /* MovieSchedule.swift in Sources */,
 				D9B37EC62BE7AA9600AC1C55 /* MainTabBarController.swift in Sources */,
 				D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */,
+				D9CAAE3E2C09F436004ED4E0 /* MovieCellViewModel.swift in Sources */,
 				D92210662BE9019E00301B08 /* CinemaService.swift in Sources */,
 				D9F8D4E22C03793900B811BD /* MovieService.swift in Sources */,
 				D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */,
@@ -538,8 +542,8 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처에 위치한 독립영화관을 찾기 위해 위치 권한 허용이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -568,8 +572,8 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처에 위치한 독립영화관을 찾기 위해 위치 권한 허용이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

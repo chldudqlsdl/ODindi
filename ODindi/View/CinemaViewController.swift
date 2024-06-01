@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import Then
 import SnapKit
+import Loaf
 
 class CinemaViewController: UIViewController {
     
@@ -105,17 +106,21 @@ class CinemaViewController: UIViewController {
         
         movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
-            cell.movieSchedule = item
+            
+            cell.viewModel = MovieCellViewModel(item)
             
             cell.watchLaterButtonTapped
-                .bind { movieCode in
-                    self.viewModel.watchLaterButtonTapped.onNext(movieCode)
+                .bind { [weak self] bool in
+                    if !bool {
+                        
+                        Loaf("보고싶어요에 추가되었습니다", state: .custom(.init(backgroundColor: .orange, font: .customFont(ofSize: 15, style: .pretendardMedium), icon: UIImage(systemName: "eyeglasses") ,textAlignment: .center, iconAlignment: .left)), sender: self ?? UIViewController()).show(.custom(3))
+                    }
                 }
                 .disposed(by: cell.disposeBag)
             
             cell.posterTapped
-                .bind { movieCode in
-                    self.present(MovieViewController(viewModel: MovieViewModel(movieCode)), animated: true)
+                .bind { [weak self] movieCode in
+                    self?.present(MovieViewController(viewModel: MovieViewModel(movieCode)), animated: true)
                 }
                 .disposed(by: cell.disposeBag)
             
@@ -179,7 +184,7 @@ class CinemaViewController: UIViewController {
         
         let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension.itemWidth, heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: option == .cinema ? 0 : 10, bottom: 0, trailing: option == .cinema ? 0 : 10)
         let groupSize = NSCollectionLayoutSize(widthDimension: widthDimension.groupWidth, heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)

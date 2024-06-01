@@ -9,12 +9,14 @@ import Foundation
 import RealmSwift
 
 class WatchLater: Object {
-    @objc dynamic var movieCode: String
-    @objc dynamic var date: Date
     
-    init(movieCode: String) {
+    @Persisted(primaryKey: true) var objectId: ObjectId
+    @Persisted var movieCode: String
+    @Persisted var date: Date = Date()
+    
+    convenience init(_ movieCode: String) {
+        self.init()
         self.movieCode = movieCode
-        self.date = Date()
     }
 }
 
@@ -35,10 +37,12 @@ class DataBaseManager {
         return database.objects(object)
     }
     
-    func write(_ object: WatchLater) {
+    func write(_ code: String) {
+        
+        let watchLater = WatchLater(code)
         do {
             try database.write {
-                database.add(object, update: .modified)
+                database.add(watchLater, update: .modified)
                 print("Item Added")
             }
         } catch let error {
@@ -46,10 +50,14 @@ class DataBaseManager {
         }
     }
     
-    func delete(_ object: WatchLater) {
+    func delete(_ code :String) {
         do {
+            let item = database.objects(WatchLater.self)
+                .filter {
+                    $0.movieCode == code
+                }
             try database.write {
-                database.delete(object)
+                database.delete(item.first ?? item[0])
                 print("Item Deleted")
             }
         } catch let error {

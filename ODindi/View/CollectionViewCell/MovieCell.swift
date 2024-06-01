@@ -11,6 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import Kingfisher
+import Loaf
 
 class MovieCell: UICollectionViewCell {
     
@@ -18,13 +19,13 @@ class MovieCell: UICollectionViewCell {
     
     var disposeBag = DisposeBag()
     
-    let watchLaterButtonTapped = PublishSubject<String>()
+    let watchLaterButtonTapped = PublishSubject<Bool>()
     let posterTapped = PublishSubject<String>()
     let watchLaterTapGesture = UITapGestureRecognizer()
     let posterTapGesture = UITapGestureRecognizer()
-        
-    var movieSchedule: MovieSchedule? {
-        didSet { configure() }
+    
+    var viewModel: MovieCellViewModelType? {
+        didSet { bind() }
     }
     
     lazy var imageView = UIImageView().then {
@@ -72,27 +73,6 @@ class MovieCell: UICollectionViewCell {
     override func prepareForReuse() {
         self.disposeBag = DisposeBag()
     }
-
-    // MARK: - Attribute
-    
-    func configure() {
-        guard let movieSchedule = movieSchedule else { return }
-        imageView.kf.setImage(with: URL(string: movieSchedule.imageUrl))
-                
-        titleLabel.text = movieSchedule.name
-        
-        timeTableStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
-        movieSchedule.timeTable.forEach { time in
-            let timeLabel = UILabel().then {
-                $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-            }
-            timeLabel.text = time
-            timeTableStackView.addArrangedSubview(timeLabel)
-        }
-        
-        bind()
-    }
     
     // MARK: - Layout
     func layout() {
@@ -138,20 +118,48 @@ class MovieCell: UICollectionViewCell {
     
     func bind() {
         
+        guard let viewModel = self.viewModel else { return }
+        
+        viewModel.movieSchedule
+            .bind { [weak self] movieSchedule in
+                
+                self?.imageView.kf.setImage(with: URL(string: movieSchedule.imageUrl))
+                self?.titleLabel.text = movieSchedule.name
+                self?.timeTableStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+                movieSchedule.timeTable.forEach { time in
+                    let timeLabel = UILabel().then {
+                        $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+                    }
+                    timeLabel.text = time
+                    self?.timeTableStackView.addArrangedSubview(timeLabel)
+                }
+                
+                let newBtnImage = movieSchedule.watchLater ? UIImage(systemName: "bookmark.fill")!.withTintColor(.orange, renderingMode: .alwaysOriginal) : UIImage(systemName: "bookmark.fill")!.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+                
+                UIView.transition(with: self?.watchLaterButton ?? UIView(), duration: 0.5, options: .transitionCrossDissolve, animations: {
+                    self?.watchLaterButton.image = newBtnImage
+                })
+            }
+            .disposed(by: disposeBag)
+        
+        
         watchLaterTapGesture.rx.event
-            .bind { [weak self] _ in
-                guard let movieSchedule = self?.movieSchedule else { return }
-                self?.watchLaterButtonTapped.onNext(movieSchedule.code)
+            .withLatestFrom(viewModel.movieSchedule) { _, movieSchedule in
+                return movieSchedule
+            }
+            .bind { [weak self] movieSchedule in
+                self?.viewModel?.saveWatchLater.onNext(movieSchedule)
+                self?.watchLaterButtonTapped.onNext(movieSchedule.watchLater)
             }
             .disposed(by: disposeBag)
         
         posterTapGesture.rx.event
-            .bind { [weak self] _ in
-                guard let movieSchedule = self?.movieSchedule else { return }
+            .withLatestFrom(viewModel.movieSchedule, resultSelector: { _, movieSchedule in
+                return movieSchedule
+            })
+            .bind { [weak self] movieSchedule in
                 self?.posterTapped.onNext(movieSchedule.code)
             }
             .disposed(by: disposeBag)
     }
 }
-
-

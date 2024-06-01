@@ -179,10 +179,22 @@ class MovieViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.errorMessage
-            .bind { errorMsg in
+            .bind { [weak self] errorMsg in
+                guard let self = self else { return }
                 Loaf(errorMsg, state: .error, sender: self).show(.short)
             }
             .disposed(by: disposeBag)
+    }
+    
+    deinit {
+//        print("MovieVC deinit")
+//        
+//        let cache = ImageCache.default
+//
+//        // 캐시 전체 삭제
+//        cache.clearMemoryCache()
+//        cache.clearDiskCache()
+//        cache.cleanExpiredDiskCache()
     }
 }
 
