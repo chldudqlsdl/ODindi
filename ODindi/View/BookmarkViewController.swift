@@ -55,6 +55,13 @@ class BookmarkViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookmarkCell", for: indexPath) as! BookmarkCell
             cell.viewModel = BookmarkCellViewModel(movieCode: item.movieCode)
+            
+            cell.posterTapped
+                .bind { [weak self] movieCode in
+                    self?.present(MovieViewController(viewModel: MovieViewModel(movieCode)), animated: true)
+                }
+                .disposed(by: cell.disposebag)
+            
             return cell
         })
     }
@@ -95,6 +102,10 @@ class BookmarkViewController: UIViewController {
             .bind(to: viewModel.viewWillAppear)
             .disposed(by: disposeBag)
         
+        self.rx.viewDidAppear
+            .map { _ in ()}
+            .bind(to: viewModel.viewDidAppear)
+            .disposed(by: disposeBag)
         
         viewModel.bookmarkedMovieDatas
             .bind { [weak self] movies in

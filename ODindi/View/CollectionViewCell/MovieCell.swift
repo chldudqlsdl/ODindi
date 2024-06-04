@@ -22,7 +22,7 @@ class MovieCell: UICollectionViewCell {
     let watchLaterButtonTapped = PublishSubject<Bool>()
     let posterTapped = PublishSubject<String>()
     let watchLaterTapGesture = UITapGestureRecognizer()
-    let posterTapGesture = UITapGestureRecognizer()
+    let posterTapRecognizer = UITapGestureRecognizer()
     
     var viewModel: MovieCellViewModelType? {
         didSet { bind() }
@@ -33,7 +33,7 @@ class MovieCell: UICollectionViewCell {
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
         $0.layer.borderWidth = 0.05
-        $0.addGestureRecognizer(posterTapGesture)
+        $0.addGestureRecognizer(posterTapRecognizer)
         $0.isUserInteractionEnabled = true
     }
     
@@ -154,7 +154,7 @@ class MovieCell: UICollectionViewCell {
             }
             .disposed(by: disposeBag)
         
-        posterTapGesture.rx.event
+        posterTapRecognizer.rx.event
             .withLatestFrom(viewModel.movieSchedule, resultSelector: { _, movieSchedule in
                 return movieSchedule
             })

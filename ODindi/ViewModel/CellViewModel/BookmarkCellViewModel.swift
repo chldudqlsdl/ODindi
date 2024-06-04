@@ -9,15 +9,25 @@ import Foundation
 import RxSwift
 
 protocol BookmarkCellViewModelType {
+    var movieCode: BehaviorSubject<String> { get }
     var movieData: BehaviorSubject<MovieData> { get }
 }
 
 class BookmarkCellViewModel: BookmarkCellViewModelType{
     
     let disposeBag = DisposeBag()
+    
+    var movieCode = BehaviorSubject<String>(value: "")
     var movieData = BehaviorSubject<MovieData>(value: MovieData())
     
     init(movieCode: String) {
+        
+        Observable
+            .just(movieCode)
+            .bind { [weak self] string in
+                self?.movieCode.onNext(string)
+            }
+            .disposed(by: disposeBag)
         
         let movieDataResult = Observable
             .just(movieCode)

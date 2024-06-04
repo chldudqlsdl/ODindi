@@ -66,14 +66,12 @@ class DataBaseManager {
     }
     
     
-    func delete(_ code :String) {
+    func delete() {
         do {
-            let item = database.objects(WatchLater.self)
-                .filter {
-                    $0.movieCode == code
-                }
+            let items = database.objects(WatchLater.self)
+                .filter("isDeleted == true")
             try database.write {
-                database.delete(item.first ?? item[0])
+                database.delete(items)
                 print("Item Deleted")
             }
         } catch let error {

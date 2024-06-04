@@ -10,6 +10,7 @@ import RxSwift
 
 protocol BookmarkViewModelType {
     var viewWillAppear: PublishSubject<Void> { get }
+    var viewDidAppear: PublishSubject<Void> { get }
     
     var bookmarkedMovieDatas: BehaviorSubject<[WatchLater]> { get }
 }
@@ -19,6 +20,7 @@ class BookmarkViewModel: BookmarkViewModelType {
     let disposeBag = DisposeBag()
     
     var viewWillAppear = PublishSubject<Void>()
+    var viewDidAppear = PublishSubject<Void>()
     
     var bookmarkedMovieDatas = BehaviorSubject<[WatchLater]>(value: [])
     
@@ -38,5 +40,10 @@ class BookmarkViewModel: BookmarkViewModelType {
             }
             .disposed(by: disposeBag)
         
+        viewDidAppear
+            .bind { _ in
+                DataBaseManager.shared.delete()
+            }
+            .disposed(by: disposeBag)
     }
 }

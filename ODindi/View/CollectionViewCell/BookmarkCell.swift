@@ -14,16 +14,21 @@ class BookmarkCell: UICollectionViewCell {
     // MARK: - Properties
     
     let disposebag = DisposeBag()
+    let posterTapped = PublishSubject<String>()
+    let posterTapRecognizer = UITapGestureRecognizer()
     
     var viewModel: BookmarkCellViewModelType? {
         didSet { bind() }
     }
 
-    var imageView = UIImageView().then {
+    lazy var imageView = UIImageView().then {
         $0.contentMode = .scaleToFill
         $0.layer.cornerRadius = 5
         $0.layer.masksToBounds = true
         $0.layer.borderWidth = 0.05
+        
+        $0.addGestureRecognizer(posterTapRecognizer)
+        $0.isUserInteractionEnabled = true
     }
     
     var imageViewForShadow = UIView().then {
@@ -89,6 +94,13 @@ class BookmarkCell: UICollectionViewCell {
                 self?.imageView.kf.setImage(with: URL(string: movieData.poster.small))
                 self?.titleLabel.text = movieData.title
             }
+            .disposed(by: disposebag)
+        
+        posterTapRecognizer.rx.event
+            .withLatestFrom(viewModel.movieCode) { _, movieCode in
+                return movieCode
+            }
+            .bind(to: posterTapped)
             .disposed(by: disposebag)
     }
     
