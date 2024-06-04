@@ -243,25 +243,18 @@ class CinemaViewController: UIViewController {
             .bind(to: viewModel.didSelectDate)
             .disposed(by: disposeBag)
         
-        
-        viewModel.selectedDateMovieSchedule
+        Observable
+            .combineLatest(self.rx.viewWillAppear, viewModel.selectedDateMovieSchedule) { _ , items in
+                return items
+            }
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] items in
+                self?.movieCollectionView.reloadData()
                 UIView.transition(with: UIImageView(), duration: 0.8, options: .transitionCrossDissolve) {
                     self?.setMovieSnapshot(items)
                 }
             }
             .disposed(by: disposeBag)
-        
-//        movieCollectionView.rx.itemSelected
-//            .map { $0.row }
-//            .withLatestFrom(viewModel.selectedDateMovieSchedule) { indexPath, cinemaSchedule in
-//                return cinemaSchedule[indexPath].code
-//            }
-//            .bind { movieCode in
-//                self.present(MovieViewController(viewModel: MovieViewModel(movieCode)), animated: true)
-//            }
-//            .disposed(by: disposeBag)
         
         Observable
             .just(())

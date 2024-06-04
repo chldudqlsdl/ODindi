@@ -106,11 +106,5 @@ class CinemaViewModel: CinemaViewModelType {
             }
             .bind(to: selectedDateMovieSchedule)
             .disposed(by: disposeBag)
-        
-        watchLaterButtonTapped
-            .bind { movieCode in
-                print(movieCode)
-            }
-            .disposed(by: disposeBag)
     }
 }

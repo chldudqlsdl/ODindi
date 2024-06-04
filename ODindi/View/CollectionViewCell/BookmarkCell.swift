@@ -13,9 +13,11 @@ class BookmarkCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    let disposebag = DisposeBag()
+    var disposebag = DisposeBag()
     let posterTapped = PublishSubject<String>()
     let posterTapRecognizer = UITapGestureRecognizer()
+    let bookmarkTapped = PublishSubject<String>()
+    let bookmarkTapRecognizer = UITapGestureRecognizer()
     
     var viewModel: BookmarkCellViewModelType? {
         didSet { bind() }
@@ -43,16 +45,26 @@ class BookmarkCell: UICollectionViewCell {
         $0.numberOfLines = 0
     }
     
+    lazy var bookmarkIcon = UIImageView().then {
+        $0.image = UIImage(systemName: "bookmark.fill")!.withTintColor(.orange, renderingMode: .alwaysOriginal)
+        $0.contentMode = .scaleAspectFit
+        $0.addGestureRecognizer(bookmarkTapRecognizer)
+        $0.isUserInteractionEnabled = true
+    }
+    
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        disposebag = DisposeBag()
     }
     
     // MARK: - Layout
@@ -72,6 +84,13 @@ class BookmarkCell: UICollectionViewCell {
             $0.horizontalEdges.equalToSuperview().inset(10)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(imageView.snp.width).multipliedBy(1.42)
+        }
+        
+        addSubview(bookmarkIcon)
+        bookmarkIcon.snp.makeConstraints {
+            $0.top.equalTo(imageView).inset(10)
+            $0.right.equalTo(imageView).inset(10)
+            $0.width.height.equalTo(30)
         }
         
         addSubview(titleLabel)
@@ -101,6 +120,15 @@ class BookmarkCell: UICollectionViewCell {
                 return movieCode
             }
             .bind(to: posterTapped)
+            .disposed(by: disposebag)
+        
+        bookmarkTapRecognizer.rx.event
+            .withLatestFrom(viewModel.movieCode) { _, movieCode in
+                return movieCode
+            }
+            .bind { [weak self] string in
+                self?.bookmarkTapped.onNext(string)
+            }
             .disposed(by: disposebag)
     }
     

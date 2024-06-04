@@ -12,6 +12,8 @@ protocol BookmarkViewModelType {
     var viewWillAppear: PublishSubject<Void> { get }
     var viewDidAppear: PublishSubject<Void> { get }
     
+    var deleteBookmarkedMovie: PublishSubject<String> { get }
+    
     var bookmarkedMovieDatas: BehaviorSubject<[WatchLater]> { get }
 }
 
@@ -21,6 +23,8 @@ class BookmarkViewModel: BookmarkViewModelType {
     
     var viewWillAppear = PublishSubject<Void>()
     var viewDidAppear = PublishSubject<Void>()
+    
+    var deleteBookmarkedMovie = PublishSubject<String>()
     
     var bookmarkedMovieDatas = BehaviorSubject<[WatchLater]>(value: [])
     
@@ -43,6 +47,13 @@ class BookmarkViewModel: BookmarkViewModelType {
         viewDidAppear
             .bind { _ in
                 DataBaseManager.shared.delete()
+            }
+            .disposed(by: disposeBag)
+        
+        deleteBookmarkedMovie
+            .bind { [weak self] movieCode in
+                DataBaseManager.shared.tempDelete(movieCode)
+                self?.viewWillAppear.onNext(())
             }
             .disposed(by: disposeBag)
     }

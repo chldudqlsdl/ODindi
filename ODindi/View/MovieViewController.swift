@@ -180,12 +180,12 @@ class MovieViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.errorMessage
-            .bind { [weak self] errorMsg in
-                guard let self = self else { return }
-                Loaf(errorMsg, state: .error, sender: self).show(.short)
-            }
-            .disposed(by: disposeBag)
+//        viewModel.errorMessage
+//            .bind { [weak self] errorMsg in
+//                guard let self = self else { return }
+//                Loaf(errorMsg, state: .error, sender: self).show(.short)
+//            }
+//            .disposed(by: disposeBag)
     }
     
     deinit {

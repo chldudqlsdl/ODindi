@@ -23,7 +23,8 @@ class BookmarkViewController: UIViewController {
     let viewModel: BookmarkViewModelType
     let disposeBag = DisposeBag()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-    var dataSource : UICollectionViewDiffableDataSource<Section, MovieItem>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, MovieItem>!
+    var alertSheet: UIAlertController!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -62,6 +63,12 @@ class BookmarkViewController: UIViewController {
                 }
                 .disposed(by: cell.disposebag)
             
+            cell.bookmarkTapped
+                .bind { [weak self] string in
+                    self?.showAlert(string)
+                }
+                .disposed(by: cell.disposebag)
+                
             return cell
         })
     }
@@ -119,5 +126,20 @@ class BookmarkViewController: UIViewController {
         snapshot.appendSections([.movie])
         snapshot.appendItems(items, toSection: .movie)
         dataSource.apply(snapshot)
+    }
+    
+    func showAlert(_ string: String) {
+        
+        alertSheet = UIAlertController(title: "더이상 보고싶지 않나요?", message: "한번 삭제하면 되돌릴 수 없습니다 🥹", preferredStyle: .alert)
+        alertSheet.addAction(UIAlertAction(title: "취소", style: .default))
+        alertSheet.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { [weak self] _ in
+            Observable
+                .just(string)
+                .bind { string in
+                    self?.viewModel.deleteBookmarkedMovie.onNext(string)
+                }
+                .disposed(by: self?.disposeBag ?? DisposeBag())
+        }))
+        present(alertSheet, animated: true)
     }
 }
