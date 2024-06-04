@@ -10,9 +10,9 @@ import RealmSwift
 
 class WatchLater: Object {
     
-    @Persisted(primaryKey: true) var objectId: ObjectId
-    @Persisted var movieCode: String
+    @Persisted(primaryKey: true) var movieCode: String
     @Persisted var date: Date = Date()
+    @Persisted var isDeleted: Bool = false
     
     convenience init(_ movieCode: String) {
         self.init()
@@ -33,8 +33,9 @@ class DataBaseManager {
         print("Realm is located at:", database.configuration.fileURL!)
     }
     
-    func read(_ object: WatchLater.Type) -> Results<WatchLater> {
-        return database.objects(object)
+    func read() -> Results<WatchLater> {
+        return database.objects(WatchLater.self)
+            .filter("isDeleted == false")
     }
     
     func write(_ code: String) {
@@ -49,6 +50,21 @@ class DataBaseManager {
             print(error)
         }
     }
+    
+    func tempDelete(_ code: String) {
+        do {
+            let item = database.objects(WatchLater.self)
+                .filter {
+                    $0.movieCode == code
+                }
+            try database.write {
+                item.first?.isDeleted = true
+            }
+        } catch let error {
+            print(error)
+        }
+    }
+    
     
     func delete(_ code :String) {
         do {

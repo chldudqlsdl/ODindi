@@ -113,7 +113,7 @@ class CinemaViewController: UIViewController {
                 .bind { [weak self] bool in
                     if !bool {
                         
-                        Loaf("보고싶어요에 추가되었습니다", state: .custom(.init(backgroundColor: .orange, font: .customFont(ofSize: 15, style: .pretendardMedium), icon: UIImage(systemName: "eyeglasses") ,textAlignment: .center, iconAlignment: .left)), sender: self ?? UIViewController()).show(.custom(3))
+                        Loaf("보고싶어요에 추가되었습니다", state: .custom(.init(backgroundColor: .orange, font: .customFont(ofSize: 15, style: .pretendardMedium), icon: UIImage(systemName: "eyeglasses") ,textAlignment: .center, iconAlignment: .left)), sender: self ?? UIViewController()).show(.custom(1.5))
                     }
                 }
                 .disposed(by: cell.disposeBag)

@@ -11,7 +11,7 @@ import UIKit
 struct MovieData {
     var title: String = ""
     var engTitle: String = ""
-    var poster: String = ""
+    var poster: Poster = Poster("")
     var releasedDate: String = ""
     var overView: String = ""
     var director: String = ""
@@ -19,6 +19,17 @@ struct MovieData {
     var genre: String = ""
     var runningTime: String = ""
     var rating: Rating = .rAll
+}
+
+struct Poster {
+    var small: String
+    var large: String
+    
+    init(_ string: String){
+        small = string
+        let largeString = string.replacingOccurrences(of: "small", with: "large")
+        large = largeString
+    }
 }
 
 enum Rating {

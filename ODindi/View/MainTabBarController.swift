@@ -78,13 +78,18 @@ class MainTabBarController: UITabBarController{
         let mapVM = MapViewModel(coordinate)
         let mapVC = MapViewController(viewModel: mapVM)
         
+        let bookmarkVM = BookmarkViewModel()
+        let bookmarkVC = BookmarkViewController(viewModel: bookmarkVM)
+        
         let nav1 = configureNavController(vc: cinemaVC, image: UIImage(systemName: "popcorn")!)
         let nav2 = configureNavController(vc: mapVC, image: UIImage(systemName: "map")!)
-        viewControllers = [nav1, nav2]
+        let nav3 = configureNavController(vc: bookmarkVC, image: UIImage(systemName: "bookmark")!)
+        viewControllers = [nav1, nav2, nav3]
     }
     func configureNavController(vc: UIViewController, image: UIImage) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: vc)
         navigationController.tabBarItem.image = image
+        navigationController.tabBarItem.title = ""
         return navigationController
     }
 }

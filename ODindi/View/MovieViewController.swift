@@ -56,6 +56,7 @@ class MovieViewController: UIViewController {
             $0.contentMode = .scaleToFill
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
+            $0.layer.borderWidth = 0.05
         }
         
         shadowView.do {
@@ -165,7 +166,8 @@ class MovieViewController: UIViewController {
         
         viewModel.movieData
             .bind { [weak self] data in
-                self?.posterImageView.kf.setImage(with: URL(string: data.poster), completionHandler: { _ in
+                
+                self?.posterImageView.kf.setImage(with: URL(string: data.poster.large), completionHandler: { _ in
                     self?.shadowView.backgroundColor = .systemBackground
                 })
                 self?.ratingImageView.image = data.rating.image

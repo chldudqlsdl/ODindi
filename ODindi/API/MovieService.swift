@@ -47,8 +47,8 @@ class MovieService {
                     movieData.title = try doc.select("div.info-box").select("h3.h3").first()!.text()
                     movieData.engTitle = try doc.select("div.info-box").select("h4.h4").first()!.text()
                     
-                    let smallImg = try doc.select("div.info-box").select("div.poster").select("img").first()!.attr("src")
-                    movieData.poster = smallImg.replacingOccurrences(of: "small", with: "large")
+                    let posterImgString = try doc.select("div.info-box").select("div.poster").select("img").first()!.attr("src")
+                    movieData.poster = Poster(posterImgString)
                     
                     let etc : Elements = try doc.select("div.info-box").select("div.etc").select("span")
                     let ratingString = try etc.array()[0].text()

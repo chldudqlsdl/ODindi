@@ -32,6 +32,7 @@ class MovieCell: UICollectionViewCell {
         $0.contentMode = .scaleToFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
+        $0.layer.borderWidth = 0.05
         $0.addGestureRecognizer(posterTapGesture)
         $0.isUserInteractionEnabled = true
     }

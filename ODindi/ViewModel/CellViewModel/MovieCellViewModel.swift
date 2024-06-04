@@ -28,7 +28,7 @@ class MovieCellViewModel: MovieCellViewModelType {
             .just(movieSchedule)
             .map({ movieSchedule in
                 var newMovieSchedule = movieSchedule
-                for watchLater in DataBaseManager.shared.read(WatchLater.self) {
+                for watchLater in DataBaseManager.shared.read() {
                     if watchLater.movieCode == movieSchedule.code {
                         newMovieSchedule.watchLater = true
                         break
@@ -48,7 +48,7 @@ class MovieCellViewModel: MovieCellViewModelType {
                 newMovieSchedule.watchLater.toggle()
                 
                 if movieSchedule.watchLater {
-                    DataBaseManager.shared.delete(movieSchedule.code)
+                    DataBaseManager.shared.tempDelete(movieSchedule.code)
                 } else {
                     DataBaseManager.shared.write(movieSchedule.code)
                 }

@@ -21,7 +21,6 @@
 		D926E3622BEA6B6100CFA01B /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3612BEA6B6100CFA01B /* RxCocoa-Dynamic */; };
 		D926E3642BEA6B6100CFA01B /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3632BEA6B6100CFA01B /* RxRelay */; };
 		D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92870BE2BEE419D00484866 /* CinemaCell.swift */; };
-		D937BD472C05C19E001E7F2A /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937BD462C05C19E001E7F2A /* LikeViewController.swift */; };
 		D937BD512C05C426001E7F2A /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD492C05C426001E7F2A /* Pretendard-Thin.otf */; };
 		D937BD522C05C426001E7F2A /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD4A2C05C426001E7F2A /* Pretendard-ExtraBold.otf */; };
 		D937BD542C05C426001E7F2A /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD4C2C05C426001E7F2A /* Pretendard-Light.otf */; };
@@ -37,6 +36,10 @@
 		D94991622BFF2F0200B95F5F /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94991612BFF2F0200B95F5F /* DateCell.swift */; };
 		D94991642BFF6EEF00B95F5F /* DateCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */; };
 		D94CDCE92C04CA300096951E /* Loaf in Frameworks */ = {isa = PBXBuildFile; productRef = D94CDCE82C04CA300096951E /* Loaf */; };
+		D95C24CB2C0DA585001FA0DE /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95C24CA2C0DA585001FA0DE /* BookmarkViewController.swift */; };
+		D95C24CD2C0DA673001FA0DE /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95C24CC2C0DA673001FA0DE /* BookmarkViewModel.swift */; };
+		D95C24CF2C0DB936001FA0DE /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95C24CE2C0DB936001FA0DE /* BookmarkCell.swift */; };
+		D95C24D12C0DD6F8001FA0DE /* BookmarkCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95C24D02C0DD6F8001FA0DE /* BookmarkCellViewModel.swift */; };
 		D9AF46672BF490AB00DDC787 /* RxAppState in Frameworks */ = {isa = PBXBuildFile; productRef = D9AF46662BF490AB00DDC787 /* RxAppState */; };
 		D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */; };
 		D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */; };
@@ -69,7 +72,6 @@
 		D92210672BE9028300301B08 /* MovieSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSchedule.swift; sourceTree = "<group>"; };
 		D926E3482BEA416000CFA01B /* CinemaCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaCalendar.swift; sourceTree = "<group>"; };
 		D92870BE2BEE419D00484866 /* CinemaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaCell.swift; sourceTree = "<group>"; };
-		D937BD462C05C19E001E7F2A /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		D937BD492C05C426001E7F2A /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		D937BD4A2C05C426001E7F2A /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		D937BD4C2C05C426001E7F2A /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
@@ -83,6 +85,10 @@
 		D937BD642C0609AA001E7F2A /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		D94991612BFF2F0200B95F5F /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCellViewModel.swift; sourceTree = "<group>"; };
+		D95C24CA2C0DA585001FA0DE /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
+		D95C24CC2C0DA673001FA0DE /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
+		D95C24CE2C0DB936001FA0DE /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
+		D95C24D02C0DD6F8001FA0DE /* BookmarkCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCellViewModel.swift; sourceTree = "<group>"; };
 		D9B37EAE2BE7A67200AC1C55 /* ODindi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODindi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B37EB12BE7A67200AC1C55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B37EB32BE7A67200AC1C55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +154,7 @@
 				D92870BE2BEE419D00484866 /* CinemaCell.swift */,
 				D94991612BFF2F0200B95F5F /* DateCell.swift */,
 				D9F070A22BF0F84400F21641 /* MovieCell.swift */,
+				D95C24CE2C0DB936001FA0DE /* BookmarkCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -174,6 +181,7 @@
 			children = (
 				D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */,
 				D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */,
+				D95C24D02C0DD6F8001FA0DE /* BookmarkCellViewModel.swift */,
 			);
 			path = CellViewModel;
 			sourceTree = "<group>";
@@ -231,7 +239,7 @@
 				D9B37ECB2BE7AD2A00AC1C55 /* CinemaViewController.swift */,
 				D9F8D4DD2C03726F00B811BD /* MovieViewController.swift */,
 				D9B37ECD2BE7AD6600AC1C55 /* MapViewController.swift */,
-				D937BD462C05C19E001E7F2A /* LikeViewController.swift */,
+				D95C24CA2C0DA585001FA0DE /* BookmarkViewController.swift */,
 				D92870C02BEE41A400484866 /* CollectionViewCell */,
 			);
 			path = View;
@@ -244,6 +252,7 @@
 				D922105E2BE8BBFA00301B08 /* CinemaViewModel.swift */,
 				D9F8D4DF2C0375EE00B811BD /* MovieViewModel.swift */,
 				D92191512BFC68740049AC13 /* MapViewModel.swift */,
+				D95C24CC2C0DA673001FA0DE /* BookmarkViewModel.swift */,
 				D94991652BFF6EFC00B95F5F /* CellViewModel */,
 			);
 			path = ViewModel;
@@ -373,20 +382,23 @@
 				D9B37EB22BE7A67200AC1C55 /* AppDelegate.swift in Sources */,
 				D9CAAE3E2C09F436004ED4E0 /* MovieCellViewModel.swift in Sources */,
 				D92210662BE9019E00301B08 /* CinemaService.swift in Sources */,
+				D95C24CB2C0DA585001FA0DE /* BookmarkViewController.swift in Sources */,
 				D9F8D4E22C03793900B811BD /* MovieService.swift in Sources */,
 				D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */,
-				D937BD472C05C19E001E7F2A /* LikeViewController.swift in Sources */,
 				D94991622BFF2F0200B95F5F /* DateCell.swift in Sources */,
 				D92191522BFC68740049AC13 /* MapViewModel.swift in Sources */,
 				D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */,
 				D9F070A32BF0F84400F21641 /* MovieCell.swift in Sources */,
 				D9F8D4E42C037A7200B811BD /* MovieData.swift in Sources */,
+				D95C24CF2C0DB936001FA0DE /* BookmarkCell.swift in Sources */,
 				D9F8D4E02C0375EE00B811BD /* MovieViewModel.swift in Sources */,
 				D9B37ECE2BE7AD6600AC1C55 /* MapViewController.swift in Sources */,
 				D92210642BE8CD6800301B08 /* Extensions.swift in Sources */,
 				D9F8D4DE2C03726F00B811BD /* MovieViewController.swift in Sources */,
 				D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */,
+				D95C24D12C0DD6F8001FA0DE /* BookmarkCellViewModel.swift in Sources */,
 				D937BD652C0609AA001E7F2A /* DataBaseManager.swift in Sources */,
+				D95C24CD2C0DA673001FA0DE /* BookmarkViewModel.swift in Sources */,
 				D9B37ED02BE7AE6100AC1C55 /* MainTabBarViewModel.swift in Sources */,
 				D937BD5C2C05C770001E7F2A /* FontLiterals.swift in Sources */,
 				D9B37ECC2BE7AD2A00AC1C55 /* CinemaViewController.swift in Sources */,
