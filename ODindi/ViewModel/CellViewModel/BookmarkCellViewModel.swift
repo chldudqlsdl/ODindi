@@ -22,12 +22,7 @@ class BookmarkCellViewModel: BookmarkCellViewModelType{
     
     init(movieCode: String) {
         
-        Observable
-            .just(movieCode)
-            .bind { [weak self] string in
-                self?.movieCode.onNext(string)
-            }
-            .disposed(by: disposeBag)
+        self.movieCode.onNext(movieCode)
         
         let movieDataResult = Observable
             .just(movieCode)

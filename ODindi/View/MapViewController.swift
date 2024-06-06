@@ -46,12 +46,12 @@ class MapViewController: UIViewController {
         mapView.showsUserLocation = true
     }
     
-    
     // MARK: - Layout
     private func layout() {
         view.addSubview(mapView)
         mapView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.left.right.top.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -72,6 +72,37 @@ class MapViewController: UIViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        mapView.rx.didSelect
+            .do(onNext: { [weak self] annotationView in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self?.mapView.deselectAnnotation((annotationView as? MKAnnotation), animated: true)
+                }
+            })
+            .withLatestFrom(viewModel.coordinate) {(annotationView, coordinate) -> (String, CLLocationCoordinate2D)? in
+                guard let cinemaNameOptional = annotationView.annotation?.title else { return nil }
+                guard let cinemaName = cinemaNameOptional else { return nil }
+                return (cinemaName, coordinate)
+            }
+            .compactMap { $0 }
+            .bind { [weak self] (cinemaName, coordinate) in
+                self?.configureSheet(cinemaName: cinemaName, coordinate: coordinate)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func configureSheet(cinemaName: String, coordinate: CLLocationCoordinate2D) {
+        let vc = MapDetailViewController(viewModel: MapDetailViewModel(coordinate: coordinate, cinemaName: cinemaName))
+        if #available(iOS 15.0, *) {
+            if let sheet = vc.sheetPresentationController {
+                sheet.detents = [.medium()]
+                sheet.prefersGrabberVisible = true
+                sheet.preferredCornerRadius = 20
+            }
+            present(vc, animated: true)
+        } else {
+            return
+        }
     }
 }
 

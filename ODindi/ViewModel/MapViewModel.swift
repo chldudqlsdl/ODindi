@@ -12,18 +12,24 @@ import CoreLocation
 import MapKit
 
 protocol MapViewModelType {
+    var coordinate: BehaviorSubject<CLLocationCoordinate2D> { get }
+    
     var region: Observable<MKCoordinateRegion> { get }
     var annotations: Observable<[MKPointAnnotation]> { get }
 }
 
 class MapViewModel: MapViewModelType {
-    
+
     var disposeBag = DisposeBag()
+    
+    var coordinate = BehaviorSubject<CLLocationCoordinate2D>(value: CLLocationCoordinate2D())
         
     var region : Observable<MKCoordinateRegion>
     var annotations: Observable<[MKPointAnnotation]>
         
     init(_ currentCoordinate: CLLocationCoordinate2D) {
+        
+        coordinate.onNext(currentCoordinate)
         
         let currentCoordinate = Observable.just(currentCoordinate)
             .share()
