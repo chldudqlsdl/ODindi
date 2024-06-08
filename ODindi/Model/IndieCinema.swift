@@ -9,14 +9,15 @@ import Foundation
 import CoreLocation
 
 struct IndieCinema: Hashable {
-    
+
     let id: Int
     let name: String
     let coordinate: CLLocationCoordinate2D
     let code: [String]
     let instagram: String
-    let url: String
+    let map: String
     let address: String
+    var distance: Double = 0
 }
 
 extension IndieCinema {
@@ -25,7 +26,7 @@ extension IndieCinema {
     static var list: [IndieCinema] {
         var cinemas: [IndieCinema] = []
         for (index, name) in IndieCinemaData.nameList.enumerated() {
-            cinemas.append(IndieCinema(id: index, name: name, coordinate: CLLocationCoordinate2D(latitude: IndieCinemaData.latitudeList[index], longitude: IndieCinemaData.longitudeList[index]), code: IndieCinemaData.cinemaCodeList[name] ?? ["indieart","000057"], instagram: IndieCinemaData.instagramList[name] ?? "", url: IndieCinemaData.urlList[name] ?? "", address: IndieCinemaData.addressList[name] ?? "" ))
+            cinemas.append(IndieCinema(id: index, name: name, coordinate: CLLocationCoordinate2D(latitude: IndieCinemaData.latitudeList[index], longitude: IndieCinemaData.longitudeList[index]), code: IndieCinemaData.cinemaCodeList[name] ?? ["indieart","000057"], instagram: IndieCinemaData.instagramList[name] ?? "", map: IndieCinemaData.mapList[name] ?? "", address: IndieCinemaData.addressList[name] ?? "" ))
         }
         return cinemas
     }
@@ -52,7 +53,7 @@ struct IndieCinemaData {
         "인디플러스포항",
         "인디플러스천안",
         "인천미림극장",
-        "전주디지털독립영화관",
+//        "전주디지털독립영화관",
         "판타스틱큐브",
         "필름포럼",
         "헤이리시네마",
@@ -70,7 +71,7 @@ struct IndieCinemaData {
     static let latitudeList : [Double] = [
         35.149793,
         35.146904,
-        37.664192,
+        37.654235,
         35.205938,
         37.561342,
         36.565073,
@@ -79,7 +80,7 @@ struct IndieCinemaData {
         36.040895,
         36.808647,
         37.475437,
-        35.818347,
+//        35.818347,
         37.503474,
         37.563754,
         37.791493,
@@ -97,7 +98,7 @@ struct IndieCinemaData {
     static let longitudeList : [Double] = [
         126.912486,
         126.922060,
-        127.066247,
+        127.061447,
         128.575802,
         126.947042,
         128.730979,
@@ -106,7 +107,7 @@ struct IndieCinemaData {
         129.367107,
         127.152192,
         126.634283,
-        127.142540,
+//        127.142540,
         126.765792,
         126.944109,
         126.699044,
@@ -150,31 +151,31 @@ struct IndieCinemaData {
         "KU시네마테크" : "https://instagram.com/kucinema?igshid=MzRlODBiNWFlZA=="
     ]
     
-    static let urlList : [String : String] = [
-        "광주극장" : "https://map.naver.com/v5/search/%EA%B4%91%EC%A3%BC%EA%B7%B9%EC%9E%A5/place/11830496?c=15,0,0,0,dh&placePath=%3Fentry%253Dbmp",
-        "광주독립영화관" : "https://map.naver.com/v5/search/%EA%B4%91%EC%A3%BC%EB%8F%85%EB%A6%BD%EC%98%81%ED%99%94%EA%B4%80/place/1528167363?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "더숲아트시네마" : "https://map.naver.com/v5/entry/place/1015940361?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "씨네아트리좀" : "https://map.naver.com/v5/entry/place/37383447?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "아트하우스모모" : "https://map.naver.com/v5/entry/place/12948307?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "안동중앙아트시네마" : "https://map.naver.com/v5/search/%EC%95%88%EB%8F%99%EC%A4%91%EC%95%99%EC%8B%9C%EB%84%A4%EB%A7%88/place/34635294?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "에무시네마" : "https://map.naver.com/v5/entry/place/37842043?c=15,0,0,0,dh",
-        "오오극장" : "https://map.naver.com/v5/search/%EC%98%A4%EC%98%A4%EA%B7%B9%EC%9E%A5/place/35966761?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "인디플러스포항" : "https://map.naver.com/v5/search/%EC%9D%B8%EB%94%94%ED%94%8C%EB%9F%AC%EC%8A%A4%ED%8F%AC%ED%95%AD/place/569933553?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "인디플러스천안" : "https://map.naver.com/v5/search/%EC%9D%B8%EB%94%94%ED%94%8C%EB%9F%AC%EC%8A%A4%EC%B2%9C%EC%95%88/place/98309050?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "인천미림극장" : "https://map.naver.com/v5/entry/place/33315469?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "전주디지털독립영화관" : "https://map.naver.com/v5/search/%EC%A0%84%EC%A3%BC%EB%94%94%EC%A7%80%ED%84%B8%EB%8F%85%EB%A6%BD%EC%98%81%ED%99%94%EA%B4%80?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "판타스틱큐브" : "https://map.naver.com/v5/search/%ED%8C%90%ED%83%80%EC%8A%A4%ED%8B%B1%20%ED%81%90%EB%B8%8C/place/38488228?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "필름포럼" : "https://map.naver.com/v5/entry/place/11625927?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "헤이리시네마" : "https://map.naver.com/v5/entry/place/38257172?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "씨네큐브광화문" : "https://map.naver.com/v5/search/%EC%94%A8%EB%84%A4%ED%81%90%EB%B8%8C%EA%B4%91%ED%99%94%EB%AC%B8/place/13182210?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "오르페오한남" : "https://map.naver.com/v5/search/%EC%98%A4%EB%A5%B4%ED%8E%98%EC%98%A4%ED%95%9C%EB%82%A8/place/1017816573?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "라이카시네마" : "https://map.naver.com/v5/entry/place/1156408497?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "모퉁이극장" : "https://map.naver.com/v5/entry/place/1303271354?c=15,0,0,0,dh",
-        "씨네인디U" : "https://map.naver.com/v5/search/%EC%94%A8%EB%84%A4%EC%9D%B8%EB%94%94U/place/1927181014?c=15,0,0,0,dh&isCorrectAnswer=true",
-        "아리랑시네센터" : "https://map.naver.com/v5/search/%EC%95%84%EB%A6%AC%EB%9E%91%EC%8B%9C%EB%84%A4%EC%84%BC%ED%84%B0/place/11622504?c=15,0,0,0,dh&placePath=%3Fentry%253Dbmp",
-        "영화공간주안" : "https://map.naver.com/v5/entry/place/12035642?c=15,0,0,0,dh",
-        "KT&G상상마당시네마" : "https://map.naver.com/v5/entry/place/1361168366?c=15,0,0,0,dh",
-        "KU시네마테크" : "https://map.naver.com/v5/search/KU%EC%8B%9C%EB%84%A4%EB%A7%88%ED%85%8C%ED%81%AC/place/19563767?c=15,0,0,0,dh&isCorrectAnswer=true"
+    static let mapList : [String : String] = [
+        "광주극장" : "https://m.place.naver.com/place/11830496",
+        "광주독립영화관" : "https://m.place.naver.com/place/1528167363",
+        "더숲아트시네마" : "https://m.place.naver.com/place/1015940361",
+        "씨네아트리좀" : "https://m.place.naver.com/place/37383447",
+        "아트하우스모모" : "https://m.place.naver.com/place/12948307",
+        "안동중앙아트시네마" : "https://m.place.naver.com/place/34635294",
+        "에무시네마" : "https://m.place.naver.com/place/37842043",
+        "오오극장" : "https://m.place.naver.com/place/35966761",
+        "인디플러스포항" : "https://m.place.naver.com/place/569933553",
+        "인디플러스천안" : "https://m.place.naver.com/place/98309050",
+        "인천미림극장" : "https://m.place.naver.com/place/33315469",
+        "전주디지털독립영화관" : "",
+        "판타스틱큐브" : "https://m.place.naver.com/place/38488228",
+        "필름포럼" : "https://m.place.naver.com/place/11625927",
+        "헤이리시네마" : "https://m.place.naver.com/place/38257172",
+        "씨네큐브광화문" : "https://m.place.naver.com/place/13182210",
+        "오르페오한남" : "https://m.place.naver.com/place/1017816573",
+        "라이카시네마" : "https://m.place.naver.com/place/1156408497",
+        "모퉁이극장" : "https://m.place.naver.com/place/1303271354",
+        "씨네인디U" : "https://m.place.naver.com/place/1927181014",
+        "아리랑시네센터" : "https://m.place.naver.com/place/11622504",
+        "영화공간주안" : "https://m.place.naver.com/place/12035642",
+        "KT&G상상마당시네마" : "https://m.place.naver.com/place/1361168366",
+        "KU시네마테크" : "https://m.place.naver.com/place/19563767"
     ]
     
     static let addressList : [String : String] = [

@@ -12,7 +12,7 @@ import SnapKit
 class CinemaCell: UICollectionViewCell {
     
     // MARK: - Properties
-    var name: String? {
+    var indieCinema: IndieCinema? {
         didSet { configureTitle() }
     }
     
@@ -51,7 +51,6 @@ class CinemaCell: UICollectionViewCell {
             $0.height.equalToSuperview()
             $0.left.equalToSuperview().inset(15)
         }
-       
         addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
@@ -66,7 +65,7 @@ class CinemaCell: UICollectionViewCell {
     
     // MARK: - Methods
     func configureTitle() {
-        nameLabel.text = name
+        nameLabel.text = indieCinema?.name
     }
 }
 

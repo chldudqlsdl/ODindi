@@ -129,17 +129,13 @@ class BookmarkViewController: UIViewController {
     }
     
     func showAlert(_ string: String) {
-        
-        alertSheet = UIAlertController(title: "더이상 보고싶지 않나요?", message: "한번 삭제하면 되돌릴 수 없습니다 🥹", preferredStyle: .alert)
-        alertSheet.addAction(UIAlertAction(title: "취소", style: .default))
-        alertSheet.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { [weak self] _ in
+        AlertUtil.showAlert2(on: self, title: "더이상 보고싶지 않나요?", msg: "한번 삭제하면 되돌릴 수 없습니다 🥹", cancelMsg: "취소", confirmMsg: "확인") { [weak self] in
             Observable
                 .just(string)
                 .bind { string in
                     self?.viewModel.deleteBookmarkedMovie.onNext(string)
                 }
                 .disposed(by: self?.disposeBag ?? DisposeBag())
-        }))
-        present(alertSheet, animated: true)
+        }
     }
 }

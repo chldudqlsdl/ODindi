@@ -54,7 +54,12 @@ class CinemaViewModel: CinemaViewModelType {
             .do(onNext: { [weak self] _ in self?.isLoading.onNext(true) })
             .withLatestFrom(self.currentCoordinate)
             .map { currentCoordinate in
-                let sortedCinemaListByDistance = IndieCinema.list.sorted { cinema1, cinema2 in
+                let cinemasWithDistance = IndieCinema.list.map { cinema -> IndieCinema in
+                    var updatedCinema = cinema
+                    updatedCinema.distance = updatedCinema.coordinate.distance(to: currentCoordinate)
+                    return updatedCinema
+                }
+                let sortedCinemaListByDistance = cinemasWithDistance.sorted { cinema1, cinema2 in
                     let distance1 = currentCoordinate.distance(to: cinema1.coordinate)
                     let distance2 = currentCoordinate.distance(to: cinema2.coordinate)
                     return distance1 < distance2
@@ -108,3 +113,4 @@ class CinemaViewModel: CinemaViewModelType {
             .disposed(by: disposeBag)
     }
 }
+

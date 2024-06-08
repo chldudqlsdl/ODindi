@@ -8,12 +8,13 @@
 import Foundation
 import RxSwift
 import CoreLocation
+import RxRelay
 
 protocol MainTabBarViewModelType {
     var checkLocationAuth: PublishSubject<Void> { get }
     var fetchCoordinate: PublishSubject<Void> { get }
-    
-    var currentCoordinate: PublishSubject<CLLocationCoordinate2D> { get }
+        
+    var currentCoordinate: BehaviorSubject<CLLocationCoordinate2D> { get }
 }
 
 class MainTabBarViewModel: MainTabBarViewModelType {
@@ -24,7 +25,7 @@ class MainTabBarViewModel: MainTabBarViewModelType {
     var fetchCoordinate = PublishSubject<Void>()
     
     // OUTPUT
-    var currentCoordinate = PublishSubject<CLLocationCoordinate2D>()
+    var currentCoordinate = BehaviorSubject<CLLocationCoordinate2D>(value: CLLocationCoordinate2D(latitude: 0, longitude: 0))
     
     init(){
                 
@@ -36,10 +37,18 @@ class MainTabBarViewModel: MainTabBarViewModelType {
         
         fetchCoordinate
             .flatMap { LocationService.shared.locationSubject }
+            .withLatestFrom(currentCoordinate, resultSelector: { (newCoordinate, oldCoordinate) -> CLLocationCoordinate2D? in
+                if oldCoordinate.latitude == 0 {
+                    return newCoordinate
+                }
+                if oldCoordinate.distance(to: newCoordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)) > 1000 {
+                    return newCoordinate
+                } else {
+                    return nil
+                }
+            })
             .compactMap { $0 }
-            .take(1)
             .bind(to: currentCoordinate)
             .disposed(by: disposeBag)
     }
 }
-

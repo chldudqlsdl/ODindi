@@ -21,9 +21,13 @@ class MapDetailViewController: UIViewController {
     let nameLabel = UILabel()
     let addressLabel = UILabel()
     let instaBtn = UIImageView()
+    let mapBtn = UIImageView()
     let instaBtnTapRecognizer = UITapGestureRecognizer()
+    let mapBtnTapRecognizer = UITapGestureRecognizer()
+    let btnStackView = UIStackView()
     let loadingIndicator = UIActivityIndicatorView(style: .large)
-    let webView = WKWebView()
+    var webView: WKWebView!
+    let webViewController = UIViewController()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -46,7 +50,6 @@ class MapDetailViewController: UIViewController {
     
     func attribute() {
         view.backgroundColor = .systemBackground
-        webView.navigationDelegate = self
         
         logoImageView.do {
             $0.contentMode = .scaleAspectFit
@@ -64,6 +67,20 @@ class MapDetailViewController: UIViewController {
             $0.image = UIImage(named: "Instagram_icon")
             $0.addGestureRecognizer(instaBtnTapRecognizer)
             $0.isUserInteractionEnabled = true
+        }
+        mapBtn.do {
+            $0.contentMode = .scaleAspectFit
+            $0.image = UIImage(named: "map_icon")
+            $0.addGestureRecognizer(mapBtnTapRecognizer)
+            $0.isUserInteractionEnabled = true
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.layer.borderWidth = 0.1
+        }
+        btnStackView.do {
+            $0.addArrangedSubview(instaBtn)
+            $0.addArrangedSubview(mapBtn)
+            $0.spacing = 30
         }
     }
     
@@ -91,13 +108,22 @@ class MapDetailViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
         
-        view.addSubview(instaBtn)
         instaBtn.snp.makeConstraints {
-            $0.top.equalTo(addressLabel.snp.bottom).offset(10)
             $0.width.height.equalTo(30)
-            $0.centerX.equalToSuperview()
         }
         
+        mapBtn.snp.makeConstraints {
+            $0.width.height.equalTo(30)
+        }
+        
+        view.addSubview(btnStackView)
+        btnStackView.snp.makeConstraints {
+            $0.top.equalTo(addressLabel.snp.bottom).offset(15)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    func layoutIndicator() {
         webView.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
@@ -116,22 +142,33 @@ class MapDetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         instaBtnTapRecognizer.rx.event
-            .withLatestFrom(viewModel.cinemaData) { _, cinemaData in
-                return cinemaData.instagram
-            }
-            .bind { [weak self] urlString in
-                self?.loadingIndicator.startAnimating()
-                                
-                guard let URL = URL(string: urlString) else { return }
-                let URLRequest = URLRequest(url: URL)
-                self?.view = self?.webView
-                self?.webView.load(URLRequest)
-                
-//                let vc = UIViewController()
-//                vc.view = self?.webView
-//                self?.present(vc, animated: true)
+            .bind { [weak self] _ in
+                self?.configureWebViewController()
+                self?.viewModel.instaBtnTapped.onNext(())
             }
             .disposed(by: disposeBag)
+        
+        mapBtnTapRecognizer.rx.event
+            .bind { [weak self] _ in
+                self?.configureWebViewController()
+                self?.viewModel.mapBtnTapped.onNext(())
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.urlRequest
+            .bind { [weak self] URLRequest in
+                self?.webView.load(URLRequest)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func configureWebViewController() {
+        self.webView = WKWebView()
+        self.layoutIndicator()
+        self.webView.navigationDelegate = self
+        self.loadingIndicator.startAnimating()
+        webViewController.view = self.webView
+        self.present(webViewController, animated: true)
     }
 }
 

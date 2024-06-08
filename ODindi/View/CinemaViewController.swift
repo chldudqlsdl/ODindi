@@ -94,7 +94,7 @@ class CinemaViewController: UIViewController {
         
         cinemaDataSource = UICollectionViewDiffableDataSource(collectionView: cinemaCollectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CinemaCell", for: indexPath) as! CinemaCell
-            cell.name = item.name
+            cell.indieCinema = item
             return cell
         })
         dateDataSource = UICollectionViewDiffableDataSource(collectionView: dateCollectionView, cellProvider: { collectionView, indexPath, item in
@@ -136,6 +136,7 @@ class CinemaViewController: UIViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(50)
+            $0.width.lessThanOrEqualTo(150)
         }
         
         view.addSubview(cinemaCollectionView)

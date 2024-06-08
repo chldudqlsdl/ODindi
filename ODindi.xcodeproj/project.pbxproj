@@ -56,6 +56,7 @@
 		D9B37EE92BE7D21700AC1C55 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D9B37EE82BE7D21700AC1C55 /* SnapKit-Dynamic */; };
 		D9CAAE3E2C09F436004ED4E0 /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */; };
 		D9CBDED52C0F5A3E00ECAEF8 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CBDED42C0F5A3E00ECAEF8 /* MapDetailViewController.swift */; };
+		D9DF86592C142C2C0042D9BC /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DF86582C142C2C0042D9BC /* AlertUtil.swift */; };
 		D9F070A32BF0F84400F21641 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F070A22BF0F84400F21641 /* MovieCell.swift */; };
 		D9F070A62BF106BE00F21641 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D9F070A52BF106BE00F21641 /* Kingfisher */; };
 		D9F44A5C2C10420C00AF6718 /* RxMKMapViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F44A5B2C10420C00AF6718 /* RxMKMapViewDelegateProxy.swift */; };
@@ -105,6 +106,7 @@
 		D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		D9CBDED42C0F5A3E00ECAEF8 /* MapDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
+		D9DF86582C142C2C0042D9BC /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		D9F070A22BF0F84400F21641 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		D9F44A5B2C10420C00AF6718 /* RxMKMapViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMKMapViewDelegateProxy.swift; sourceTree = "<group>"; };
 		D9F44A5D2C108DE100AF6718 /* MapDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailViewModel.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				D92210632BE8CD6800301B08 /* Extensions.swift */,
 				D9F44A5B2C10420C00AF6718 /* RxMKMapViewDelegateProxy.swift */,
+				D9DF86582C142C2C0042D9BC /* AlertUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				D92210642BE8CD6800301B08 /* Extensions.swift in Sources */,
 				D9F8D4DE2C03726F00B811BD /* MovieViewController.swift in Sources */,
 				D9CBDED52C0F5A3E00ECAEF8 /* MapDetailViewController.swift in Sources */,
+				D9DF86592C142C2C0042D9BC /* AlertUtil.swift in Sources */,
 				D9B37EB42BE7A67200AC1C55 /* SceneDelegate.swift in Sources */,
 				D95C24D12C0DD6F8001FA0DE /* BookmarkCellViewModel.swift in Sources */,
 				D9F44A5C2C10420C00AF6718 /* RxMKMapViewDelegateProxy.swift in Sources */,
@@ -563,6 +567,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ODindi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "어디인디";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처에 위치한 독립영화관을 찾기 위해 위치 권한 허용이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -593,6 +598,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ODindi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "어디인디";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처에 위치한 독립영화관을 찾기 위해 위치 권한 허용이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

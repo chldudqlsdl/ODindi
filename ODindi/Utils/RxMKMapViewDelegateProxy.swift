@@ -35,7 +35,6 @@ extension Reactive where Base: MKMapView {
     var didSelect: Observable<MKAnnotationView> {
         return delegate.methodInvoked(#selector(MKMapViewDelegate.mapView(_:didSelect:)))
             .map { params in
-                print(params)
                 return params[1] as! MKAnnotationView
             }
     }
