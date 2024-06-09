@@ -18,6 +18,29 @@ struct IndieCinema: Hashable {
     let map: String
     let address: String
     var distance: Double = 0
+    
+    func distanceWithTime() -> (distanceLabel: String, timeLabel: String) {
+        let distance = Int(self.distance)
+                
+        var distanceResult = ""
+        var timeResult = ""
+        let walkingSpeedPerMinute = 5000.0 / 60.0
+        
+        if distance < 1000 {
+            distanceResult = String(distance) + "m"
+        } else if distance >= 1000 && distance < 10000  {
+            distanceResult = String(format: "%.1f", Double(distance) / 1000) + "km"
+        } else {
+            distanceResult = String(format: "%.0f", Double(distance) / 1000) + "km"
+        }
+        
+        if distance < 5000 {
+            timeResult = "도보 \(String(Int((self.distance / walkingSpeedPerMinute).rounded())))분 거리에 있어요! 🥳"
+        } else {
+            timeResult = "조금 거리가 있네요... 😅"
+        }
+        return (distanceResult, timeResult)
+    }
 }
 
 extension IndieCinema {

@@ -95,7 +95,7 @@ class MapViewController: UIViewController {
         let vc = MapDetailViewController(viewModel: MapDetailViewModel(coordinate: coordinate, cinemaName: cinemaName))
         if #available(iOS 15.0, *) {
             if let sheet = vc.sheetPresentationController {
-                sheet.detents = [.medium()]
+                sheet.detents = [.large()]
                 sheet.prefersGrabberVisible = true
                 sheet.preferredCornerRadius = 20
             }

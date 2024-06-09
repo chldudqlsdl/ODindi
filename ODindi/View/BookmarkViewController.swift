@@ -129,7 +129,7 @@ class BookmarkViewController: UIViewController {
     }
     
     func showAlert(_ string: String) {
-        AlertUtil.showAlert2(on: self, title: "더이상 보고싶지 않나요?", msg: "한번 삭제하면 되돌릴 수 없습니다 🥹", cancelMsg: "취소", confirmMsg: "확인") { [weak self] in
+        AlertHelper.showAlert(on: self, title: "더이상 보고싶지 않나요?", msg: "한번 삭제하면 되돌릴 수 없습니다 🥹", cancelMsg: "취소", confirmMsg: "확인") { [weak self] in
             Observable
                 .just(string)
                 .bind { string in

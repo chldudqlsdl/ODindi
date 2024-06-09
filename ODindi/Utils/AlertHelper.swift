@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 import UIKit
 
-struct AlertUtil {
-    static func showAlert2(
+struct AlertHelper {
+    static func showAlert(
         on viewController: UIViewController,
         title: String,
         msg: String,

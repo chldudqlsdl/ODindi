@@ -32,6 +32,10 @@ class CinemaViewController: UIViewController {
     var disposeBag = DisposeBag()
     
     let titleImage = UIImageView()
+    let titleLabel = UILabel()
+    let timeLabel = UILabel()
+    let distanceLabel = UILabel()
+    let noMovieLabel = UILabel()
     
     private var cinemaCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dateCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -42,7 +46,7 @@ class CinemaViewController: UIViewController {
     private var cinemaSnapshot: NSDiffableDataSourceSnapshot<Section, CinemaItem>!
     private var dateSnapshot: NSDiffableDataSourceSnapshot<Section, DateItem>!
     private var movieSnapshot: NSDiffableDataSourceSnapshot<Section, MovieItem>!
-    private var activityIndicator = UIActivityIndicatorView()
+    private var activityIndicator = UIActivityIndicatorView(style: .medium)
     
     private var selectedCinemaCalendar: CinemaCalendar?
     
@@ -75,6 +79,26 @@ class CinemaViewController: UIViewController {
         
         titleImage.do {
             $0.contentMode = .scaleAspectFit
+        }
+        
+        titleLabel.do {
+            $0.font = UIFont.customFont(ofSize: 26, style: .pretendardBold)
+        }
+        
+        timeLabel.do {
+            $0.font = UIFont.customFont(ofSize: 16, style: .pretendardSemiBold)
+            $0.textColor = .darkGray
+        }
+        
+        distanceLabel.do {
+            $0.font = UIFont.customFont(ofSize: 16, style: .pretendardMedium)
+            $0.textColor = .gray
+        }
+        
+        noMovieLabel.do {
+            $0.font = UIFont.customFont(ofSize: 18, style: .pretendardSemiBold)
+            $0.text = "영화 상영정보가 없습니다 😭"
+            $0.isHidden = true
         }
     }
     
@@ -133,15 +157,33 @@ class CinemaViewController: UIViewController {
     private func layout() {
         view.addSubview(titleImage)
         titleImage.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().inset(50)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(50)
             $0.width.lessThanOrEqualTo(150)
         }
         
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(120)
+            $0.left.equalToSuperview().inset(20)
+        }
+        
+        view.addSubview(timeLabel)
+        timeLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(6)
+            $0.left.equalTo(titleLabel.snp.left).inset(2)
+        }
+        
+        view.addSubview(distanceLabel)
+        distanceLabel.snp.makeConstraints {
+            $0.bottom.equalTo(timeLabel.snp.bottom)
+            $0.left.equalTo(timeLabel.snp.right).offset(10)
+        }
+        
         view.addSubview(cinemaCollectionView)
         cinemaCollectionView.snp.makeConstraints {
-            $0.top.equalTo(titleImage.snp.bottom).offset(18)
+            $0.top.equalTo(timeLabel.snp.bottom).offset(30)
             $0.width.equalToSuperview()
             $0.height.equalTo(30)
         }
@@ -162,6 +204,11 @@ class CinemaViewController: UIViewController {
             $0.top.equalTo(dateCollectionView.snp.bottom).offset(18)
             $0.width.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.5)
+        }
+        view.addSubview(noMovieLabel)
+        noMovieLabel.snp.makeConstraints {
+            $0.top.equalTo(dateCollectionView.snp.bottom).offset(50)
+            $0.centerX.equalToSuperview()
         }
     }
     
@@ -203,14 +250,26 @@ class CinemaViewController: UIViewController {
                 self?.setCinemaSnapShot(items)
                 guard let cinema = items.first else { return }
                 self?.titleImage.image = UIImage(named: "\(cinema.name)")
+                self?.titleLabel.text = cinema.name
+                self?.timeLabel.text = cinema.distanceWithTime().timeLabel
+                self?.distanceLabel.text = cinema.distanceWithTime().distanceLabel
             }
             .disposed(by: disposeBag)
         
         cinemaCollectionView.rx.itemSelected
             .map { $0.row }
             .withLatestFrom(viewModel.nearCinemas) { [weak self] index, nearCinemas in
-                UIView.transition(with: self?.titleImage ?? UIImageView(), duration: 1.0, options: .transitionCrossDissolve) {
+                TransitionHelper.configure(target: self?.titleImage) {
                     self?.titleImage.image = UIImage(named: "\(nearCinemas[index].name)")
+                }
+                TransitionHelper.configure(target: self?.titleLabel) {
+                    self?.titleLabel.text = nearCinemas[index].name
+                }
+                TransitionHelper.configure(target: self?.timeLabel) {
+                    self?.timeLabel.text = nearCinemas[index].distanceWithTime().timeLabel
+                }
+                TransitionHelper.configure(target: self?.distanceLabel) {
+                    self?.distanceLabel.text = nearCinemas[index].distanceWithTime().distanceLabel
                 }
                 return index
             }
@@ -249,10 +308,14 @@ class CinemaViewController: UIViewController {
                 return items
             }
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] items in
+            .subscribe { [weak self] (items:[MovieSchedule]) in
+                
                 self?.movieCollectionView.reloadData()
                 UIView.transition(with: UIImageView(), duration: 0.8, options: .transitionCrossDissolve) {
                     self?.setMovieSnapshot(items)
+                }
+                UIView.transition(with: self?.noMovieLabel ?? UILabel(), duration: 1.0, options: .transitionCrossDissolve) {
+                    self?.noMovieLabel.isHidden = !items.isEmpty
                 }
             }
             .disposed(by: disposeBag)

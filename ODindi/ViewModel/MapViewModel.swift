@@ -36,7 +36,7 @@ class MapViewModel: MapViewModelType {
         
         region = currentCoordinate
             .map({ coordinate in
-                let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
+                let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 20000, longitudinalMeters: 20000)
                 return region
             })
         

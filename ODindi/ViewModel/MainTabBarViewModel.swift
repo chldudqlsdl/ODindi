@@ -41,7 +41,7 @@ class MainTabBarViewModel: MainTabBarViewModelType {
                 if oldCoordinate.latitude == 0 {
                     return newCoordinate
                 }
-                if oldCoordinate.distance(to: newCoordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)) > 1000 {
+                if oldCoordinate.distance(to: newCoordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)) > 300 {
                     return newCoordinate
                 } else {
                     return nil
