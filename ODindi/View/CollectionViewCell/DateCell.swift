@@ -35,7 +35,7 @@ class DateCell: UICollectionViewCell {
     lazy var selectedCircle = UIView().then {
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
-        $0.layer.borderWidth = 0.5
+        $0.layer.borderWidth = 0.6
         $0.layer.borderColor = UIColor.clear.cgColor
     }
     

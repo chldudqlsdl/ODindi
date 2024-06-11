@@ -95,7 +95,8 @@ class MapDetailViewController: UIViewController {
             $0.isUserInteractionEnabled = true
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
-            $0.layer.borderWidth = 0.1
+            $0.layer.borderWidth = 0.6
+            $0.layer.borderColor = UIColor.lightGray.cgColor
         }
         btnStackView.do {
             $0.addArrangedSubview(instaBtn)

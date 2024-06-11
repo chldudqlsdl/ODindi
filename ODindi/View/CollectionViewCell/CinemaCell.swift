@@ -32,7 +32,8 @@ class CinemaCell: UICollectionViewCell {
     
     lazy var insetView = UIView().then {
         $0.layer.cornerRadius = self.frame.height / 2
-        $0.layer.borderWidth = 0.5
+        $0.layer.masksToBounds = true
+        $0.layer.borderWidth = 0.6
         $0.layer.borderColor = UIColor.clear.cgColor
     }
     
