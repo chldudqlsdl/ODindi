@@ -46,7 +46,7 @@ class BookmarkCell: UICollectionViewCell {
     }
     
     lazy var bookmarkIcon = UIImageView().then {
-        $0.image = UIImage(systemName: "bookmark.fill")!.withTintColor(.orange, renderingMode: .alwaysOriginal)
+        $0.image = UIImage(systemName: "bookmark.fill")!.withTintColor(.customMedium, renderingMode: .alwaysOriginal)
         $0.contentMode = .scaleAspectFit
         $0.addGestureRecognizer(bookmarkTapRecognizer)
         $0.isUserInteractionEnabled = true

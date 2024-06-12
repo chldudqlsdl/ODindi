@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     var viewModel: MapViewModelType
     var disposeBag = DisposeBag()
     let mapView = MKMapView()
+    let guideLabel = UILabel()
     
     // MARK: - LifeCycle
     
@@ -40,6 +41,17 @@ class MapViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .systemBackground
         mapViewAttribute()
+        mapView.delegate = self
+        
+        guideLabel.do {
+            $0.font = .customFont(ofSize: 16, style: .pretendardSemiBold)
+            $0.text = "지도에서 가까운 독립 영화관을\n탐색해보세요 👀"
+            $0.backgroundColor = .customLight.withAlphaComponent(0.9)
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.numberOfLines = 2
+            $0.textAlignment = .center
+        }
     }
     
     private func mapViewAttribute() {
@@ -52,6 +64,14 @@ class MapViewController: UIViewController {
         mapView.snp.makeConstraints {
             $0.left.right.top.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        view.addSubview(guideLabel)
+        guideLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(50)
+            $0.left.equalToSuperview().inset(40)
         }
     }
     
@@ -106,3 +126,25 @@ class MapViewController: UIViewController {
     }
 }
 
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else { return nil }
+        
+        let identifier = "marker"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
+        
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        annotationView?.markerTintColor = .customMedium
+        annotationView?.titleVisibility = .visible
+        annotationView?.subtitleVisibility = .visible
+        if #available(iOS 14.0, *) {
+            annotationView?.collisionMode = .none
+        }
+        return annotationView
+    }
+}

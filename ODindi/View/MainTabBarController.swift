@@ -44,7 +44,7 @@ class MainTabBarController: UITabBarController{
         view.backgroundColor = .systemBackground
         let appearance = UITabBarAppearance()
         tabBar.standardAppearance = appearance
-        tabBar.tintColor = .orange
+        tabBar.tintColor = .customMedium
     }
     
     // MARK: - Binding

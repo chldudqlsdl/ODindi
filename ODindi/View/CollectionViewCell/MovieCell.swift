@@ -135,7 +135,7 @@ class MovieCell: UICollectionViewCell {
                     self?.timeTableStackView.addArrangedSubview(timeLabel)
                 }
                 
-                let newBtnImage = movieSchedule.watchLater ? UIImage(systemName: "bookmark.fill")!.withTintColor(.orange, renderingMode: .alwaysOriginal) : UIImage(systemName: "bookmark.fill")!.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+                let newBtnImage = movieSchedule.watchLater ? UIImage(systemName: "bookmark.fill")!.withTintColor(.customMedium, renderingMode: .alwaysOriginal) : UIImage(systemName: "bookmark.fill")!.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
                 
                 UIView.transition(with: self?.watchLaterButton ?? UIView(), duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self?.watchLaterButton.image = newBtnImage

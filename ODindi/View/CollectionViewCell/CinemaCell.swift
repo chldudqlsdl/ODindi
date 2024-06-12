@@ -21,10 +21,12 @@ class CinemaCell: UICollectionViewCell {
             if isSelected {
                 UIView.transition(with: self.insetView, duration: 0.2, options: .transitionCrossDissolve) {
                     self.insetView.layer.borderColor = UIColor.black.cgColor
+                    self.insetView.backgroundColor = UIColor.customLight
                 }
             } else {
                 UIView.transition(with: self.insetView, duration: 0.2, options: .transitionCrossDissolve) {
                     self.insetView.layer.borderColor = UIColor.clear.cgColor
+                    self.insetView.backgroundColor = UIColor.clear
                 }
             }
         }

@@ -52,6 +52,7 @@
 		D9B918582C184019000C9443 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D9B918572C184019000C9443 /* RxCocoa */; };
 		D9B9185C2C184019000C9443 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D9B9185B2C184019000C9443 /* RxRelay */; };
 		D9B9185D2C184029000C9443 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D9B9184B2C18400B000C9443 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D9B9185F2C187F8C000C9443 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B9185E2C187F8C000C9443 /* Colors.swift */; };
 		D9CAAE3E2C09F436004ED4E0 /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */; };
 		D9CBDED52C0F5A3E00ECAEF8 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CBDED42C0F5A3E00ECAEF8 /* MapDetailViewController.swift */; };
 		D9DF86592C142C2C0042D9BC /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DF86582C142C2C0042D9BC /* AlertHelper.swift */; };
@@ -117,6 +118,7 @@
 		D9B37ECD2BE7AD6600AC1C55 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D9B37ECF2BE7AE6100AC1C55 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		D9B37EDD2BE7B18000AC1C55 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		D9B9185E2C187F8C000C9443 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		D9CBDED42C0F5A3E00ECAEF8 /* MapDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		D9DF86582C142C2C0042D9BC /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				D9F44A5B2C10420C00AF6718 /* RxMKMapViewDelegateProxy.swift */,
 				D9DF86582C142C2C0042D9BC /* AlertHelper.swift */,
 				D9DF865A2C14B3250042D9BC /* TransitionHelper.swift */,
+				D9B9185E2C187F8C000C9443 /* Colors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				D95C24CD2C0DA673001FA0DE /* BookmarkViewModel.swift in Sources */,
 				D9B37ED02BE7AE6100AC1C55 /* MainTabBarViewModel.swift in Sources */,
 				D937BD5C2C05C770001E7F2A /* FontLiterals.swift in Sources */,
+				D9B9185F2C187F8C000C9443 /* Colors.swift in Sources */,
 				D9B37ECC2BE7AD2A00AC1C55 /* CinemaViewController.swift in Sources */,
 				D94991642BFF6EEF00B95F5F /* DateCellViewModel.swift in Sources */,
 				D922105F2BE8BBFA00301B08 /* CinemaViewModel.swift in Sources */,

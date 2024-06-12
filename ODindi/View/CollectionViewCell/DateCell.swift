@@ -27,8 +27,10 @@ class DateCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 selectedCircle.layer.borderColor = UIColor.black.cgColor
+                selectedCircle.backgroundColor = UIColor.customLight
             } else {
                 selectedCircle.layer.borderColor = UIColor.clear.cgColor
+                selectedCircle.backgroundColor = UIColor.clear
             }
         }
     }

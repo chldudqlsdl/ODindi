@@ -74,9 +74,6 @@ class CinemaViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .systemBackground
-//        self.title = "내 근처 독립영화관"
-//        navigationController?.navigationBar.prefersLargeTitles = true
-        
         titleImage.do {
             $0.contentMode = .scaleAspectFit
         }
@@ -137,7 +134,7 @@ class CinemaViewController: UIViewController {
                 .bind { [weak self] bool in
                     if !bool {
                         
-                        Loaf("보고싶어요에 추가되었습니다", state: .custom(.init(backgroundColor: .orange, font: .customFont(ofSize: 15, style: .pretendardMedium), icon: UIImage(systemName: "eyeglasses") ,textAlignment: .center, iconAlignment: .left)), sender: self ?? UIViewController()).show(.custom(1.5))
+                        Loaf("보고싶어요에 추가되었습니다", state: .custom(.init(backgroundColor: .customMedium.withAlphaComponent(0.9), font: .customFont(ofSize: 15, style: .pretendardMedium), icon: UIImage(systemName: "eyeglasses") ,textAlignment: .center, iconAlignment: .left)), sender: self ?? UIViewController()).show(.custom(1.5))
                     }
                 }
                 .disposed(by: cell.disposeBag)
@@ -356,6 +353,7 @@ class CinemaViewController: UIViewController {
         movieSnapshot.appendItems(items, toSection: .movie)
         movieDataSource.apply(movieSnapshot, animatingDifferences: true) 
         { [weak self] in
+            guard self?.movieCollectionView.numberOfItems(inSection: 0) ?? 0 > 0 else { return }
             self?.movieCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [.centeredHorizontally])
         }
     }

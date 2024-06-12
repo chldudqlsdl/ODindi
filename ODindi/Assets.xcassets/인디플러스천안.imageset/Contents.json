@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "인디플러스천안.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "chevron.right@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
