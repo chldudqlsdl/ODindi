@@ -14,6 +14,7 @@ struct CinemaCalendar {
     var businessDayStatusArray: [BusinessDayStatus] = []
 }
 
+// 날짜와, 해당날짜의 영업여부를 불값으로 저장하는 모델
 struct BusinessDayStatus: Hashable {
     let dateString: String
     let isBusinessDay: Bool

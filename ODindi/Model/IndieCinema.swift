@@ -19,6 +19,7 @@ struct IndieCinema: Hashable {
     let address: String
     var distance: Double = 0
     
+    // distance를 파라미터로 받아 km 단위로 환산하여 리턴, 도보로는 몇분 소요되는지 리턴하는 메서드
     func distanceWithTime() -> (distanceLabel: String, timeLabel: String) {
         let distance = Int(self.distance)
                 
