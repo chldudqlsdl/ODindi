@@ -23,7 +23,7 @@
 |-|-|-|
 |내 위치에서 가까운 독립(인디)영화관 <br> 세곳의 상영정보를 볼 수 있습니다|전국의 모든 독립영화관의 정보를 <br>지도에서 볼 수 있습니다 | 보고싶어요(북마크)한 영화가 <br> 이곳에 보관됩니다|
 |<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/74a48c0a-8091-4d23-a479-dc087f51533f">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/4f6932f3-fd25-403a-84ea-c760d6e76564">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/811c02ff-02a3-498e-b69d-ac3b21ea2c8d">|
-| 300m 이동시 마다 위치 업데이트 <br> 상영날짜 ∙ 정보 ∙ 영화상세정보 크롤링 <br> 보고싶어요(북마크) 기능 <br> DiffableDataSource | 전국 26개 독립 영화관 Annotation <br> 인스타그램 ∙ 네이버지도 웹뷰 연결 <br> 메인탭과 동일한 보고싶어요 기능 | RealmDB 에 저장된 데이터 표출 <br> 보고싶어요 취소시 메인탭 업데이트|
+| - 300m 이동시 마다 위치 업데이트 <br> - 상영날짜 ∙ 정보 ∙ 영화상세정보 크롤링 <br> - 보고싶어요(북마크) 기능 <br> - DiffableDataSource | - 전국 26개 독립 영화관 Annotation <br> - 인스타그램 ∙ 네이버지도 웹뷰 연결 <br> - 메인탭과 동일한 보고싶어요 기능 | - RealmDB 에 저장된 데이터 표출 <br> - 보고싶어요 취소시 메인탭 업데이트|
 
 <br />
 
