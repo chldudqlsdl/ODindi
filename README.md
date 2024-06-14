@@ -1,5 +1,5 @@
 
-# 어디인디<img src="https://github.com/chldudqlsdl/ODindi/assets/83645833/8587f87b-2694-4b3f-b1fc-74d39d429770" align=left width=100>
+# 어디인디<img src="https://github.com/chldudqlsdl/ODindi/assets/83645833/8587f87b-2694-4b3f-b1fc-74d39d429770" align=left width=120>
 
 > 내 주변의 독립(인디)영화관을 찾아주는 서비스 🍿  
 > 1인 개발 (24.05.05 ~ 24.06.11)
