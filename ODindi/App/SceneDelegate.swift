@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         // RealmDB 저장소 주소 프린트
-        DataBaseManager.shared.getLocationOfDefaultRealm()
+//        DataBaseManager.shared.getLocationOfDefaultRealm()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

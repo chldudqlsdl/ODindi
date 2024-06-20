@@ -242,7 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				D922105E2BE8BBFA00301B08 /* MainViewModel.swift */,
-				D9F44A5D2C108DE100AF6718 /* MapDetailViewModel.swift */,
+				D9F8D4DF2C0375EE00B811BD /* MovieDetailViewModel.swift */,
 				D94991632BFF6EEF00B95F5F /* DateCellViewModel.swift */,
 				D9CAAE3D2C09F436004ED4E0 /* MovieCellViewModel.swift */,
 			);
@@ -271,7 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				D92191512BFC68740049AC13 /* MapViewModel.swift */,
-				D9F8D4DF2C0375EE00B811BD /* MovieDetailViewModel.swift */,
+				D9F44A5D2C108DE100AF6718 /* MapDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

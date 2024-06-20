@@ -82,7 +82,7 @@ class MapDetailViewModel: MapDetailViewModelType {
             .do(onNext: { [weak self] _ in self?.didSelectDate.onNext(0) })
             .flatMap { cinema in
                 return CinemaService.shared.fetchCinemaCalendar(cinema: cinema)
-                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             }
             .do(onNext: { [weak self] _ in self?.isLoading.onNext(false)})
             .bind(to: selectedCinemaCalendar)
