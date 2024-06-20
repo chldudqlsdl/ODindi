@@ -23,6 +23,10 @@
 ## ✨ 기능 및 구현사항
 <img src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/882b842e-0129-4a9d-92d9-ca8a302cba6d" >
 
+**0. 아키텍쳐 및 주요기술** 
+  - MVVM 아키텍쳐
+ - RxSwift 
+
 **1. 가까운 영화관 탭 (메인탭)** 
   - **내 위치에서 가까운 독립 영화관 세곳의 상영정보를 볼 수 있습니다**
   - CoreLocation 을 활용해 300m 이동마다 근처의 독립영화관 업데이트
