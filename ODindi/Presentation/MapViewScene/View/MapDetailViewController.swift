@@ -160,16 +160,26 @@ class MapDetailViewController: UIViewController {
     func layout() {
         view.addSubview(logoImageView)
         logoImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(30)
             $0.centerX.equalToSuperview()
-            $0.height.lessThanOrEqualTo(50)
             $0.width.lessThanOrEqualTo(150)
+            
+            if UIScreen.main.bounds.height < 800 {
+                $0.top.equalToSuperview().inset(20)
+                $0.height.lessThanOrEqualTo(40)
+            } else {
+                $0.top.equalToSuperview().inset(30)
+                $0.height.lessThanOrEqualTo(50)
+            }
         }
         
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(logoImageView.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
+            if UIScreen.main.bounds.width < 380 {
+                $0.top.equalTo(logoImageView.snp.bottom).offset(15)
+            } else {
+                $0.top.equalTo(logoImageView.snp.bottom).offset(20)
+            }
         }
         
         view.addSubview(addressLabel)
@@ -204,7 +214,7 @@ class MapDetailViewController: UIViewController {
         movieCollectionView.snp.makeConstraints {
             $0.top.equalTo(dateCollectionView.snp.bottom).offset(18)
             $0.width.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.5)
+            $0.height.equalToSuperview().multipliedBy(0.6)
         }
         
         view.addSubview(noMovieLabel)

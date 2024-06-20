@@ -159,15 +159,20 @@ class MainViewController: UIViewController {
     private func layout() {
         view.addSubview(titleImage)
         titleImage.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(50)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(50)
             $0.width.lessThanOrEqualTo(150)
+            if UIScreen.main.bounds.height < 800 {
+                $0.height.equalTo(0)
+                $0.top.equalToSuperview().inset(30)
+            } else {
+                $0.height.equalTo(50)
+                $0.top.equalToSuperview().inset(60)
+            }
         }
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(120)
+            $0.top.equalTo(titleImage.snp.bottom).offset(20)
             $0.left.equalToSuperview().inset(20)
         }
         
@@ -185,7 +190,7 @@ class MainViewController: UIViewController {
         
         view.addSubview(cinemaCollectionView)
         cinemaCollectionView.snp.makeConstraints {
-            $0.top.equalTo(timeLabel.snp.bottom).offset(30)
+            $0.top.equalTo(timeLabel.snp.bottom).offset(27)
             $0.width.equalToSuperview()
             $0.height.equalTo(30)
         }

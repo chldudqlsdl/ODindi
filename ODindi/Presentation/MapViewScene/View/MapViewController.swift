@@ -154,4 +154,8 @@ extension MapViewController: MKMapViewDelegate {
         }
         return annotationView
     }
+    
+    func mapViewDidFailLoadingMap(_ mapView: MKMapView, withError error: Error) {
+        print("Debug: \(error.localizedDescription)")
+    }
 }

@@ -37,7 +37,7 @@ class MapViewModel: MapViewModelType {
         // 지도에 표시할 영역 범위를 지정 ex) 20000m x 20000m
         region = currentCoordinate
             .map({ coordinate in
-                let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 20000, longitudinalMeters: 20000)
+                let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
                 return region
             })
         
