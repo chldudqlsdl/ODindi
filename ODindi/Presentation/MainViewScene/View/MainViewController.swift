@@ -349,6 +349,7 @@ class MainViewController: UIViewController {
         cinemaDataSource.apply(cinemaSnapshot, animatingDifferences: true)
         { [weak self] in
             // 자동으로 영화 컬렉션뷰의 첫번째 아이템 선택
+            guard self?.cinemaCollectionView.numberOfItems(inSection: 0) ?? 0 > 0 else { return }
             self?.cinemaCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
         }
         
@@ -357,15 +358,16 @@ class MainViewController: UIViewController {
         dateSnapshot = NSDiffableDataSourceSnapshot<Section, DateItem>()
         dateSnapshot.appendSections([.date])
         dateSnapshot.appendItems(items, toSection: .date)
-        dateDataSource.apply(dateSnapshot, animatingDifferences: true) 
+        dateDataSource.apply(dateSnapshot, animatingDifferences: true)
         { [weak self] in
             // 자동으로 상영일 중(휴일 제외) 첫번째 아이템 선택
             self?.viewModel.cinemaCalendarFirstIndex
                 .observe(on: MainScheduler.instance)
                 .bind(onNext: { index in
+                    guard index < self?.dateCollectionView.numberOfItems(inSection: 0) ?? 0 else { return }
                     self?.dateCollectionView.selectItem(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: [.centeredHorizontally])
                 })
-                .disposed(by: self?.disposeBag ?? DisposeBag())
+                .disposed(by: DisposeBag())
         }
     }
     func setMovieSnapshot(_ items: [MovieSchedule]) {

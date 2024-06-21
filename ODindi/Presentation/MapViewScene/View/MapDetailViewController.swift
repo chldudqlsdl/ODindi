@@ -365,9 +365,10 @@ class MapDetailViewController: UIViewController {
             self?.viewModel.cinemaCalendarFirstIndex
                 .observe(on: MainScheduler.instance)
                 .bind(onNext: { index in
+                    guard index < self?.dateCollectionView.numberOfItems(inSection: 0) ?? 0 else { return }
                     self?.dateCollectionView.selectItem(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: [.centeredHorizontally])
                 })
-                .disposed(by: self?.disposeBag ?? DisposeBag())
+                .disposed(by: DisposeBag())
         }
     }
     
@@ -377,6 +378,7 @@ class MapDetailViewController: UIViewController {
         movieSnapshot.appendItems(items, toSection: .movie)
         movieDataSource.apply(movieSnapshot, animatingDifferences: true)
         { [weak self] in
+            guard self?.movieCollectionView.numberOfItems(inSection: 0) ?? 0 > 0 else { return }
             self?.movieCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [.centeredHorizontally])
         }
     }
