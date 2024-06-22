@@ -97,6 +97,8 @@ Observable
 
 ### **flatMap 에서 flatMapLatest 로 변경**
 
+**[에러분석 영상링크(Youtube)](https://youtu.be/RUT8xTWbMJ8?si=zgbSCBlaDCS3nfN5&t=1m04s)**
+
 **문제상황**
 
 A코드를 보면 ‘선택된 영화관(`selectedCinema` - Subject)’ 에 따라서 ‘상영 날짜 리스트(`selectedCinemaCalendar` - Subject)’ 가 바뀌도록 연동되어 있다. 이는 영화관 마다 상영 날짜 리스트가 다르기 때문이다.
@@ -130,6 +132,8 @@ Observable
 ```
 
 ### **dequeueReusableCell 과 RxSwift 를 함께 사용할 때 주의점**
+
+**[에러분석 영상링크(Youtube)](https://youtu.be/0pDcFlmsk30?si=N1sHY0IrRKY2c_ub&t=0m12s)**
 
 ```swift
 // MainViewController
@@ -235,6 +239,8 @@ mapView.rx.didSelect
 
 ### RealmDB 데이터 삭제시 DiffableDataSource 와의 충돌
 
+**[에러분석 영상링크(Youtube)](https://youtu.be/bQT_EvVskPw?si=LFi_5gOTOx6p5tVp&t=1m10s)**
+
 기존에는 영화 포스터 하단의 북마크 버튼을 누르면, 해당 영화가 RealmDB 에 추가된다. 북마크에 추가된 영화는 북마크 버튼이 보라색으로 바뀌며, 보라색 처리된 버튼을 누르면 북마크 취소를 해야하므로 해당 영화 인스턴스를 RealmDB 에서 Delete 해주었다.
 
 북마크탭의 북마크된 영화들은 DiffableDataSource 를 통해 표시되고, 데이터에 변화가 일어나면 애니메이션과 함께 변경된 데이터가 표시된다
@@ -268,6 +274,8 @@ class WatchLater: Object {
 
 ### 두 라이브러리 간의 충돌
 
+**[에러분석 영상링크(Youtube)](https://youtu.be/WvGNxJfl8ns?si=TFj_wLhOsfaRGB0G&t=0m22s)**
+
 **문제상황**
 
 <img src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/b2598d1d-e76f-49ac-915e-511c95f2e70a" width=200>
@@ -294,7 +302,7 @@ linker 로 병합되는 것은 똑같은데, 병합된 결과의 참조만 exe f
 
 **라이브러리 별로 빌드 산출물 폴더 ∙ 실행 파일이 어떻게 바뀌는지 실험**
 
-**[실험 결과 링크](https://slowsteadybrown.notion.site/Library-63da20ea88374e91924bf3f7247f8e15?pvs=4)**
+**[실험 결과 링크(Notion)](https://slowsteadybrown.notion.site/Library-63da20ea88374e91924bf3f7247f8e15?pvs=4)**
   
 </details>
 <details>
@@ -302,7 +310,7 @@ linker 로 병합되는 것은 똑같은데, 병합된 결과의 참조만 exe f
 
 <br />
   
-**[전체 개발 일지 링크](https://slowsteadybrown.notion.site/266fc8054a4240d8aca1cc07f0155d0e?pvs=4)**
+**[전체 개발 일지 링크(Notion)](https://slowsteadybrown.notion.site/266fc8054a4240d8aca1cc07f0155d0e?pvs=4)**
   
 </details>
 
@@ -346,5 +354,6 @@ linker 로 병합되는 것은 똑같은데, 병합된 결과의 참조만 exe f
 |가까운 영화관 탭 (메인탭)|지도 탭|북마크 탭|
 |-|-|-|
 |<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/74a48c0a-8091-4d23-a479-dc087f51533f">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/4f6932f3-fd25-403a-84ea-c760d6e76564">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/811c02ff-02a3-498e-b69d-ac3b21ea2c8d">|
+
 
 
