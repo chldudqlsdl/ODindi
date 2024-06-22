@@ -1,5 +1,5 @@
 
-# 어디인디<img src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/f2007359-317b-4148-b405-8f05871715fb" align=left width=120>
+# 어디인디<img src="https://github.com/chldudqlsdl/ODindi/assets/83645833/c07492ff-91c2-4f9a-b934-d05e14a3e49e" align=left width=120>
 
 > 내 주변의 독립(인디)영화관을 찾아주는 서비스 🍿  
 > 1인 개발 (24.05.05 ~ 24.06.11)
@@ -21,7 +21,7 @@
 <br />
 
 ## ✨ 기능 및 구현사항
-<img src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/882b842e-0129-4a9d-92d9-ca8a302cba6d" >
+<img src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/0873a3e6-8c93-4826-853e-d6c765bd495e" >
 
 **0. 아키텍쳐 및 주요기술** 
   - MVVM 아키텍쳐
