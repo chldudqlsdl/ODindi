@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D90253BD2C2C207C001198C6 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D90253BC2C2C207C001198C6 /* SwiftSoup */; };
 		D92191522BFC68740049AC13 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92191512BFC68740049AC13 /* MapViewModel.swift */; };
 		D922105F2BE8BBFA00301B08 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D922105E2BE8BBFA00301B08 /* MainViewModel.swift */; };
 		D92210612BE8C6B500301B08 /* IndieCinema.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210602BE8C6B500301B08 /* IndieCinema.swift */; };
 		D92210642BE8CD6800301B08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210632BE8CD6800301B08 /* Extensions.swift */; };
 		D92210662BE9019E00301B08 /* CinemaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210652BE9019E00301B08 /* CinemaService.swift */; };
 		D92210682BE9028300301B08 /* MovieSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92210672BE9028300301B08 /* MovieSchedule.swift */; };
-		D926E3472BEA3B1700CFA01B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D926E3462BEA3B1700CFA01B /* SwiftSoup */; };
 		D926E3492BEA416000CFA01B /* CinemaCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D926E3482BEA416000CFA01B /* CinemaCalendar.swift */; };
 		D92870BF2BEE419D00484866 /* CinemaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92870BE2BEE419D00484866 /* CinemaCell.swift */; };
 		D937BD512C05C426001E7F2A /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D937BD492C05C426001E7F2A /* Pretendard-Thin.otf */; };
@@ -82,6 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D90253BE2C2C2461001198C6 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D92191512BFC68740049AC13 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		D922105E2BE8BBFA00301B08 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D92210602BE8C6B500301B08 /* IndieCinema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndieCinema.swift; sourceTree = "<group>"; };
@@ -144,9 +145,9 @@
 				D9B37EE12BE7B34800AC1C55 /* RxCoreLocation in Frameworks */,
 				D9B37EE42BE7D21000AC1C55 /* Then in Frameworks */,
 				D9B918542C184019000C9443 /* RxBlocking in Frameworks */,
+				D90253BD2C2C207C001198C6 /* SwiftSoup in Frameworks */,
 				D94CDCE92C04CA300096951E /* Loaf in Frameworks */,
 				D9B9184F2C184012000C9443 /* SnapKit in Frameworks */,
-				D926E3472BEA3B1700CFA01B /* SwiftSoup in Frameworks */,
 				D9F070A62BF106BE00F21641 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,7 +413,6 @@
 			packageProductDependencies = (
 				D9B37EE02BE7B34800AC1C55 /* RxCoreLocation */,
 				D9B37EE32BE7D21000AC1C55 /* Then */,
-				D926E3462BEA3B1700CFA01B /* SwiftSoup */,
 				D9F070A52BF106BE00F21641 /* Kingfisher */,
 				D9AF46662BF490AB00DDC787 /* RxAppState */,
 				D94CDCE82C04CA300096951E /* Loaf */,
@@ -421,6 +421,7 @@
 				D9B918532C184019000C9443 /* RxBlocking */,
 				D9B918572C184019000C9443 /* RxCocoa */,
 				D9B9185B2C184019000C9443 /* RxRelay */,
+				D90253BC2C2C207C001198C6 /* SwiftSoup */,
 			);
 			productName = ODindi;
 			productReference = D9B37EAE2BE7A67200AC1C55 /* ODindi.app */;
@@ -443,23 +444,24 @@
 			};
 			buildConfigurationList = D9B37EA92BE7A67200AC1C55 /* Build configuration list for PBXProject "ODindi" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = D9B37EA52BE7A67200AC1C55;
 			packageReferences = (
 				D9B37EDF2BE7B34800AC1C55 /* XCRemoteSwiftPackageReference "RxCoreLocation" */,
 				D9B37EE22BE7D21000AC1C55 /* XCRemoteSwiftPackageReference "Then" */,
-				D926E3452BEA3B1700CFA01B /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				D9F070A42BF106BD00F21641 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D9AF46652BF490AB00DDC787 /* XCRemoteSwiftPackageReference "RxAppState" */,
 				D94CDCE72C04CA300096951E /* XCRemoteSwiftPackageReference "Loaf" */,
 				D9B918482C18400B000C9443 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				D9B9184D2C184012000C9443 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D9B918522C184019000C9443 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				D90253BB2C2C207C001198C6 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = D9B37EAF2BE7A67200AC1C55 /* Products */;
 			projectDirPath = "";
@@ -541,6 +543,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D9B37EBD2BE7A67300AC1C55 /* Base */,
+				D90253BE2C2C2461001198C6 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -616,6 +620,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -681,7 +686,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "어디인디";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처에 위치한 독립영화관을 찾기 위해 위치 권한 허용이 필요합니다";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -699,6 +703,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -719,7 +724,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "어디인디";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처에 위치한 독립영화관을 찾기 위해 위치 권한 허용이 필요합니다";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -737,6 +741,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -767,9 +772,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D926E3452BEA3B1700CFA01B /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+		D90253BB2C2C207C001198C6 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.7.2;
@@ -842,9 +847,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D926E3462BEA3B1700CFA01B /* SwiftSoup */ = {
+		D90253BC2C2C207C001198C6 /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D926E3452BEA3B1700CFA01B /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			package = D90253BB2C2C207C001198C6 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
 		};
 		D94CDCE82C04CA300096951E /* Loaf */ = {

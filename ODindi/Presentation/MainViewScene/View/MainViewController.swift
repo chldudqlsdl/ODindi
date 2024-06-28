@@ -289,8 +289,15 @@ class MainViewController: UIViewController {
         viewModel.selectedCinemaCalendar
             .observe(on: MainScheduler.instance)
             .bind(onNext: { [weak self] cinemaCalendar in
-                UIView.transition(with: UIImageView(), duration: 0.7, options: .transitionCrossDissolve) {
-                    self?.setDateSnapshot(cinemaCalendar.businessDayStatusArray)
+                if cinemaCalendar.alldays == [] {
+                    // 네트워크 오류 경고창 표시
+                    let alert = UIAlertController(title: "네트워크 오류", message: "인터넷 연결이 불안정합니다. 네트워크 연결을 확인해주세요", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                } else {
+                    UIView.transition(with: UIImageView(), duration: 0.7, options: .transitionCrossDissolve) {
+                        self?.setDateSnapshot(cinemaCalendar.businessDayStatusArray)
+                    }
                 }
             })
             .disposed(by: disposeBag)

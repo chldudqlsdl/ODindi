@@ -83,7 +83,11 @@ class MainViewModel: MainViewModelType {
         selectedCinema
             .flatMap { cinema in
                 return CinemaService.shared.fetchCinemaCalendar(cinema: cinema)
-                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+//                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+                    .catch { error in
+                        print("Failed to fetch cinema calendar: \(error.localizedDescription)")
+                        return Observable.just(CinemaCalendar()) // 빈 캘린더 반환
+                    }
             }
             .do(onNext: { [weak self] _ in self?.isLoading.onNext(false)})
             .bind(to: selectedCinemaCalendar)
@@ -115,6 +119,10 @@ class MainViewModel: MainViewModelType {
             .flatMapLatest { cinemaAndDate in
                 // 지정 영화관, 지정 날짜의 상영 정보 요청
                 return CinemaService.shared.fetchCinemaSchedule(cinema: cinemaAndDate.0, date: cinemaAndDate.1)
+                    .catch { error in
+                        print("Failed to fetch cinema schedule: \(error.localizedDescription)")
+                        return Observable.just([]) // 빈 상영 정보 반환
+                    }
             }
             .bind(to: selectedDateMovieSchedule)
             .disposed(by: disposeBag)

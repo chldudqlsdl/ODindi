@@ -82,7 +82,10 @@ class MapDetailViewModel: MapDetailViewModelType {
             .do(onNext: { [weak self] _ in self?.didSelectDate.onNext(0) })
             .flatMap { cinema in
                 return CinemaService.shared.fetchCinemaCalendar(cinema: cinema)
-                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+                    .catch { error in
+                        print("Failed to fetch cinema calendar: \(error.localizedDescription)")
+                        return Observable.just(CinemaCalendar()) // 빈 캘린더 반환
+                    }
             }
             .do(onNext: { [weak self] _ in self?.isLoading.onNext(false)})
             .bind(to: selectedCinemaCalendar)
@@ -110,6 +113,10 @@ class MapDetailViewModel: MapDetailViewModelType {
             .compactMap { $0 }
             .flatMapLatest { cinemaAndDate in
                 return CinemaService.shared.fetchCinemaSchedule(cinema: cinemaAndDate.0, date: cinemaAndDate.1)
+                    .catch { error in
+                        print("Failed to fetch cinema schedule: \(error.localizedDescription)")
+                        return Observable.just([]) // 빈 상영 정보 반환
+                    }
             }
             .bind(to: selectedDateMovieSchedule)
             .disposed(by: disposeBag)

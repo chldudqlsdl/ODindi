@@ -18,14 +18,25 @@ class CinemaService {
         return Observable<CinemaSchedule>.create { emitter in
             let urlString = "https://www.dtryx.com/cinema/showseq_list.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&ssid=&tokn=&BrandCd=\(cinema.code[0])&CinemaCd=\(cinema.code[1])&PlaySDT=\(date)"
             
-            URLSession.shared.dataTask(with: URL(string: urlString)!) { data, response, error in
+            guard let url = URL(string: urlString) else {
+                let error = NSError(domain: "Invalid URL", code: 0)
+                emitter.onError(error)
+                return Disposables.create()
+            }
+            
+            URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     emitter.onError(error)
+                    return
                 }
                 guard let data = data else {
-                    let response = response as! HTTPURLResponse
-                    let error = NSError(domain: "No Data", code: response.statusCode)
-                    emitter.onError(error)
+                    if let response = response as? HTTPURLResponse {
+                        let error = NSError(domain: "No Data", code: response.statusCode)
+                        emitter.onError(error)
+                    } else {
+                        let error = NSError(domain: "No Data", code: 0)
+                        emitter.onError(error)
+                    }
                     return
                 }
                 if let movieScheduleInfos = self.ParseJSON(data: data) {
@@ -63,23 +74,45 @@ class CinemaService {
     
     // 영화관을 파라미터로 받아 해당 영화관의 영업일(휴일여부 포함) Observable 을 리턴하는 메서드
     func fetchCinemaCalendar(cinema: IndieCinema = IndieCinema.list[0]) -> Observable<CinemaCalendar> {
+        return Observable<CinemaCalendar>.create { emitter in
+            let urlString = "https://www.dtryx.com/cinema/main.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&BrandCd=\(cinema.code[0])&CinemaCd=\(cinema.code[1])"
             
-            return Observable<CinemaCalendar>.create { emitter in
-                let urlString = "https://www.dtryx.com/cinema/main.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&BrandCd=\(cinema.code[0])&CinemaCd=\(cinema.code[1])"
-                var cinemaCalendar = CinemaCalendar()
+            print("Fetching URL: \(urlString)")
+            
+            guard let url = URL(string: urlString) else {
+                let error = NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+                emitter.onError(error)
+                return Disposables.create()
+            }
+            
+            var cinemaCalendar = CinemaCalendar()
+            
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    emitter.onError(error)
+                    return
+                }
+                guard let data = data else {
+                    let error = NSError(domain: "No Data", code: 0, userInfo: nil)
+                    emitter.onError(error)
+                    return
+                }
                 do {
-                    let html = try String(contentsOf: URL(string: urlString)!, encoding: .utf8)
+                    let html = String(data: data, encoding: .utf8) ?? ""
+                    
                     let doc: Document = try SwiftSoup.parse(html)
                     let elements = try doc.select("div.main-schedule").select("div.swiper-slide").select("a")
                     
                     for element in elements.array() {
+                        let date = try element.attr("data-dt")
                         if try element.attr("class") == "btnDay disabled" {
-                            cinemaCalendar.holidays.append(try element.attr("data-dt"))
+                            cinemaCalendar.holidays.append(date)
                         } else {
-                            cinemaCalendar.businessDays.append(try element.attr("data-dt"))
+                            cinemaCalendar.businessDays.append(date)
                         }
-                        cinemaCalendar.alldays.append(try element.attr("data-dt"))
+                        cinemaCalendar.alldays.append(date)
                     }
+                    
                     cinemaCalendar.alldays.forEach { dateString in
                         if cinemaCalendar.businessDays.contains(dateString) {
                             cinemaCalendar.businessDayStatusArray.append(BusinessDayStatus(dateString: dateString, isBusinessDay: true))
@@ -87,13 +120,17 @@ class CinemaService {
                             cinemaCalendar.businessDayStatusArray.append(BusinessDayStatus(dateString: dateString, isBusinessDay: false))
                         }
                     }
+                    
+                    emitter.onNext(cinemaCalendar)
                 } catch {
-                    print(error.localizedDescription)
+                    print("HTML Parsing Error: \(error.localizedDescription)")
+                    emitter.onError(error)
                 }
-                
-                emitter.onNext(cinemaCalendar)
-                return Disposables.create()
-            }
+            }.resume()
+            
+            return Disposables.create()
+        }
     }
 }
+
 
