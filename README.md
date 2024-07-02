@@ -50,13 +50,9 @@
 
 
 ## 🤔 개발과정의 고민
-
 <details>
-<summary><strong style="font-size: 1.2em;">메인탭</strong></summary>
-
-## 고민한 점
-
-### RxSwift 도입으로 얻은 다양한 효과
+<summary><strong style="font-size: 1.2em;">RxSwift 도입으로 얻은 다양한 효과</strong></summary>
+<br>
 
 **RxSwift를 사용해 비동기 작업의 흐름을 명확하게 표현하여 코드의 가독성과 유지보수성을 높임**
 
@@ -92,10 +88,11 @@ Observable
     .bind(to: selectedDateMovieSchedule)
     .disposed(by: disposeBag)
 ```
+</details>
 
-## TroubleShooting
-
-### **flatMap 에서 flatMapLatest 로 변경**
+<details>
+<summary><strong style="font-size: 1.2em;">flatMap 에서 flatMapLatest 로 변경</strong></summary>
+<br>
 
 **[에러분석 영상링크(Youtube)](https://youtu.be/RUT8xTWbMJ8?si=zgbSCBlaDCS3nfN5&t=1m04s)**
 
@@ -130,8 +127,10 @@ Observable
     .bind(to: selectedDateMovieSchedule)
     .disposed(by: disposeBag)
 ```
-
-### **dequeueReusableCell 과 RxSwift 를 함께 사용할 때 주의점**
+</details>
+<details>
+<summary><strong style="font-size: 1.2em;">dequeueReusableCell 과 RxSwift 를 함께 사용할 때 주의점</strong></summary>
+<br>
 
 **[에러분석 영상링크(Youtube)](https://youtu.be/0pDcFlmsk30?si=N1sHY0IrRKY2c_ub&t=0m12s)**
 
@@ -168,8 +167,10 @@ override func prepareForReuse() {
     self.disposeBag = DisposeBag()
 }
 ```
-
-### **init(contentsOf:) 은 네트워크 요청시 사용하지 말 것**
+</details>
+<details>
+<summary><strong style="font-size: 1.2em;">init(contentsOf:) 은 네트워크 요청시 사용하지 말 것</strong></summary>
+<br>
 
 **[에러분석 영상링크(Youtube)](https://www.youtube.com/watch?v=XhiUO03A-2g&t=75s)**
 
@@ -212,16 +213,11 @@ URLSession.shared.dataTask(with: url) { data, response, error in
 URL 네트워크 통신을 위해서는 URLSession.shared.dataTask 를 사용할 것을 공식문서에도 권고하고 있어 수정해주었다. URLSession.shared.dataTask 는 호출한 스레드를 블록하지 않고, 만약 모든 스레드가 사용중이라면 사용가능한 스레드가 생길 때까지 대기하므로 안전하게 사용할 수 있다.
 
 덧붙여 init(contentsOf:) 의 사용 용도는, 로컬에서 URL 주소를 통해 특정 파일에 접근할 때 사용하라고 만들어 놓은 메서드임을 추측할 수 있다.
-
 </details>
 
 <details>
-<summary><strong style="font-size: 1.2em;">지도탭</strong></summary>
-
-## 고민한 점
-
-  ### 라이브러리 쓰지 않고 RxSwift 와 Delegate 연결
-
+<summary><strong style="font-size: 1.2em;">라이브러리 쓰지 않고 RxSwift 와 Delegate 연결</strong></summary>
+<br>
 프로젝트에서 CoreLocation 의 경우 CLLocationManagerDelegate 와 RxSwift 를 연결하기 위해서 RxCoreLocation 라이브러리를 사용하였다. 하지만 라이브러리와 RxSwift 사이의 버전이 맞지 않아 라이브러리 추가가 안되는 경우가 있었고, 향후 버전 문제로 에러가 발생할 수도 있다고 생각하였다. 
 
 지도탭에서는 mapView 의 Annotation이 선택되었을 때의 감지를 MKMapViewDelegate 의 메서드를 통해 수행한다. 이를 위해 라이브러리를 사용하지 않고 직접 MKMapViewDelegate 와 RxSwift 을 연결하는 코드를 작성하였다. 
@@ -273,15 +269,11 @@ mapView.rx.didSelect
         self?.configureSheet(cinemaName: cinemaName, coordinate: coordinate)
     }
 ```
-
 </details>
   
 <details>
-<summary><strong style="font-size: 1.2em;">북마크탭</strong></summary>
-
- ## 고민한점
-
-### RealmDB 데이터 삭제시 DiffableDataSource 와의 충돌
+<summary><strong style="font-size: 1.2em;">RealmDB 데이터 삭제시 DiffableDataSource 와의 충돌</strong></summary>
+<br>
 
 **[에러분석 영상링크(Youtube)](https://youtu.be/bQT_EvVskPw?si=LFi_5gOTOx6p5tVp&t=1m10s)**
 
@@ -312,11 +304,8 @@ class WatchLater: Object {
 위와 같이 RealmObject 의 데이터 모델을 변경하여, 북마크 취소시 바로 DB 에서 삭제하지 않고 임시로 프로퍼티 `isDeleted` 만 true 로 바꿔준다. DiffableDataSource 를 통한 뷰의 갱신이 일어난 이후에 `isDeleted` 가 true 인 인스턴스만 따로 DB에서 삭제해주면 된다.
 </details>
 <details>
-<summary><strong style="font-size: 1.2em;">빌드</strong></summary>
-
-## TroubleShooting
-
-### 두 라이브러리 간의 충돌
+<summary><strong style="font-size: 1.2em;">빌드 : 두 라이브러리 간의 충돌</strong></summary>
+<br>
 
 **[에러분석 영상링크(Youtube)](https://youtu.be/WvGNxJfl8ns?si=TFj_wLhOsfaRGB0G&t=0m22s)**
 
@@ -398,3 +387,4 @@ linker 로 병합되는 것은 똑같은데, 병합된 결과의 참조만 exe f
 |가까운 영화관 탭 (메인탭)|지도 탭|북마크 탭|
 |-|-|-|
 |<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/74a48c0a-8091-4d23-a479-dc087f51533f">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/4f6932f3-fd25-403a-84ea-c760d6e76564">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/811c02ff-02a3-498e-b69d-ac3b21ea2c8d">|
+
