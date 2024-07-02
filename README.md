@@ -151,7 +151,7 @@ movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollec
 })
 ```
 
-**문제상황**
+**문제상황**  
 영화셀의 포스터를 탭하면 탭 여부가 `posterTapped` - Subject 로 전달되어, `MainViewController` 에서 영화 상세 정보 뷰를 present 하도록 구현하였다. 하지만 간헐적으로 포스터를 한번만 탭하였는데도 상세 정보 뷰 컨트롤러(`MovieDetailViewController`) 가 중복되어 생성되는 경우가 발생하였다.
 
 **원인**
@@ -168,6 +168,50 @@ override func prepareForReuse() {
     self.disposeBag = DisposeBag()
 }
 ```
+
+### **init(contentsOf:) 은 네트워크 요청시 사용하지 말 것**
+
+**[에러분석 영상링크(Youtube)](https://www.youtube.com/watch?v=XhiUO03A-2g&t=75s)**
+
+<img src="https://github.com/chldudqlsdl/ODindi/assets/83645833/154d1655-ea99-4eb6-800e-4675c382f946"  width=200>
+
+**문제상황**  
+위 이미지는 앱 출시를 위해 심사제출을 하고 앱스토어로 부터 받은 에러 화면 스크린샷이다. 알 수 없는 이유로 영화관의 상영 날짜를 불러오지 못하고 있다. 하지만 이와 같은 에러가 나의 Xcode ∙ 실기기에는 전혀 발생하지 않아 원인을 밝혀내는데 오랜 시간이 소요되었다.
+
+**원인**
+
+```swift
+// 영화관을 파라미터로 받아 해당 영화관의 영업일(휴일여부 포함) Observable 을 리턴하는 메서드
+func fetchCinemaCalendar(cinema: IndieCinema = IndieCinema.list[0]) -> Observable<CinemaCalendar> {
+    return Observable<CinemaCalendar>.create { emitter in
+
+        do {
+            let html = try String(contentsOf: url, encoding: .utf8)
+            let doc: Document = try SwiftSoup.parse(html)
+              // ... [중략] ...
+        }
+        return Disposables.create()
+    }
+}
+```
+
+원인은 영화관의 상영 날짜를 불러오는 fetchCinemaCalendar 에 있었다. fetchCinemaCalendar 에서는 SwiftSoup를 통한 웹 크롤링으로 상영 날짜를 불러오는데 URL 주소를 통해 html 문자열을 가져오는데, 이 과정에서 String(contentsOf: url, encoding: .utf8) 을 사용하였다.
+
+하지만 공식문서에 네트워크 요청을 위해 URL 주소를 사용할 때는 init(contentsOf:) 을 사용하는 것을 금지하고 있다. init(contentsOf:) 는 동기적 메서드이므로 작동시 호출한 스레드를 블록한다. 현재도 백그라운드 스레드로 바꿔주었기에 메인스레드를 블록하는 것은 아니지만, 앱스토어의 심사 시의 특수한 네트워크, 스레드 환경에서는 이러한 스레드 블록이 중대한 에러를 야기하여 통신이 실패한 것을 추측할 수 있었다.
+
+**해결방법**
+
+```swift
+URLSession.shared.dataTask(with: url) { data, response, error in
+                do {
+                    let html = String(data: data, encoding: .utf8) ?? ""
+                    let doc: Document = try SwiftSoup.parse(html)
+                    // ... [후략] ...
+```
+
+URL 네트워크 통신을 위해서는 URLSession.shared.dataTask 를 사용할 것을 공식문서에도 권고하고 있어 수정해주었다. URLSession.shared.dataTask 는 호출한 스레드를 블록하지 않고, 만약 모든 스레드가 사용중이라면 사용가능한 스레드가 생길 때까지 대기하므로 안전하게 사용할 수 있다.
+
+덧붙여 init(contentsOf:) 의 사용 용도는, 로컬에서 URL 주소를 통해 특정 파일에 접근할 때 사용하라고 만들어 놓은 메서드임을 추측할 수 있다.
 
 </details>
 
@@ -354,6 +398,3 @@ linker 로 병합되는 것은 똑같은데, 병합된 결과의 참조만 exe f
 |가까운 영화관 탭 (메인탭)|지도 탭|북마크 탭|
 |-|-|-|
 |<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/74a48c0a-8091-4d23-a479-dc087f51533f">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/4f6932f3-fd25-403a-84ea-c760d6e76564">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/811c02ff-02a3-498e-b69d-ac3b21ea2c8d">|
-
-
-

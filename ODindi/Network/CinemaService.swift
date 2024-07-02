@@ -134,3 +134,51 @@ class CinemaService {
 }
 
 
+
+//// 영화관을 파라미터로 받아 해당 영화관의 영업일(휴일여부 포함) Observable 을 리턴하는 메서드
+//func fetchCinemaCalendar(cinema: IndieCinema = IndieCinema.list[0]) -> Observable<CinemaCalendar> {
+//    return Observable<CinemaCalendar>.create { emitter in
+//        let urlString = "https://www.dtryx.com/cinema/main.do?cgid=FE8EF4D2-F22D-4802-A39A-D58F23A29C1E&BrandCd=\(cinema.code[0])&CinemaCd=\(cinema.code[1])"
+//        
+//        print(urlString)
+//        
+//        guard let url = URL(string: urlString) else {
+//            let error = NSError(domain: "Invalid URL", code: 0)
+//            emitter.onError(error)
+//            return Disposables.create()
+//        }
+//        
+//        var cinemaCalendar = CinemaCalendar()
+//        
+//        do {
+//            let html = try String(contentsOf: url, encoding: .utf8)
+//            let doc: Document = try SwiftSoup.parse(html)
+//            let elements = try doc.select("div.main-schedule").select("div.swiper-slide").select("a")
+//            
+//            for element in elements.array() {
+//                let date = try element.attr("data-dt")
+//                if try element.attr("class") == "btnDay disabled" {
+//                    cinemaCalendar.holidays.append(date)
+//                } else {
+//                    cinemaCalendar.businessDays.append(date)
+//                }
+//                cinemaCalendar.alldays.append(date)
+//            }
+//            
+//            cinemaCalendar.alldays.forEach { dateString in
+//                if cinemaCalendar.businessDays.contains(dateString) {
+//                    cinemaCalendar.businessDayStatusArray.append(BusinessDayStatus(dateString: dateString, isBusinessDay: true))
+//                } else {
+//                    cinemaCalendar.businessDayStatusArray.append(BusinessDayStatus(dateString: dateString, isBusinessDay: false))
+//                }
+//            }
+//            
+//            emitter.onNext(cinemaCalendar)
+//        } catch {
+//            print(error.localizedDescription)
+//            emitter.onError(error)
+//        }
+//        
+//        return Disposables.create()
+//    }
+//}
