@@ -1,64 +1,67 @@
 
-# 어디인디<img src="https://github.com/chldudqlsdl/ODindi/assets/83645833/c07492ff-91c2-4f9a-b934-d05e14a3e49e" align=left width=120>
+# オディンディ<img src="https://github.com/chldudqlsdl/ODindi/assets/83645833/c07492ff-91c2-4f9a-b934-d05e14a3e49e" align=left width=150>
 
-> 내 주변의 독립(인디)영화관을 찾아주는 서비스 🍿  
-> 1인 개발 (24.05.05 ~ 24.06.11)
-
-<br />
-
-## 💭 소개
-
-> 우리 주변에는 특별한 영화들을 상영하는 작은 독립영화관이 숨어 있습니다  
-> 때로는 크고 유명한 영화관을 벗어나 작은 영화관에서 인생 영화를 만날지도 몰라요
-> 
-> 내 위치에서 가까운 독립영화관 세곳의 상영 정보를 빠르게 확인할 수 있고  
-> 지도에서는 전국의 모든 독립영화관들의 정보를 한눈에 확인할 수 있어요
-> 
-> **이번 주말에는 어디인디와 함께 가까운 독립영화관으로 떠나보는건 어떨까요?**
-
-
+> 近くの独立（インディー）映画館を探してくれるサービス (
+「オディ - 韓国語」は日本語で「どこ」です。) 🍿  
+>1人開発 （24.05.05 ～ 24.06.11）  
+> [📺 アプリ紹介動画のリンク(YouTube)](https://www.youtube.com/watch?v=2q0a5HQbgXo&t=80s)
 
 <br />
 
-## ✨ 기능 및 구현사항
+## 💭 紹介
+
+> 私たちの周りには、特別な映画を上映している小さな独立系映画館が隠れています。  
+> 時には、大きくて有名な映画館を離れて、小さな映画館で人生の一本に出会えるかもしれません。
+> 
+> 現在地から近い独立映画館3軒の上映情報を素早く確認でき、  
+> 地図では全国のすべての独立映画館の情報を一目で確認できます。
+> 
+> **今週末は、オディンディと一緒に近くの独立映画館に足を運んでみませんか？**  
+> [🛒 App Storeのリンク](https://apps.apple.com/kr/app/id6504532476)  
+
+
+
+<br />
+
+## ✨ 機能と実装事項
 <img src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/0873a3e6-8c93-4826-853e-d6c765bd495e" >
 
-**0. 아키텍쳐 및 주요기술** 
-  - MVVM 아키텍쳐
- - RxSwift 
+**0. アーキテクチャと主要技術** 
+  - MVVMアーキテクチャ
+  - RxSwift
 
-**1. 가까운 영화관 탭 (메인탭)** 
-  - **내 위치에서 가까운 독립 영화관 세곳의 상영정보를 볼 수 있습니다**
-  - CoreLocation 을 활용해 300m 이동마다 근처의 독립영화관 업데이트
-  - DiffableDataSource ∙ CompositionalLayout 활용해 영화관 ∙ 상영일 ∙ 영화셀 구현
-  - SwiftSoup 을 활용해 독립영화관 영업일 정보 크롤링
-  - 영화 상세 정보 보기 ∙ 보고싶어요(북마크) 기능
+**1. 近くの映画館タブ（メインタブ）** 
+  - **現在地から近い独立映画館3軒の上映情報を確認できます。**
+  - CoreLocationを活用し、300m移動ごとに近くの独立映画館を更新
+  - DiffableDataSource・CompositionalLayoutを活用して、映画館・上映日・映画セルを実装
+  - SwiftSoupを活用して独立映画館の営業日情報をクロール
+  - 映画詳細情報表示・「見たい」機能（ブックマーク）
 
-**2. 지도탭**
-  - **지도에서 전국의 모든 독립영화관 정보를 볼 수 있습니다.**
-  - mapView 에 전국 모든 독립영화관 데이터를 AnnotationView 로 추가
-  - Annotation 선택시 메인뷰와 동일하게 상영정보 표출
-  - webView 를 통해 해당 영화관의 인스타그램 ∙ 네이버지도로 연결
+**2. 地図タブ**
+  - **地図で全国のすべての独立映画館の情報を確認できます。**
+  - mapViewに全国の独立映画館データをAnnotationViewとして追加
+  - Annotationを選択すると、メインビューと同様に上映情報を表示
+  - webViewを通じて、該当映画館のInstagram・NAVER地図にリンク
 
-**3. 북마크탭**
- - **보고싶어요(북마크)한 영화들이 이곳에 저장됩니다**
-  - RealmDB 에 저장된 북마크한 영화 불러오기
-  - 보고싶어요 취소시 메인탭을 업데이트하여 취소 사항이 바로 반영되도록 구현
+**3. ブックマークタブ**
+  - **「見たい」（ブックマーク）した映画がここに保存されます。**
+  - RealmDBに保存されたブックマークした映画を読み込み
+  - 「見たい」を解除すると、メインタブを更新して解除内容が即座に反映されるように実装
 
 
 <br />
 
 
-## 🤔 개발과정의 고민
+## 🤔 開発過程での悩み(ぜひお読みください🙏)
 <details>
-<summary><strong style="font-size: 1.2em;">RxSwift 도입으로 얻은 다양한 효과</strong></summary>
+<summary><strong style="font-size: 1.2em;">RxSwift導入によって得られたさまざまな効果</strong></summary>
 <br>
 
-**RxSwift를 사용해 비동기 작업의 흐름을 명확하게 표현하여 코드의 가독성과 유지보수성을 높임**
+**RxSwiftを使用して非同期作業の流れを明確に表現し、コードの可読性と保守性を向上させました。**
 
-`selectedCinema`는`PublishSubject`로, 컬렉션뷰에서 선택된 영화관 인스턴스를 전달받는다. 이 인스턴스는 네트워크 요청을 담당하는 `Observable`에 전달되어 영화관의 상영 일정을 가져온다. 이때 `flatMap` 연산자를 사용하여 네트워크 요청을 비동기적으로 처리하고, `subscribe(on:)`을 통해 백그라운드 스레드에서 실행하도록 지정하였다. 네트워크 요청이 완료되면 결과인 영화관 영업일 리스트를 `selectedCinemaCalendar`라는 `PublishSubject`에 전달한다.
+`selectedCinema`は`PublishSubject`として、コレクションビューで選択された映画館のインスタンスを受け取ります。このインスタンスはネットワークリクエストを担当する`Observable`に渡され、映画館の上映スケジュールを取得します。このとき、`flatMap`演算子を使用して非同期的にネットワークリクエストを処理し、`subscribe(on:)`を通じてバックグラウンドスレッドで実行するように指定しました。ネットワークリクエストが完了すると、結果として得られた映画館の営業日リストを`selectedCinemaCalendar`という`PublishSubject`に渡します。
 
-이렇게 RxSwift를 사용하면 비동기 작업의 시작부터 결과 처리까지의 흐름을 한눈에 파악할 수 있어 코드의 가독성과 유지보수성을 향상시킬 수 있었다.
+このようにRxSwiftを使用することで、非同期作業の開始から結果処理までの流れを一目で把握でき、コードの可読性と保守性を向上させることができました。
 
 ```swift
 selectedCinema
@@ -71,11 +74,11 @@ selectedCinema
     .disposed(by: disposeBag)
 ```
 
-**RxSwift의 다양한 Operator 를 적절히 사용하여 직관적으로 이해할 수 있는 코드를 작성함**
+**RxSwiftのさまざまなOperatorを適切に使用して、直感的に理解できるコードを作成**
 
-메인탭의 영화 상영 정보를(포스터 및 상영시간) 표시하기 위해서는 선택된 영화관(`selectedCinema` - Subject), 선택된 영화관의 상영 날짜 리스트(`selectedCinemaCalendar` - Subject), 그리고 선택된 날짜 인덱스(`didSelectDate` - Subject) 이 세가지 데이터가 모두 필요하다. 또한 이 세 데이터 중 하나라도 변경될 때마다 새로운 영화 상영 정보를 표시해야 한다.
-이를 위해 `combineLatest` Operator 를 사용해 각 Subject가 방출하는 최신값을 결합한다. 각 Subject의 값이 변할 때마다 새로운 값이 결합되고 이를 통해 새로운 상영 정보를 요청하고 업데이트할 수 있다.
-이와 같은 Operator 사용으로 적절한 기능 구현을 함과 동시에 코드의 직관성과 가독성을 높일 수 있었다.
+メインタブで映画の上映情報（ポスターおよび上映時間）を表示するためには、選択された映画館（`selectedCinema` - Subject）、選択された映画館の上映日リスト（`selectedCinemaCalendar` - Subject）、そして選択された日付のインデックス（`didSelectDate` - Subject）の3つのデータが必要です。また、この3つのデータのうち1つでも変更があった場合、常に新しい映画上映情報を表示する必要があります。
+この目的のために、`combineLatest` Operatorを使用して各Subjectが放出する最新の値を結合します。各Subjectの値が変わるたびに新しい値が結合され、それを基に新しい上映情報をリクエストし、更新することができます。
+このようにOperatorを活用することで、適切な機能を実現しながら、コードの直感性と可読性を向上させることができました。
 
 ```swift
 Observable
@@ -91,23 +94,23 @@ Observable
 </details>
 
 <details>
-<summary><strong style="font-size: 1.2em;">flatMap 에서 flatMapLatest 로 변경</strong></summary>
+<summary><strong style="font-size: 1.2em;">flatMapからflatMapLatestに変更</strong></summary>
 <br>
 
-**[에러분석 영상링크(Youtube)](https://youtu.be/RUT8xTWbMJ8?si=zgbSCBlaDCS3nfN5&t=1m04s)**
+**[エラー分析動画リンク(Youtube)](https://youtu.be/RUT8xTWbMJ8?si=zgbSCBlaDCS3nfN5&t=1m04s)**
 
-**문제상황**
+**問題状況**
 
-A코드를 보면 ‘선택된 영화관(`selectedCinema` - Subject)’ 에 따라서 ‘상영 날짜 리스트(`selectedCinemaCalendar` - Subject)’ 가 바뀌도록 연동되어 있다. 이는 영화관 마다 상영 날짜 리스트가 다르기 때문이다.
-이 때문에  `selectedCinema` 가 바뀐다면 B코드에서는 `selectedCinema` 가 바뀔 때 한 번, `selectedCinemaCalendar` 가 바뀔 때 한 번, 총 두 번 순서대로 값이 전달되고 flatMap 을 통한 요청도 두 번 수행된다. 
-B코드는 기존에 flatMapLatest 가 아니라, flatMap 으로 작성되었는데, flatMap 의 경우 값을 전달 받는 순서와 상관없이 비동기 처리가 끝난 순서대로 결과 값이 나온다. 이 때문에 `selectedCinemaCalendar` 가 바뀔 때 결합된 값에 의한 비동기 처리 결과 값이 먼저 나오고, 이후에 `selectedCinema` 가 바뀔 때 결합된 값에 의한 비동기 처리 결과 값이 나오면 다른 영화관의 상영 날짜 리스트를 기반으로 비동기 처리를 요청한 것이 된다.
+Aコードを見ると、「選択された映画館（`selectedCinema` - Subject）」に応じて「上映日リスト（`selectedCinemaCalendar` - Subject）」が変更されるように連動しています。これは映画館ごとに上映日リストが異なるためです。
+このため、`selectedCinema`が変更されると、Bコードでは`selectedCinema`が変更されるときに一度、`selectedCinemaCalendar`が変更されるときにもう一度、合計で二回順番に値が伝達され、`flatMap`を通じたリクエストも二回実行されます。
+Bコードは従来`flatMapLatest`ではなく`flatMap`で書かれていましたが、`flatMap`の場合、値が伝達される順序に関係なく、非同期処理が終了した順番で結果が返されます。そのため、`selectedCinemaCalendar`が変更されたときに結合された値による非同期処理の結果が先に出て、その後に`selectedCinema`が変更されたときに結合された値による非同期処理の結果が出ると、異なる映画館の上映日リストに基づいた非同期処理がリクエストされることになります。
 
-**해결방법**
+**解決方法**
 
-이 때문에 flatMap 을 flatMapLatest 로 변경했으며, 이는 결합된 값이 flatMapLatest 넘어간 순서에 따라 결과 값을 리턴해주는 것을 보장한다. 이에 더해 flatMapLatest 내부의 로직을 처리하는 도중  다른 값이 들어오면 기존의 로직 처리를 중단하고 새 값에 대한 로직 처리를 시작하기 때문에 불필요한 작업을 줄이는 효과도 얻을 수 있었다. 
+このため、`flatMap`を`flatMapLatest`に変更しました。これにより、結合された値が`flatMapLatest`に渡される順序に従って結果が返されることが保証されます。さらに、`flatMapLatest`内部でロジックを処理している途中で他の値が入力された場合、既存のロジック処理を中断し、新しい値に対するロジック処理を開始するため、不要な作業を減らす効果も得られました。
 
 ```swift
-// A코드
+// Aコード
 selectedCinema
     .flatMap { cinema in
         return CinemaService.shared.fetchCinemaCalendar(cinema: cinema)
@@ -116,7 +119,7 @@ selectedCinema
     .bind(to: selectedCinemaCalendar)
     .disposed(by: disposeBag)
 
-// B코드 
+// Bコード
 Observable
     .combineLatest(selectedCinema, selectedCinemaCalendar, didSelectDate) { cinema, calendar, dateIndex -> (IndieCinema, String)? in
         return (cinema, calendar.alldays[dateIndex])
@@ -129,10 +132,10 @@ Observable
 ```
 </details>
 <details>
-<summary><strong style="font-size: 1.2em;">dequeueReusableCell 과 RxSwift 를 함께 사용할 때 주의점</strong></summary>
+<summary><strong style="font-size: 1.2em;">dequeueReusableCellとRxSwiftを一緒に使用する際の注意点</strong></summary>
 <br>
 
-**[에러분석 영상링크(Youtube)](https://youtu.be/0pDcFlmsk30?si=N1sHY0IrRKY2c_ub&t=0m12s)**
+**[エラー分析動画リンク(Youtube)](https://youtu.be/0pDcFlmsk30?si=N1sHY0IrRKY2c_ub&t=0m12s)**
 
 ```swift
 // MainViewController
@@ -140,7 +143,7 @@ movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollec
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
     cell.viewModel = MovieCellViewModel(item)
     
-    // 영화셀에서 포스터가 탭되면 영화 상세 정보 View 를 띄워줌
+    // 映画セルでポスターがタップされたとき、映画の詳細情報ビューを表示します。
     cell.posterTapped
         .bind { [weak self] movieCode in
             self?.present(MovieDetailViewController(viewModel: MovieDetailViewModel(movieCode)), animated: true)
@@ -150,16 +153,14 @@ movieDataSource = UICollectionViewDiffableDataSource(collectionView: movieCollec
 })
 ```
 
-**문제상황**  
-영화셀의 포스터를 탭하면 탭 여부가 `posterTapped` - Subject 로 전달되어, `MainViewController` 에서 영화 상세 정보 뷰를 present 하도록 구현하였다. 하지만 간헐적으로 포스터를 한번만 탭하였는데도 상세 정보 뷰 컨트롤러(`MovieDetailViewController`) 가 중복되어 생성되는 경우가 발생하였다.
+**問題状況**  
+映画セルのポスターをタップすると、タップの有無が`posterTapped` - Subjectに伝達され、`MainViewController`で映画の詳細情報ビューが`present`されるように実装しました。しかし、ポスターを一度だけタップしたにもかかわらず、詳細情報ビューコントローラー（`MovieDetailViewController`）が重複して生成されるケースが断続的に発生しました。
 
-**원인**
+**原因**  
+原因はセルが`dequeueReusableCell`によって再利用されるためです。セルが再利用されるたびに`cell.posterTapped`のストリームが再生成され、その結果、ポスターを複数回タップしたかのような状況が発生したのです。
 
-원인은 셀이 dequeueReusableCell 이기 때문이다. 셀이 재사용될 때마다 `cell.posterTapped` 의 스트림이 계속 생겨났고 이 때문에 포스터를 여러번 탭한 것과 같은 결과가 발생한 것이다.
-
-**해결방법**
-
-셀이 재사용될 때마다 이전의 셀에서 생성되었던 RxSwift 스트림을 모두 제거해야 한다. 아래의 방식으로 DisposeBag 을 교체해 이전의 스트림을 제거하였다.
+**解決方法**  
+セルが再利用されるたびに、以前のセルで生成されたRxSwiftストリームをすべて削除する必要があります。以下の方法で`DisposeBag`を交換し、以前のストリームを削除しました。
 
 ```swift
 // MovieCell
@@ -169,60 +170,60 @@ override func prepareForReuse() {
 ```
 </details>
 <details>
-<summary><strong style="font-size: 1.2em;">init(contentsOf:) 은 네트워크 요청시 사용하지 말 것</strong></summary>
+<summary><strong style="font-size: 1.2em;">init(contentsOf:)はネットワークリクエスト時に使用しないこと</strong></summary>
 <br>
 
-**[에러분석 영상링크(Youtube)](https://www.youtube.com/watch?v=XhiUO03A-2g&t=75s)**
+**[エラー分析動画リンク(Youtube)](https://www.youtube.com/watch?v=XhiUO03A-2g&t=75s)**
 
 <img src="https://github.com/chldudqlsdl/ODindi/assets/83645833/154d1655-ea99-4eb6-800e-4675c382f946"  width=200>
 
-**문제상황**  
-위 이미지는 앱 출시를 위해 심사제출을 하고 앱스토어로 부터 받은 에러 화면 스크린샷이다. 알 수 없는 이유로 영화관의 상영 날짜를 불러오지 못하고 있다. 하지만 이와 같은 에러가 나의 Xcode ∙ 실기기에는 전혀 발생하지 않아 원인을 밝혀내는데 오랜 시간이 소요되었다.
+**問題状況**  
+上記の画像は、アプリリリースのために審査提出を行った際、App Storeから受け取ったエラー画面のスクリーンショットです。原因不明の理由で映画館の上映日を取得できていません。しかし、このようなエラーは自分のXcodeや実機では全く発生しておらず、原因を特定するのに長い時間がかかりました。
 
-**원인**
+**原因**
 
 ```swift
-// 영화관을 파라미터로 받아 해당 영화관의 영업일(휴일여부 포함) Observable 을 리턴하는 메서드
+// 映画館をパラメータとして受け取り、該当映画館の営業日（休日を含む）をObservableとして返すメソッド
 func fetchCinemaCalendar(cinema: IndieCinema = IndieCinema.list[0]) -> Observable<CinemaCalendar> {
     return Observable<CinemaCalendar>.create { emitter in
 
         do {
             let html = try String(contentsOf: url, encoding: .utf8)
             let doc: Document = try SwiftSoup.parse(html)
-              // ... [중략] ...
+              // ... [省略] ...
         }
         return Disposables.create()
     }
 }
 ```
 
-원인은 영화관의 상영 날짜를 불러오는 fetchCinemaCalendar 에 있었다. fetchCinemaCalendar 에서는 SwiftSoup를 통한 웹 크롤링으로 상영 날짜를 불러오는데 URL 주소를 통해 html 문자열을 가져오는데, 이 과정에서 String(contentsOf: url, encoding: .utf8) 을 사용하였다.
+原因は映画館の上映日を取得する`fetchCinemaCalendar`メソッドにありました。このメソッドでは、SwiftSoupを使用したウェブクローリングによって上映日を取得していますが、URLアドレスを使ってHTML文字列を取得する際に`String(contentsOf: url, encoding: .utf8)`を使用していました。
 
-하지만 공식문서에 네트워크 요청을 위해 URL 주소를 사용할 때는 init(contentsOf:) 을 사용하는 것을 금지하고 있다. init(contentsOf:) 는 동기적 메서드이므로 작동시 호출한 스레드를 블록한다. 현재도 백그라운드 스레드로 바꿔주었기에 메인스레드를 블록하는 것은 아니지만, 앱스토어의 심사 시의 특수한 네트워크, 스레드 환경에서는 이러한 스레드 블록이 중대한 에러를 야기하여 통신이 실패한 것을 추측할 수 있었다.
+しかし、公式ドキュメントでは、ネットワークリクエストのためにURLアドレスを使用する場合、`init(contentsOf:)`を使用することを禁止しています。`init(contentsOf:)`は同期的なメソッドであり、実行時に呼び出したスレッドをブロックします。現在、バックグラウンドスレッドに切り替えているため、メインスレッドをブロックすることはありませんが、App Storeの審査時の特殊なネットワークやスレッド環境では、このようなスレッドブロックが重大なエラーを引き起こし、通信が失敗したと推測されます。
 
-**해결방법**
+**解決方法**
 
 ```swift
 URLSession.shared.dataTask(with: url) { data, response, error in
                 do {
                     let html = String(data: data, encoding: .utf8) ?? ""
                     let doc: Document = try SwiftSoup.parse(html)
-                    // ... [후략] ...
+                    // ... [省略] ...
 ```
 
-URL 네트워크 통신을 위해서는 URLSession.shared.dataTask 를 사용할 것을 공식문서에도 권고하고 있어 수정해주었다. URLSession.shared.dataTask 는 호출한 스레드를 블록하지 않고, 만약 모든 스레드가 사용중이라면 사용가능한 스레드가 생길 때까지 대기하므로 안전하게 사용할 수 있다.
+URLネットワーク通信には`URLSession.shared.dataTask`を使用することが公式ドキュメントでも推奨されているため、これに修正しました。`URLSession.shared.dataTask`は呼び出したスレッドをブロックせず、すべてのスレッドが使用中であれば、使用可能なスレッドが空くまで待機するため、安全に使用することができます。
 
-덧붙여 init(contentsOf:) 의 사용 용도는, 로컬에서 URL 주소를 통해 특정 파일에 접근할 때 사용하라고 만들어 놓은 메서드임을 추측할 수 있다.
+加えて、`init(contentsOf:)`の使用用途は、ローカルでURLアドレスを通じて特定のファイルにアクセスする際に使用するために作られたメソッドだと推測できます。
 </details>
 
 <details>
-<summary><strong style="font-size: 1.2em;">라이브러리 쓰지 않고 RxSwift 와 Delegate 연결</strong></summary>
+<summary><strong style="font-size: 1.2em;">ライブラリを使用せずに、RxSwiftとDelegateを接続</strong></summary>
 <br>
-프로젝트에서 CoreLocation 의 경우 CLLocationManagerDelegate 와 RxSwift 를 연결하기 위해서 RxCoreLocation 라이브러리를 사용하였다. 하지만 라이브러리와 RxSwift 사이의 버전이 맞지 않아 라이브러리 추가가 안되는 경우가 있었고, 향후 버전 문제로 에러가 발생할 수도 있다고 생각하였다. 
+プロジェクトでは、CoreLocationに関して`CLLocationManagerDelegate`とRxSwiftを接続するためにRxCoreLocationライブラリを使用しました。しかし、ライブラリとRxSwiftのバージョンが一致せず、ライブラリの追加ができない場合があり、将来的にバージョンの問題でエラーが発生する可能性もあると考えました。
 
-지도탭에서는 mapView 의 Annotation이 선택되었을 때의 감지를 MKMapViewDelegate 의 메서드를 통해 수행한다. 이를 위해 라이브러리를 사용하지 않고 직접 MKMapViewDelegate 와 RxSwift 을 연결하는 코드를 작성하였다. 
+マップタブでは、`mapView`の`Annotation`が選択されたときの検出を`MKMapViewDelegate`のメソッドを通じて行います。そのため、ライブラリを使用せずに、直接`MKMapViewDelegate`とRxSwiftを接続するコードを作成しました。
 
-**MKMapViewDelegate 를 DelegateProxy 로 변환하도록 하는 RxMKMapViewDelegateProxy 클래스** 
+**`MKMapViewDelegate`を`DelegateProxy`に変換するための`RxMKMapViewDelegateProxy`クラス** 
 
 ```swift
 class RxMKMapViewDelegateProxy: DelegateProxy<MKMapView, MKMapViewDelegate>, DelegateProxyType, MKMapViewDelegate {
@@ -240,7 +241,7 @@ class RxMKMapViewDelegateProxy: DelegateProxy<MKMapView, MKMapViewDelegate>, Del
 }
 ```
 
-**MKMapViewDelegate 의 메서드를 Observable 로 변환하는 확장**
+**`MKMapViewDelegate`のメソッドを`Observable`に変換するエクステンション**
 
 ```swift
 extension Reactive where Base: MKMapView {
@@ -258,7 +259,7 @@ extension Reactive where Base: MKMapView {
 }
 ```
 
-**RxSwift 와 RxMKMapViewDelegateProxy 연결한 사용례**
+**RxSwiftと`RxMKMapViewDelegateProxy`を接続した使用例**
 
 ```swift
 mapView.rx.didSelect
@@ -272,26 +273,26 @@ mapView.rx.didSelect
 </details>
   
 <details>
-<summary><strong style="font-size: 1.2em;">RealmDB 데이터 삭제시 DiffableDataSource 와의 충돌</strong></summary>
+<summary><strong style="font-size: 1.2em;">RealmDBのデータ削除時におけるDiffableDataSourceとの衝突</strong></summary>
 <br>
 
-**[에러분석 영상링크(Youtube)](https://youtu.be/bQT_EvVskPw?si=LFi_5gOTOx6p5tVp&t=1m10s)**
+**[エラー分析動画リンク(Youtube)](https://youtu.be/bQT_EvVskPw?si=LFi_5gOTOx6p5tVp&t=1m10s)**
 
-기존에는 영화 포스터 하단의 북마크 버튼을 누르면, 해당 영화가 RealmDB 에 추가된다. 북마크에 추가된 영화는 북마크 버튼이 보라색으로 바뀌며, 보라색 처리된 버튼을 누르면 북마크 취소를 해야하므로 해당 영화 인스턴스를 RealmDB 에서 Delete 해주었다.
+以前は、映画ポスターの下にあるブックマークボタンを押すと、該当の映画がRealmDBに追加されていました。ブックマークに追加された映画は、ブックマークボタンが紫色に変わり、紫色のボタンを押すとブックマークを解除する必要があるため、その映画インスタンスをRealmDBから削除していました。
 
-북마크탭의 북마크된 영화들은 DiffableDataSource 를 통해 표시되고, 데이터에 변화가 일어나면 애니메이션과 함께 변경된 데이터가 표시된다
+ブックマークタブに表示されるブックマークされた映画は、DiffableDataSourceを通じて表示され、データに変化が生じると、アニメーションとともに変更されたデータが表示されます。
 
-**문제상황**
+**問題状況**
 
-그런데 북마크 취소 후 DiffableDataSource 가 변경되는 과정에서 
-`Thread 1: "Object has been deleted or invalidated.”`
-다음과 같은 에러메시지 표출과 함께 앱이 크래쉬된다
+しかし、ブックマークを解除した後、DiffableDataSourceが変更される過程で、  
+`Thread 1: "Object has been deleted or invalidated.”`  
+というエラーメッセージが表示され、アプリがクラッシュしてしまいます。
 
-**원인**
+**原因**
 
-DiffableDataSource 는 데이터가 변하면 변경전 데이터와 변경후 데이터의 상태를 비교해서 뷰를 갱신한다. 그래서 DiffableDataSource 변경전의 삭제된 데이터의 RealmObject 인스턴스에 접근하려 하는데, RealmDB에서는 삭제된 데이터에 대해서는 참조할 수 없도록 예외처리가 되어 있어 크래쉬가 발생하는 것
+DiffableDataSourceは、データが変更されると、変更前のデータと変更後のデータの状態を比較してビューを更新します。そのため、DiffableDataSourceが変更前に削除されたデータのRealmObjectインスタンスにアクセスしようとしますが、RealmDBでは削除されたデータに対して参照できないように例外処理が行われているため、クラッシュが発生します。
 
-**해결방법**
+**解決方法**
 
 ```swift
 class WatchLater: Object {
@@ -301,49 +302,49 @@ class WatchLater: Object {
 }
 ```
 
-위와 같이 RealmObject 의 데이터 모델을 변경하여, 북마크 취소시 바로 DB 에서 삭제하지 않고 임시로 프로퍼티 `isDeleted` 만 true 로 바꿔준다. DiffableDataSource 를 통한 뷰의 갱신이 일어난 이후에 `isDeleted` 가 true 인 인스턴스만 따로 DB에서 삭제해주면 된다.
+上記のようにRealmObjectのデータモデルを変更し、ブックマークを解除する際にすぐにDBから削除せず、一時的にプロパティ`isDeleted`をtrueに変更します。DiffableDataSourceによるビューの更新が行われた後に、`isDeleted`がtrueのインスタンスだけをDBから削除すれば良いです。
 </details>
 <details>
-<summary><strong style="font-size: 1.2em;">빌드 : 두 라이브러리 간의 충돌</strong></summary>
+<summary><strong style="font-size: 1.2em;">ビルド: 2つのライブラリ間の衝突</strong></summary>
 <br>
 
-**[에러분석 영상링크(Youtube)](https://youtu.be/WvGNxJfl8ns?si=TFj_wLhOsfaRGB0G&t=0m22s)**
+**[エラー分析動画リンク(Youtube)](https://youtu.be/WvGNxJfl8ns?si=TFj_wLhOsfaRGB0G&t=0m22s)**
 
-**문제상황**
+**問題状況**
 
 <img src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/b2598d1d-e76f-49ac-915e-511c95f2e70a" width=200>
 
-계속해서 시뮬레이터로만 빌드하다가, 출시직전 실기기 빌드를 하는 과정에서 에러가 발생
+シミュレーターでのビルドを続けていたが、リリース直前に実機でビルドを行う過程でエラーが発生した。
 
-**원인 및 문제해결**
+**原因と問題解決**
 
 <img src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/95afb076-be58-4560-bd28-cda1984c5169" width=400>
 
-TARGET → Libraries 를 살펴보면 RxCocoa 와 RxCocoa-Dynamic 두가지의 라이브러리가 추가되어 있음을 알 수 있다. 두가지의 라이브러리를 모두 추가하려고 시도해서 발생한 에러이며 둘 중 하나의 라이브러리만 남기고 나머지를 삭제하면 문제를 해결된다
+TARGET → Librariesを確認すると、RxCocoaとRxCocoa-Dynamicの2つのライブラリが追加されていることがわかります。両方のライブラリを追加しようとしたために発生したエラーであり、どちらか一方のライブラリだけを残して、もう一方を削除することで問題が解決します。
 
-**라이브러리의 종류와 각각의 특징**
+**ライブラリの種類とそれぞれの特徴**
 
-라이브러리는 Xcode Target 의 일부로 빌드되지 않은 코드 및 데이터 조각이다. 라이브러리와 앱의 소스코드용 파일을 병합하는 프로세스를 Link 라고 하는데, 이 Link 방식에 따라 두가지 종류의 라이브러리로 분류된다. 각 라이브러리의 특징에 따라 취사선택해서 사용할 수 있다.
+ライブラリはXcode Targetの一部としてビルドされないコードやデータの断片です。ライブラリとアプリのソースコードファイルを結合するプロセスを「リンク」と呼び、このリンク方式によってライブラリは以下の2種類に分類されます。各ライブラリの特徴に応じて、適切なものを選択して使用できます。
 
-**StaticLibrary**
+**Static Library**
 
-여러 라이브러리들이 Static linker 로 병합되고 병합된 결과가 내가 작성한 코드와 합쳐져서 executable file 이 만들어진다. exefile 이 커지므로, 메모리 공간이 커지고, 시작시간이 느리다. Library Update 시 다시 Link 해야 결과가 반영된다
+複数のライブラリがスタティックリンカーによって結合され、結合された結果が自分が作成したコードと一緒に実行可能ファイルが作成されます。そのため、実行可能ファイルが大きくなり、メモリ使用量が増加し、起動時間が遅くなります。ライブラリを更新する際には再度リンクを行う必要があり、結果が反映されます。
 
 **Dynamic Library**
 
-linker 로 병합되는 것은 똑같은데, 병합된 결과의 참조만 exe file 에 포함되고 별도의 라이브러리 파일이 존재한다. 그래서 매번 앱을 실행할 때 마다 주소 공간에 로드되고, 런치하는데 시간이 오래 걸린다 (보통 StaticLibrary 보다 런치 시간이 더 길다)
+リンカーによって結合される点は同じですが、結合された結果の参照だけが実行可能ファイルに含まれ、別途ライブラリファイルが存在します。そのため、アプリを実行するたびにライブラリがアドレス空間にロードされる必要があり、起動時に時間がかかります（通常、スタティックライブラリよりも起動時間が長くなります）。
 
-**라이브러리 별로 빌드 산출물 폴더 ∙ 실행 파일이 어떻게 바뀌는지 실험**
+**ライブラリごとにビルド成果物フォルダや実行ファイルがどのように変わるかを実験**
 
-**[실험 결과 링크(Notion)](https://slowsteadybrown.notion.site/Library-63da20ea88374e91924bf3f7247f8e15?pvs=4)**
+**[実験結果のリンク(Notion)](https://slowsteadybrown.notion.site/Library-63da20ea88374e91924bf3f7247f8e15?pvs=4)**
   
 </details>
 <details>
-<summary><strong style="font-size: 1.2em;">전체 개발일지 보기</strong></summary>
+<summary><strong style="font-size: 1.2em;">開発全体の日誌</strong></summary>
 
 <br />
   
-**[전체 개발 일지 링크(Notion)](https://slowsteadybrown.notion.site/266fc8054a4240d8aca1cc07f0155d0e?pvs=4)**
+**[開発全体の日誌のリンク(Notion)](https://slowsteadybrown.notion.site/266fc8054a4240d8aca1cc07f0155d0e?pvs=4)**
   
 </details>
 
@@ -365,7 +366,7 @@ linker 로 병합되는 것은 똑같은데, 병합된 결과의 참조만 exe f
 
 <br />
 
-## 🗂 폴더 구조
+## 🗂 フォルダ構造
 ~~~
 📦Odindi
  ┣ 📂App
@@ -383,8 +384,9 @@ linker 로 병합되는 것은 똑같은데, 병합된 결과의 참조만 exe f
 
 <br />
 
-## 📺 앱 구동 화면 
-|가까운 영화관 탭 (메인탭)|지도 탭|북마크 탭|
+## 📺 アプリの起動画面 
+|**近くの映画館タブ（メインタブ）**|**マップタブ**|**ブックマークタブ**|
 |-|-|-|
 |<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/74a48c0a-8091-4d23-a479-dc087f51533f">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/4f6932f3-fd25-403a-84ea-c760d6e76564">|<img width="250" src="https://github.com/chldudqlsdl/Brown-Diary/assets/83645833/811c02ff-02a3-498e-b69d-ac3b21ea2c8d">|
+
 
